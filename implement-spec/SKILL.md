@@ -28,13 +28,13 @@ Communication to and from subagents should be sparse. Communicate primarily thro
    - calls the Skill tool with `tdd` to build the ticket;
    - merges the integration branch tip into its own branch before reporting done
 
-   Tickets with `Architect: yes` go through **architect** (sketch first, then implement against the sketch) before any code is written. Tickets with `Arena: yes` go through **arena** (full A–F) instead of a single implementer. Routine tickets skip both — a single attempt is the default. When a ticket has both flags, architect runs first and arena implements against the resulting sketch.
+   Tickets with `Architect: yes` go through **architect** (sketch first, then a single implementer fills in the sketch) before any code is written. Tickets with `Arena: yes` (which implies `Architect: no` per `to-tickets` §4) go through **arena** (full A–F) instead of a single implementer. Routine tickets skip both — a single attempt is the default.
 
 5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent**.
 
 6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency.
 
-7. Once all tickets are complete, call the Skill tool with `code-review` on the integration branch. Fix all issues raised by the code review in a single **implementer subagent**. For tickets marked `Interrogate: yes`, or any contested design on the branch, also call the Skill tool with `interrogate` on the branch diff and fix the Act On findings before resolving.
+7. Once all tickets are complete, call the Skill tool with `code-review` on the integration branch — its opt-in Interrogate gate covers `Interrogate: yes` tickets and contested designs (flag criteria: `to-tickets` §4). Fix all issues raised by the code review in a single **implementer subagent**.
 
 8. If a draft PR exists, mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch.
 

@@ -49,9 +49,11 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 
 Mark routing candidates yourself and present the markings with the breakdown below — the user vetoes, you don't interrogate.
 
-- `Arena: yes` on any ticket touching a shared seam or 2+ shapes (interface, data flow, state ownership), `no` on the rest.
-- `Architect: yes` on any ticket where code will cross a function boundary and the caller's usage, types, or module shape need settling before implementation, `no` on the rest.
+- `Architect: yes` when the interface, usage, or module shape must still be settled before implementation, `no` otherwise.
+- `Arena: yes` only when `Architect: no` AND the implementation approach itself is high-uncertainty or hard to reverse, with 2+ concrete approaches under a settled interface (a shared seam, 2+ data-flow or state-ownership shapes). `No` on everything else — including every `Architect: yes` ticket, since architect already runs an internal arena over sketches in its Phase B.
 - `Interrogate: yes` on any ticket whose design is contested, security-sensitive, or hard to reverse, `no` on the rest.
+
+Flag criteria are canonical here. Consumers (`implement-spec`, `code-review`) cite the flags; they don't redefine them.
 
 Ask the user:
 
@@ -82,9 +84,9 @@ Do NOT close or modify any parent issue.
 
 **Status:** ready-for-agent
 
-Arena: yes if 2+ shapes, else no
+Arena: yes only when Architect: no AND implementation approach is high-uncertainty or hard to reverse with 2+ concrete approaches under a settled interface, else no (never with Architect: yes — architect Phase B already runs internal arena)
 
-Architect: yes if code crosses a function boundary and the shape needs settling first, else no
+Architect: yes when interface, usage, or module shape must still be settled before implementation, else no
 
 Interrogate: yes if contested, security-sensitive, or hard to reverse, else no
 
@@ -114,11 +116,11 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 
 ## Arena
 
-Arena: yes if 2+ shapes, else no
+Arena: yes only when Architect: no AND implementation approach is high-uncertainty or hard to reverse with 2+ concrete approaches under a settled interface, else no (never with Architect: yes — architect Phase B already runs internal arena)
 
 ## Architect
 
-Architect: yes if code crosses a function boundary and the shape needs settling first, else no
+Architect: yes when interface, usage, or module shape must still be settled before implementation, else no
 
 ## Interrogate
 
