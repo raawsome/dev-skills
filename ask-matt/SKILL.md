@@ -25,7 +25,11 @@ The route most work travels. You have an idea and want it built.
      - **`/implement-spec`** for the whole spec in one run. It reads the tickets as a **task graph**, runs implementer subagents across the ready **frontier** in parallel, and lands everything on one **integration branch**. Reach for it when you'd rather orchestrate the build than drive each ticket yourself.
    - **No** → **`/implement`** right here, in the same context window.
 
-   Either way, the code gets built by driving **`/tdd`** (one red-green slice at a time) and closes out with **`/code-review`**, a two-axis review (Standards + Spec) of the diff. `/implement` runs both per ticket; `/implement-spec`'s implementers each drive `/tdd`, and it runs one `/code-review` over the integration branch. Reach for **`/tdd`** on its own when you just want to build a concrete behaviour test-first without a full spec, and **`/code-review`** on its own whenever you want to review a branch or PR against a fixed point.
+   Either way, the code gets built by driving **`/tdd`** (one red-green slice at a time) and closes out with **`/code-review`**, a three-axis review (Standards + Spec + Ponytail) of the diff. `/implement` runs both per ticket; `/implement-spec`'s implementers each drive `/tdd`, and it runs one `/code-review` over the integration branch. Reach for **`/tdd`** on its own when you just want to build a concrete behaviour test-first without a full spec, and **`/code-review`** on its own whenever you want to review a branch or PR against a fixed point.
+
+   `Architect:`/`Arena:`/`Interrogate:`/`Both:` flags ride on tickets (criteria canonical in `to-tickets` §4): `implement-spec` routes `Architect: yes→architect`, `Arena: yes→arena`, `Both: yes→architect then code-arena`; `code-review §5` gates `Interrogate`/`blast-radius` on flags or properties.
+
+   Route parallel work by need: one artifact needing synthesis goes to arena (best-of plus graft); speed-only race with no synthesis goes to swarm-race; coverage, tables, or reports go to swarm.
 
    When the work goes up as a pull request, **`/pr`** shapes the body: the smallest visual that shows the change, before/after evidence that it works, and a one-way or two-way door call. It's model-invoked, so the agent reaches for it whenever it writes a PR.
 
@@ -89,6 +93,10 @@ Off the main flow entirely.
 - **`/wait-what`** is the corrective for a message that didn't land. Use it mid-conversation, inside any other skill, and the agent re-pitches what it just said with the context you were missing, in plain English, using the `GLOSSARY.md` vocabulary. It works after the fact; `/grill-with-docs` is the upfront cure, because a shared language agreed early is what stops the jargon arriving at all.
 - **`/teach`**: learn a concept over multiple sessions, using the current directory as a stateful workspace.
 - **`/writing-for-agents`** is the reference for writing documents agents consume: skills, AGENTS.md, pointed-at docs.
+- **`/architect` / `/arena`**: design-first and parallel-candidate builds. Normally reached via ticket flags (`implement-spec` routing); invoke directly only when the user names them.
+- **`/interrogate` / `/blast-radius`**: adversarial review and breakage analysis. Each also runs inside `code-review §5` gates; invoke directly when the user names them.
+- **`/swarm` / `/ponytail-review`**: parallel coverage and over-engineering review. `swarm` also runs for multi-slice exploration, `ponytail-review` as the Ponytail axis; invoke directly when the user names them.
+- **Conflict in a merge/rebase** → resolve per `resolving-merge-conflicts` 5 steps (state → intent → hunks → checks → finish), preserving both intents.
 
 ## Precondition
 

@@ -8,6 +8,8 @@ license: MIT
 
 Fan out N parallel workers. They may cover separate slices, race the same brief, or mix both. The parent waits, aggregates, and returns one report.
 
+Route: see ask-matt routing. Briefs stay pointer-based (SHAs, paths, method). Subagents do not further fan out.
+
 ## Start
 
 Open a todolist with one entry per phase before launching anything.
@@ -34,10 +36,12 @@ If a worker drops out, proceed with N-1 and note it.
 
 ## Phase C: Aggregate
 
-Read the terminal results. Drop a result that does not record the SHAs and method its brief names, and respawn that worker once. After a second miss, record a gap. A gap does not count as a pass. For coverage, every required slice needs a result. For a race, apply the selection rule declared up front (`first pass`, `rank all`, or `best-of`). Do not paste raw worker dumps.
+Read the terminal results. Drop a result that does not record the SHAs and method its brief names, and respawn that worker once. After a second miss, record a gap. A gap does not count as a pass. For coverage, every required slice needs a result. For a race, apply the selection rule declared up front (`first pass`, `rank all`, or `best-of`). Return the compact table instead of raw dumps.
 
 Keep a compact result table, one-line evidenced issues, and explicit gaps or dropouts.
 
 ## Phase D: Report
 
 Return one consolidated in-chat report with the table, issue one-liners, gaps or dropouts, and the race rule when used.
+
+For race or mixed winners only, verify with typecheck plus the brief's tests and add a ponytail bloat pass. For coverage or table shapes there is no winner review. Ponytail never substitutes for correctness review or downstream code-review.

@@ -24,6 +24,8 @@ The user has asked for a **retrospective**. You are suggesting improvements to t
 
 4. Present these candidates to the user, in order of severity.
 
+Checklist before done (advisory only, no file writes here): each finding names its category plus cheapest enforcement, findings are ordered by severity, no code changes were made, and vague writeups were cut.
+
 ## Reference
 
 ### Implementation vs Review

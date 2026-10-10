@@ -10,6 +10,8 @@ Fan out N parallel attempts at the same task. Read every candidate end to end. P
 
 Do not use for routine tracer-bullet tickets. This is expensive by design. One attempt is the default; arena is the opt-in for high-uncertainty, hard-to-reverse shapes.
 
+Route: see ask-matt routing. Rule here is best-of plus graft. Briefs stay pointer-based (task path, SHAs, grounding dir).
+
 ## Start
 
 Open a todolist with one entry per phase before launching anything.
@@ -27,7 +29,7 @@ The N candidates will receive the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric. State what success looks like for *this* task, then turn it into 3-6 concrete gradeable criteria. The rubric is the picker's tool in Phase D. Candidates only see the task.
-3. Pick the runners. N is 3 — always fill all three seats. Same approach 3 times when the work is generation-bound rather than judgment-sensitive.
+3. Pick the runners. N is 3 by default. Use N=5 only when hard-to-reverse plus (wide space or rework cost far above 1.6x) plus parent-readable size. Same approach 3 times when the work is generation-bound rather than judgment-sensitive.
 4. Assign output paths. Each candidate writes to its own location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`). Separate before serializing shared state: no candidate edits the shared branch directly.
 
 ## Phase B: Fan out
@@ -40,7 +42,7 @@ If a candidate fails to produce output, proceed with N-1 and note the dropout in
 
 ## Phase C: Cross-judge
 
-After all Phase B candidates complete, spawn one readonly judge subagent. It sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs after candidates finish, in parallel with the parent's own reading in Phase D. Don't spawn the judge while candidates are still writing.
+After all Phase B candidates complete, spawn one readonly judge subagent. It sees the rubric and the candidates by path label, scores each criterion in a table, and recommends a base with rationale. It runs after candidates finish, in parallel with the parent's own reading in Phase D. Don't spawn the judge while candidates are still writing. Quorum is 3 valid for N=3 and 3-4 valid for N=5; below quorum, reframe rather than picking from too few.
 
 ## Phase D: Pick a base
 
@@ -54,9 +56,9 @@ Record the pick and the reason in a short synthesis note alongside the base arti
 
 ## Phase E: Graft
 
-Walk each losing candidate once more and identify what is worth porting into the base. The signal is usually one or two things per candidate, not most of it.
+Walk each losing candidate once more and identify what is worth porting into the base. The signal is usually one or two things per candidate, not most of it. Cap grafts at 2-3 total, not per loser.
 
-Fold each graft in by hand. Don't paste mechanically. The result has to remain coherent under one mental model.
+Fold each graft in by hand to keep one mental model. The result has to remain coherent under one mental model.
 
 Record what was grafted, from which candidate, and what was rejected and why.
 
@@ -66,7 +68,7 @@ When N candidates converge on the same shape, that is a strong agreement signal.
 
 The synthesized artifact has to hold up under the same scrutiny as any other output: run typechecking, run the relevant tests, and (for implement-spec integration) run the full suite once at the end.
 
-If verification surfaces a problem the arena did not catch, either Phase A was wrong (re-frame and re-run) or one candidate caught it and you missed the graft (go back to Phase E). Don't paper over.
+If verification surfaces a problem the arena did not catch, either Phase A was wrong (re-frame and re-run) or one candidate caught it and you missed the graft (go back to Phase E). Fix the frame or graft instead of covering it.
 
 ## Outputs
 

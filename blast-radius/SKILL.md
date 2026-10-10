@@ -26,13 +26,19 @@ For each fact the change's safety depends on, get it as far down this list as is
 
 Step 4 is usually one small script that imports the same library the app ships and calls the exact function you're worried about.
 
+### Escalation rule
+
+- Attempt level 4 only when all hold: (a) you can execute code here, (b) the risk is non-trivial (shared code, lib version, concurrency/lifecycle, wire format, the code-review §5 triggers), (c) levels 2-3 did not already clear it.
+- Attempt level 5 only when level 4 passed but integration doubt remains AND the app is runnable in under about 2 minutes. Otherwise report "Level 4 proven, level 5 not attempted because <reason>".
+- No exec env means stopping at the highest cheap level. Mark `UNPROVEN (highest: level N; cheapest next check: <one command>)`. This is advisory; the merge decision stays with the reviewer, never a merge block.
+
 ## Steps
 
 1. Read the change. The diff, the symbols it adds, changes, and deletes, and what it now does differently, including the part the diff doesn't spell out. Pull the PR description and commits for history where available.
 2. Find the one fact it's safe because of. Most changes that look risky are safe because of a single fact, like "this call only drops already-dead cache entries and does nothing else". Find that fact. If it holds, most risky cases are cleared at once. Spend your time here, not on a long list of maybes.
 3. Look where grep stops. Read the source of the library you call, and check its pinned version and any local patch. Work out when things run: microtasks, unmount and teardown, framework lifecycle semantics. Follow what a symbol search misses: the JSON an API returns, a DB column, a wire format, another language reading the same bytes, a feature flag, code three hops downstream.
 4. Be honest about each risk. Give it a real chance of happening and a real cost if it does. Keep the risks you confirmed. List the ones you checked and cleared separately. Cite a real `file:line`; a search that finds nothing is still an answer, and never make up a caller or an API.
-5. Prove the one fact. Write a script or test that runs the real code, run it, and paste what happened.
+5. Prove the one fact when the escalation rule fires. Write the script or test under `.scratch/blast/<slug>/` so it is rerunnable, run it against the real code, and paste what happened. Otherwise skip and say why (no exec env, or levels 2-3 already cleared it).
 6. For a big or wide change, run it as an **arena**. Ask more than one candidate the same question and merge the answers. Different attempts catch different real bugs.
 
 ## What to hand back

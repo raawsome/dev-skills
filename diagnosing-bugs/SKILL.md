@@ -97,9 +97,9 @@ If you cannot state the prediction, the hypothesis is a vibe: discard or sharpen
 
 **Show the ranked list to the user before testing.** They often have domain knowledge that re-ranks instantly ("we just deployed a change to #3"), or know hypotheses they've already ruled out. Cheap checkpoint, big time saver. Don't block on it; proceed with your ranking if the user is AFK.
 
-## Phase 3b: Fan out
+## Phase 3b: Fan out (conditional)
 
-Don't test the top hypotheses yourself one by one. Spawn 3 parallel subagents, each assigned a different hypothesis from the ranked list, each with the Phase 1 loop command and instructions to confirm or kill its hypothesis and report the evidence. Then converge: continue at Phase 4 with the survivor. If all three die, the ranking was wrong — re-rank and re-run, don't patch.
+If 2 or more hypotheses survive the checkpoint with comparable likelihood AND the Phase 1 loop is fast (seconds) and deterministic, spawn up to 3 parallel subagents (one hypothesis each, same loop command); converge on the survivor. Otherwise test the leader yourself; escalate to 3 only if it dies. Subagents do not further fan out. If all three die, the ranking was wrong — re-rank and re-run, don't patch.
 
 ## Phase 4: Instrument
 

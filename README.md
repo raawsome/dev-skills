@@ -36,3 +36,7 @@ Router: `ask-matt`. Main path: `grill-with-docs` (or `grill-me` with no repo) â†
 architect, arena, ask-matt, blast-radius, claude-handoff, code-review, codebase-design, diagnosing-bugs, domain-modeling, git-guardrails-claude-code, grill-me, grill-with-docs, grilling, handoff, implement, implement-spec, improve-codebase-architecture, interrogate, loop-me, migrate-to-shoehorn, ponytail-review, pr, prototype, research, retro, scaffold-exercises, setup-matt-pocock-skills, setup-pre-commit, setup-ts-deep-modules, swarm, tdd, teach, to-questionnaire, to-spec, to-tickets, triage, wait-what, wayfinder, wizard, writing-beats, writing-for-agents, writing-fragments, writing-shape
 
 Each skill is `<name>/SKILL.md` plus supporting files. `agents/openai.yaml` files are metadata; Claude Code ignores them.
+
+## Provenance
+
+Upstream: mattpocock-skills 1.2.3. Diverged: `diagnosing-bugs` (GLOSSARY rename + Phase 3b conditional fan-out), `research` (conditional 1-vs-3 fan-out). Route table canonical in `ask-matt`; `arena`/`swarm`/`implement-spec` cite it.

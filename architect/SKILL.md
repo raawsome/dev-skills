@@ -36,7 +36,7 @@ Screen every candidate against `references/design-red-flags.md` before synthesis
 
 Compare viable candidates on interface depth. Prefer the design that hides more complexity behind a smaller, simpler public surface. A rich interface can keep call chains short by concentrating capability instead of scattering it across layers. Do not put transport or wire types on the public API; parse into domain types behind the interface.
 
-Arena returns one synthesized design package. The synthesis decision populates the rationale's "Synthesis decision" section.
+Arena returns one synthesized design package. The synthesis decision populates the rationale's "Synthesis decision" section. The synthesis note must include a single red-flag table for the base plus grafts (8 flags from `design-red-flags.md` by PASS/FLAG plus one line each, about 150 tokens). Screening stays internal per candidate; only the synthesized table is emitted.
 
 ## Phase C: Agree (opt-in)
 
@@ -44,7 +44,7 @@ Default: proceed directly to implementation with the synthesized design. No huma
 
 Opt in to a checkpoint when the invoker explicitly asks: "/architect with checkpoint," "stop and show me before implementing," or similar. Then surface the synthesized design and pause for sign-off.
 
-The synthesis can ship as its own commit either way (scaffold-first: types and signatures land, bodies stay `not implemented`). Planned and scoped breakage during fill-in is fine. For adversarial pressure on the design before implementing, run the **interrogate** skill on the synthesized sketch (if installed).
+The synthesis can ship as its own commit either way (scaffold-first: types and signatures land behind the repo-convention skip flag with ticket link plus TODO, so CI stays green). Planned and scoped breakage during fill-in is replaced by flagged scaffolding; the Phase D implementer brief must list flag removal as an acceptance criterion, and merger plus final review must grep the flag and reject residuals. For adversarial pressure on the design before implementing, run the **interrogate** skill on the synthesized sketch (if installed). Mandatory when `Interrogate: yes` or the synthesis names a hard-to-reverse tradeoff: scope to the sketch package only, Act-On findings re-run Phase B, max 2 rounds before a human checkpoint.
 
 If the human pushes back on the shape (in a checkpoint or after the fact), treat that as Phase A evidence. Re-ground and re-run Phase B before writing more code.
 

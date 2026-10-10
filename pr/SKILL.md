@@ -27,9 +27,11 @@ Use this template for writing the PR body:
 
 <optional: description>
 
-**Blast Radius:** <one-word description>
+**Scope:** <one sentence on what could feel this merge>
 
 <optional: potential ramifications of merge>
+
+<!-- Only when small plus shared-code/lib-version/concurrency/wire-format: call the blast-radius skill for causal analysis; else skip. This template is comms only. -->
 ```
 
 ## Sections
@@ -167,4 +169,4 @@ Execution-based evidence is A-tier. Test results, console output. Show the exact
 
 Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
 
-The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
+Scope is one sentence on the potential impact of this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc. For causal breakage analysis beyond this sentence, call the blast-radius skill; this template stays comms only.
