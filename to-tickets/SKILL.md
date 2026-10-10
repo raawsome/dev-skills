@@ -47,12 +47,13 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
 
+Mark Arena candidates yourself: `yes` on any ticket touching a shared seam or 2+ shapes (interface, data flow, state ownership), `no` on the rest. Present the markings with the breakdown below — the user vetoes, you don't interrogate.
+
 Ask the user:
 
 - Does the granularity feel right? (too coarse / too fine)
 - Are the blocking edges correct: does each ticket only depend on tickets that genuinely gate it?
 - Should any tickets be merged or split further?
-- Which tickets are Arena candidates (shared seam, 2+ shapes)?
 
 Iterate until the user approves the breakdown.
 
