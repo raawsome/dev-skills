@@ -47,7 +47,11 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
 
-Mark Arena candidates yourself: `yes` on any ticket touching a shared seam or 2+ shapes (interface, data flow, state ownership), `no` on the rest. Present the markings with the breakdown below — the user vetoes, you don't interrogate.
+Mark routing candidates yourself and present the markings with the breakdown below — the user vetoes, you don't interrogate.
+
+- `Arena: yes` on any ticket touching a shared seam or 2+ shapes (interface, data flow, state ownership), `no` on the rest.
+- `Architect: yes` on any ticket where code will cross a function boundary and the caller's usage, types, or module shape need settling before implementation, `no` on the rest.
+- `Interrogate: yes` on any ticket whose design is contested, security-sensitive, or hard to reverse, `no` on the rest.
 
 Ask the user:
 
@@ -80,6 +84,10 @@ Do NOT close or modify any parent issue.
 
 Arena: yes if 2+ shapes, else no
 
+Architect: yes if code crosses a function boundary and the shape needs settling first, else no
+
+Interrogate: yes if contested, security-sensitive, or hard to reverse, else no
+
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
 
@@ -107,6 +115,14 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 ## Arena
 
 Arena: yes if 2+ shapes, else no
+
+## Architect
+
+Architect: yes if code crosses a function boundary and the shape needs settling first, else no
+
+## Interrogate
+
+Interrogate: yes if contested, security-sensitive, or hard to reverse, else no
 
 </issue-template>
 

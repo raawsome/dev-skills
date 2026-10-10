@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: "Review the changes since a fixed point (commit, branch, tag, or merge-base) along three axes: Standards (does the code follow this repo's documented coding standards?), Spec (does the code match what the originating issue/spec asked for?), and Ponytail (what over-engineering can be deleted?). Runs all three reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\"."
+description: "Review the changes since a fixed point (commit, branch, tag, or merge-base) along three axes: Standards (does the code follow this repo's documented coding standards?), Spec (does the code match what the originating issue/spec asked for?), and Ponytail (what over-engineering can be deleted?). Runs all three reviews in parallel sub-agents and reports them side by side, with opt-in Interrogate and Blast-radius gates for contested or risky changes. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\"."
 ---
 
 Three-axis review of the diff between `HEAD` and a fixed point the user supplies:
@@ -77,11 +77,18 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 - The diff command and commit list.
 - The brief: "Call the Skill tool with `ponytail-review` and review this diff for over-engineering only. One line per finding (`<file>:L<line>: <tag> <what>. <replacement>.`), tags `delete` / `stdlib` / `native` / `yagni` / `shrink`. Correctness bugs, security holes, and performance are out of scope — leave those to the other axes. End with `net: -<N> lines possible`, or `Lean already. Ship.` if there is nothing to cut. Under 400 words."
 
-### 5. Aggregate
+### 5. Opt-in gates (Interrogate / Blast-radius)
 
-Present the three reports under `## Standards`, `## Spec`, and `## Ponytail` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings, because the axes are deliberately separate (see _Why three axes_).
+These run only when triggered — never by default. Report each under its own heading; do not merge or rerank with the three axes.
 
-End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
+- **Interrogate**: when the branch contains tickets marked `Interrogate: yes`, the user says "interrogate this", or the design is contested / security-sensitive / hard to reverse. Call the Skill tool with `interrogate` on the diff command from step 1 and report its verdict verbatim under `## Interrogate`.
+- **Blast-radius**: when the diff is small but touches shared code, a library version, concurrency/lifecycle semantics, or a wire format another system reads — or the user asks "what could this break". Call the Skill tool with `blast-radius` on the change and report its writeup verbatim under `## Blast-radius`, keeping the proven-or-unproven safety fact.
+
+### 6. Aggregate
+
+Present the three reports under `## Standards`, `## Spec`, and `## Ponytail` headings, verbatim or lightly cleaned, plus `## Interrogate` / `## Blast-radius` when those gates ran. Do **not** merge or rerank findings, because the axes are deliberately separate (see _Why three axes_).
+
+End with a one-line summary: total findings per axis (and per gate that ran), and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
 
 ## Why three axes
 
