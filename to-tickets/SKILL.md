@@ -54,7 +54,11 @@ Mark routing candidates yourself and present the markings with the breakdown bel
 - `Interrogate: yes` if contested, security-sensitive, or hard-to-reverse with a single approach (where `Arena: no`), `no` on the rest.
 - `Both: yes` only as a narrow escape: when architect Phase C synthesis still names 2+ concrete hard-to-reverse implementation approaches after the sketch settles. Requires lead/user approval. Cap 1 per spec (10% max). Default is exclusive flags above.
 
-Flag criteria are canonical here. Consumers (`implement-spec`, `code-review`) cite the flags; they don't redefine them. Before routing, check all four lines (0-cost): `for f in .scratch/<slug>/issues/*.md; do grep -q 'Arena:' "$f" && grep -q 'Architect:' "$f" && grep -q 'Interrogate:' "$f" && grep -q 'Both:' "$f" || echo "missing flags: $f"; done` must print nothing. For tickets marked `Architect: yes`/`Arena: yes`/`Both: yes`, or where flags contradict each other, re-check against §4 in one cheap pass; ticket flag wins unless it contradicts §4 (e.g. `Arena: yes` with `Architect: yes` forces `Arena: no`).
+Flag criteria are canonical here. Consumers (`implement-spec`, `code-review`) cite the flags; they don't redefine them. Before routing, check all four lines (0-cost): `for f in .scratch/<slug>/issues/*.md; do grep -q 'Arena:' "$f" && grep -q 'Architect:' "$f" && grep -q 'Interrogate:' "$f" && grep -q 'Both:' "$f" || echo "missing flags: $f"; done` must print nothing.
+
+<!-- CUSTOM-BEGIN: flag-contradiction, reason: silent downgrade hides contested signal; retirement: delete markers if upstream adopts a contradiction rule -->
+For tickets marked `Architect: yes`/`Arena: yes`/`Both: yes`, or where flags contradict each other, re-check against §4 in one cheap pass. In this file (interactive): collect all contradictions into the §4 quiz as one table (ticket / flags / §4-correct value / accept?) — single user pass. In `implement-spec` (autonomous): keep the silent default (ticket flag wins unless it contradicts §4; e.g. `Arena: yes` with `Architect: yes` forces `Arena: no`) but append each correction to `flag-corrections.md` and surface it with the integration report; escalate mid-run only contradictions outside §4 pairs (missing flag lines, malformed values, Both-cap ties needing approval).
+<!-- CUSTOM-END -->
 
 Ask the user:
 
@@ -63,6 +67,10 @@ Ask the user:
 - Should any tickets be merged or split further?
 
 Iterate until the user approves the breakdown.
+
+<!-- CUSTOM-BEGIN: flag-table, reason: batch veto stays legible; retirement: delete markers if upstream adopts a flag presentation -->
+Present flags as a table (`| ticket | Architect | Arena | Interrogate | Both |`), veto by row, approve once; isolate the `Both:` row with its approval checkbox.
+<!-- CUSTOM-END -->
 
 ### 5. Publish the tickets to the configured tracker
 
@@ -85,13 +93,7 @@ Do NOT close or modify any parent issue.
 
 **Status:** ready-for-agent
 
-Arena: yes only when Architect: no AND implementation approach is high-uncertainty or hard to reverse with 2+ concrete approaches under a settled interface, else no (never with Architect: yes — architect Phase B already runs internal arena)
-
-Architect: yes when interface, usage, or module shape must still be settled before implementation, else no
-
-Interrogate: yes if contested, security-sensitive, or hard-to-reverse with a single approach (where Arena: no), else no
-
-Both: yes only when architect Phase C still names 2+ hard-to-reverse implementations after sketch settles (cap 1/spec, needs approval), else no
+Architect / Arena / Interrogate / Both: per §4 above (do not restate the criteria here).
 
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
@@ -117,21 +119,9 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 
 - A reference to each blocking ticket, or "None (can start immediately)".
 
-## Arena
+## Routing flags
 
-Arena: yes only when Architect: no AND implementation approach is high-uncertainty or hard to reverse with 2+ concrete approaches under a settled interface, else no (never with Architect: yes — architect Phase B already runs internal arena)
-
-## Architect
-
-Architect: yes when interface, usage, or module shape must still be settled before implementation, else no
-
-## Interrogate
-
-Interrogate: yes if contested, security-sensitive, or hard-to-reverse with a single approach (where Arena: no), else no
-
-## Both
-
-Both: yes only when architect Phase C still names 2+ hard-to-reverse implementations after sketch settles (cap 1/spec, needs approval), else no
+Architect / Arena / Interrogate / Both: per §4 above (do not restate the criteria here).
 
 </issue-template>
 

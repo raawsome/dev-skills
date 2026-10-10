@@ -43,7 +43,9 @@ considered whether all these validation rules are needed at this stage?"
 
 ## Scoring
 
-End with the only metric that matters: `net: -<N> lines possible.`
+<!-- CUSTOM-BEGIN: ponytail-metric, reason: absolute N rewards golf; retirement: delete markers if upstream adds a denominator -->
+End with `net: -<N> / touched <M> (+/-), -<P>%` where P is round(100×N/M) and M is added plus modified diff lines under the same whitespace and comment exclusions as N. Each `shrink:` shows the shorter form; each `delete:` / `yagni:` names the absent caller or need. `Lean already. Ship.` is a passing result.
+<!-- CUSTOM-END -->
 
 If there is nothing to cut, say `Lean already. Ship.` and stop.
 

@@ -44,11 +44,19 @@ Default: proceed directly to implementation with the synthesized design. No huma
 
 Opt in to a checkpoint when the invoker explicitly asks: "/architect with checkpoint," "stop and show me before implementing," or similar. Then surface the synthesized design and pause for sign-off.
 
+<!-- CUSTOM-BEGIN: architect-checkpoint, reason: broad triggers pause every run; retirement: delete markers if upstream narrows the trigger -->
+Default-on applies only when a hard-to-reverse tradeoff meets one of: Interrogate findings the picker disputes with reasons, 2 Interrogate rounds exhausted, a cited ADR contradiction (ADR-ID plus one line why it reopens), or a human-value question (naming, permissions, data loss, cost, or shipped UX meaning). Hard-to-reverse alone without one of the four proceeds; Interrogate below remains the backstop.
+<!-- CUSTOM-END -->
+
 The synthesis can ship as its own commit either way (scaffold-first: types and signatures land behind the repo-convention skip flag with ticket link plus TODO, so CI stays green). Planned and scoped breakage during fill-in is replaced by flagged scaffolding; the Phase D implementer brief must list flag removal as an acceptance criterion, and merger plus final review must grep the flag and reject residuals. For adversarial pressure on the design before implementing, run the **interrogate** skill on the synthesized sketch (if installed). Mandatory when `Interrogate: yes` or the synthesis names a hard-to-reverse tradeoff: scope to the sketch package only, Act-On findings re-run Phase B, max 2 rounds before a human checkpoint.
 
 If the human pushes back on the shape (in a checkpoint or after the fact), treat that as Phase A evidence. Re-ground and re-run Phase B before writing more code.
 
 ## Phase D: Implement against the sketch
+
+<!-- CUSTOM-BEGIN: reground, reason: sketch grounds at T0, frontier moves the tip; retirement: delete markers if upstream adds drift handling -->
+Before fill-in: run the `implement-spec` Step 4 drift check (rev-list magnitude plus merge-tree conflict prediction), then diff `old-tip..new-tip --name-only` and intersect with the sketch touch set (Phase A files plus module map plus GLOSSARY/ADR deps). Disjoint work proceeds with the tip SHA noted under Rationale/Problem. Intersecting work re-grounds the delta and re-screens the 8 flags in `references/design-red-flags.md`; full Phase B re-arena only when the delta hits split-ownership, a seam, or a wire-type boundary (cite the flag plus file:line).
+<!-- CUSTOM-END -->
 
 Replace `not implemented` bodies with code, pseudocode with logic. The synthesized sketch is the contract.
 
@@ -68,6 +76,10 @@ The signal is a *pattern*, not single instances. Tells:
 - Two or more independent Phase D deviations of the same shape across the implementation.
 
 Use judgment. A few edge cases don't condemn an architecture. Some problems are legitimately complex. Complexity in the data is not complexity in the design.
+
+<!-- CUSTOM-BEGIN: scrap-discipline, reason: free re-arena invites thrash; retirement: delete markers if upstream caps scraps -->
+Scrap requires all three: (1) 2 or more independent Phase D deviations matching one tell in the list above (same workaround, same escape-hatch type, same caller-knows-internals shape — cite the tell plus file:line pairs, not two edits in one file); (2) Phase A re-trace evidence over the built reality; (3) a subtracted-X claim naming what the new sketch deletes or merges (interface entries, modules, or call sites) before it adds. One scrap proceeds unreviewed; the second pauses for a human checkpoint. Re-arena after scrap stays N=3.
+<!-- CUSTOM-END -->
 
 When you scrap:
 

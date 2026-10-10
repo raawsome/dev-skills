@@ -39,6 +39,10 @@ Step 4 is usually one small script that imports the same library the app ships a
 3. Look where grep stops. Read the source of the library you call, and check its pinned version and any local patch. Work out when things run: microtasks, unmount and teardown, framework lifecycle semantics. Follow what a symbol search misses: the JSON an API returns, a DB column, a wire format, another language reading the same bytes, a feature flag, code three hops downstream.
 4. Be honest about each risk. Give it a real chance of happening and a real cost if it does. Keep the risks you confirmed. List the ones you checked and cleared separately. Cite a real `file:line`; a search that finds nothing is still an answer, and never make up a caller or an API.
 5. Prove the one fact when the escalation rule fires. Write the script or test under `.scratch/blast/<slug>/` so it is rerunnable, run it against the real code, and paste what happened. Otherwise skip and say why (no exec env, or levels 2-3 already cleared it).
+
+<!-- CUSTOM-BEGIN: fact-linkage, reason: free exec invites retrofit-proofing; retirement: delete markers if upstream freezes the fact -->
+Freeze one sentence in step 2 as `Fact: "<...>"`. Step 5 cites it verbatim: `Proves Fact: "<...>" → level N→M (N, M in 1..5 per How sure are you) via .scratch/blast/<slug>/...` plus output. A changed fact is restated and re-proved. `UNPROVEN` still names the fact: `Fact: "<...>" — UNPROVEN (highest: level N; cheapest next check: <one command>)`.
+<!-- CUSTOM-END -->
 6. For a big or wide change, run it as an **arena**. Ask more than one candidate the same question and merge the answers. Different attempts catch different real bugs.
 
 ## What to hand back

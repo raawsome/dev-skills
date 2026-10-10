@@ -113,6 +113,10 @@ User invokes with a loose idea.
 3. **Create the map** (label `wayfinder:map`): Destination and Notes filled in, Decisions-so-far empty, the fog sketched into **Not yet specified**.
 4. **Create the tickets you can specify now** as child issues of the map, then wire blocking edges in a **second pass** (issues need ids before they can reference each other). Wiring sorts them into the frontier and the blocked; everything you can't yet specify stays in the fog: the **Not yet specified** section.
 5. **Fire the research subagents.** For each `research` ticket you just created, spin up a subagent that calls the Skill tool with "research" to resolve it in parallel, capturing its findings on a throwaway `research/<name>` branch with a context pointer from the ticket.
+
+<!-- CUSTOM-BEGIN: fanout-depth, reason: ticket-times-angle explodes; retirement: delete markers if upstream adopts a depth rule -->
+Wayfinder-spawned research runs single-angle serially in-ticket; only the top-level invocation fans. State `depth: top | child` in the brief.
+<!-- CUSTOM-END -->
 6. Stop: charting is one session's work; it hand-resolves nothing.
 
 ### Work through the map

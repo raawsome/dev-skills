@@ -9,4 +9,8 @@ Use a single agent with the owning angle when the source is known (named docs, f
 2. **Source angle**: the source code that implements it.
 3. **Field angle**: changelogs, issue trackers, community reports of real-world behaviour.
 
-Then synthesise: merge the reports into a single Markdown file, citing each claim's source. Follow every claim back to the source that owns it, not a secondary write-up; resolve disagreements in favour of the owning source. Save it where the repo already keeps such notes; match the existing convention, and if there is none, put it somewhere sensible and say where. Subagents do not further fan out. One fan-out level per invocation.
+Then synthesise: merge the reports into a single Markdown file, citing each claim's source. Follow every claim back to the source that owns it, not a secondary write-up; resolve disagreements in favour of the owning source. Save it where the repo already keeps such notes; match the existing convention, and if there is none, put it somewhere sensible and say where. One fan-out level per invocation.
+
+<!-- CUSTOM-BEGIN: fanout-depth, reason: ticket-times-angle explodes; retirement: delete markers if upstream adopts a depth rule -->
+When invoked as a fanned child, run single-angle serially in-ticket; only the top-level invocation fans. State `depth: top | child` in the brief.
+<!-- CUSTOM-END -->

@@ -100,4 +100,8 @@ Off the main flow entirely.
 
 ## Precondition
 
+<!-- CUSTOM-BEGIN: marker-convention, reason: inline fork needs attribution for clean pulls; retirement: keep while custom blocks exist -->
+Custom blocks in this repo carry `CUSTOM-BEGIN:<name, reason>` / `CUSTOM-END` pairs naming their reason; fully-custom files carry a `FULLY-CUSTOM` header. When upstream adopts a block, delete its markers and rebase onto vendor wording in the same commit. Flag criteria stay canonical in `to-tickets` §4; this router cites only.
+<!-- CUSTOM-END -->
+
 **`/setup-matt-pocock-skills`**: run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work.

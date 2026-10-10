@@ -60,6 +60,10 @@ Walk each losing candidate once more and identify what is worth porting into the
 
 Fold each graft in by hand to keep one mental model. The result has to remain coherent under one mental model.
 
+<!-- CUSTOM-BEGIN: graft-coherence, reason: picker blind, judge pre-graft, verify tests-only; retirement: delete markers if upstream adds a coherence pass -->
+When at least one graft was folded: run one coherence pass with a fresh readonly subagent (not the Phase D picker, not the Phase C judge) — checks single-mental-model plus the 8 flags in `architect/references/design-red-flags.md`, emits PASS/FLAG plus one line each. One round max; the picker hand-folds FLAG fixes, then Phase F verify. The base stays the base and the graft set stays closed. Skip when no graft was folded.
+<!-- CUSTOM-END -->
+
 Record what was grafted, from which candidate, and what was rejected and why.
 
 When N candidates converge on the same shape, that is a strong agreement signal. Note the convergence in the record and ship the consensus shape. No graft is needed. When N candidates wildly diverge, Phase A was under-specified. Reframe and re-run rather than averaging the divergence.

@@ -99,7 +99,11 @@ If you cannot state the prediction, the hypothesis is a vibe: discard or sharpen
 
 ## Phase 3b: Fan out (conditional)
 
-If 2 or more hypotheses survive the checkpoint with comparable likelihood AND the Phase 1 loop is fast (seconds) and deterministic, spawn up to 3 parallel subagents (one hypothesis each, same loop command); converge on the survivor. Otherwise test the leader yourself; escalate to 3 only if it dies. Subagents do not further fan out. If all three die, the ranking was wrong — re-rank and re-run, don't patch.
+If 2 or more hypotheses survive the checkpoint with comparable likelihood AND the Phase 1 loop is fast (seconds) and deterministic, spawn up to 3 parallel subagents (one hypothesis each, same loop command); converge on the survivor. Otherwise test the leader yourself; escalate to 3 only if it dies. If all three die, the ranking was wrong — re-rank and re-run, don't patch.
+
+<!-- CUSTOM-BEGIN: fanout-depth, reason: nested fan-out multiplies agents; retirement: delete markers if upstream adopts a depth rule -->
+When invoked as a fanned child, test the leader hypothesis serially; only the top-level invocation fans. State `depth: top | child` in the brief.
+<!-- CUSTOM-END -->
 
 ## Phase 4: Instrument
 
