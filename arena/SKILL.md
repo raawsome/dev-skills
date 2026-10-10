@@ -27,7 +27,7 @@ The N candidates will receive the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric. State what success looks like for *this* task, then turn it into 3-6 concrete gradeable criteria. The rubric is the picker's tool in Phase D. Candidates only see the task.
-3. Pick the runners. N defaults to 2, max 3. Spawn more seats only when the arena covers multiple design directions. Same approach N times when the work is generation-bound rather than judgment-sensitive.
+3. Pick the runners. N is 3 — always fill all three seats. Same approach 3 times when the work is generation-bound rather than judgment-sensitive.
 4. Assign output paths. Each candidate writes to its own location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`). Separate before serializing shared state: no candidate edits the shared branch directly.
 
 ## Phase B: Fan out

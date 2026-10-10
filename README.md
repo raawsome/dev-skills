@@ -23,7 +23,7 @@ Restart the harness after installing so new skills register. Re-run after `git p
 
 Router: `ask-matt`. Main path: `grill-with-docs` (or `grill-me` with no repo) → `to-spec` → `to-tickets` → `implement` / `implement-spec` (drives `tdd`, closes with `code-review`) → `retro`.
 
-- `arena` — opt-in only (`/arena`, "arena this"). N=2 default, max 3. Full phases A–F. `to-tickets` marks candidates with `Arena: yes`; `implement-spec` routes those tickets through arena; `improve-codebase-architecture` offers it for shared/ADR-worthy/2+ shape interfaces (cap 1/pick).
+- `arena` — opt-in only (`/arena`, "arena this"). Always 3 candidates. Full phases A–F. `to-tickets` marks candidates with `Arena: yes`; `implement-spec` routes those tickets through arena; `improve-codebase-architecture` offers it for shared/ADR-worthy/2+ shape interfaces (cap 1/pick).
 - `ponytail-review` — over-engineering only (`/ponytail-review`, "what can we delete"). Wired into `code-review` as the third axis alongside Standards and Spec.
 - `code-review` — three parallel axes, reported separately, no reranking.
 
