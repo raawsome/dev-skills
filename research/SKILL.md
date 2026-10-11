@@ -4,7 +4,7 @@ description: Investigate a question against high-trust primary sources and captu
 ---
 
 <!-- CUSTOM-BEGIN: conditional-fanout, reason: unconditional background agent wastes context when source known; retirement: delete markers if upstream conditions fan-out -->
-Use a single agent with the owning angle when the source is known (named docs, file, or report). Spin up **up to 3 background agents in parallel** only when the question spans 2 or more source types (for example docs say X but behavior is Y) and the answer feeds downstream work — so you keep working while they read:
+Use a single agent with the owning angle below when the source is known. Spin up **up to 3 background agents in parallel** only when the question spans 2 or more source types (for example docs say X but behavior is Y) and the answer feeds downstream work — so you keep working while they read:
 
 1. **Docs angle**: official docs, specs, first-party API references.
 2. **Source angle**: the source code that implements it.
