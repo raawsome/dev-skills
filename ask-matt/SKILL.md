@@ -27,11 +27,15 @@ The route most work travels. You have an idea and want it built.
 
    Either way, the code gets built by driving **`/tdd`** (one red-green slice at a time) and closes out with **`/code-review`**, a three-axis review (Standards + Spec + Ponytail) of the diff. `/implement` runs both per ticket; `/implement-spec`'s implementers each drive `/tdd`, and it runs one `/code-review` over the integration branch. Reach for **`/tdd`** on its own when you just want to build a concrete behaviour test-first without a full spec, and **`/code-review`** on its own whenever you want to review a branch or PR against a fixed point.
 
-   `Architect:`/`Arena:`/`Interrogate:`/`Both:` flags ride on tickets (criteria canonical in `to-tickets` §4): `implement-spec` routes `Architect: yes→architect`, `Arena: yes→arena`, `Both: yes→architect then code-arena`; `code-review §5` gates `Interrogate`/`blast-radius` on flags or properties. Flag criteria canonical in `to-tickets` §4; do not restate (cite-only).
+   <!-- CUSTOM-BEGIN: routing-cites, reason: upstream router has no flag routing; retirement: delete markers if upstream adopts flag routing -->
+`Architect:`/`Arena:`/`Interrogate:`/`Both:` flags ride on tickets (criteria canonical in `to-tickets` §4): `implement-spec` routes `Architect: yes→architect`, `Arena: yes→arena`, `Both: yes→architect then code-arena`; `code-review §5` gates `Interrogate`/`blast-radius` on flags or properties. Flag criteria canonical in `to-tickets` §4; do not restate (cite-only).
+<!-- CUSTOM-END -->
 
    Before stating what a skill does, read its SKILL.md; summaries here are a cache.
 
-   Route parallel work by need: one artifact needing synthesis goes to arena (best-of plus graft); speed-only race with no synthesis goes to swarm-race; coverage, tables, or reports go to swarm.
+   <!-- CUSTOM-BEGIN: parallel-routing, reason: upstream has no arena/swarm disambiguation; retirement: delete markers if upstream adds it -->
+Route parallel work by need: one artifact needing synthesis goes to arena (best-of plus graft); speed-only race with no synthesis goes to swarm (race shape: declare `first pass` / `rank all` / `best-of` per swarm Phase A); coverage, tables, or reports go to swarm.
+<!-- CUSTOM-END -->
 
    When the work goes up as a pull request, **`/pr`** shapes the body: the smallest visual that shows the change, before/after evidence that it works, and a one-way or two-way door call. It's model-invoked, so the agent reaches for it whenever it writes a PR.
 
@@ -95,9 +99,11 @@ Off the main flow entirely.
 - **`/wait-what`** is the corrective for a message that didn't land. Use it mid-conversation, inside any other skill, and the agent re-pitches what it just said with the context you were missing, in plain English, using the `GLOSSARY.md` vocabulary. It works after the fact; `/grill-with-docs` is the upfront cure, because a shared language agreed early is what stops the jargon arriving at all.
 - **`/teach`**: learn a concept over multiple sessions, using the current directory as a stateful workspace.
 - **`/writing-for-agents`** is the reference for writing documents agents consume: skills, AGENTS.md, pointed-at docs.
+<!-- CUSTOM-BEGIN: custom-standalone, reason: custom skills need router entries; retirement: n/a — custom-only skills; delete markers if upstream adopts them -->
 - **`/architect` / `/arena`**: design-first and parallel-candidate builds. Normally reached via ticket flags (`implement-spec` routing); invoke directly only when the user names them.
 - **`/interrogate` / `/blast-radius`**: adversarial review and breakage analysis. Each also runs inside `code-review §5` gates; invoke directly when the user names them.
 - **`/swarm` / `/ponytail-review`**: parallel coverage and over-engineering review. `swarm` also runs for multi-slice exploration, `ponytail-review` as the Ponytail axis; invoke directly when the user names them.
+<!-- CUSTOM-END -->
 - **Conflict in a merge/rebase** → resolve per `resolving-merge-conflicts` 5 steps (state → intent → hunks → checks → finish), preserving both intents.
 
 ## Precondition

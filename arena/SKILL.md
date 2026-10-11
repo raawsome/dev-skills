@@ -12,6 +12,8 @@ Do not use for routine tracer-bullet tickets. This is expensive by design. One a
 
 Route: see ask-matt routing. Rule here is best-of plus graft. Briefs stay pointer-based (task path, SHAs, grounding dir).
 
+`code-arena` (the term `implement-spec` step 4 and `ask-matt` cite for the `to-tickets` §4 `Both: yes` escape) means an arena run over code bodies against a settled architect sketch/scaffold: candidates implement the bodies, then pick, graft, and verify per phases A–F.
+
 ## Start
 
 Open a todolist with one entry per phase before launching anything.
@@ -61,7 +63,7 @@ Walk each losing candidate once more and identify what is worth porting into the
 Fold each graft in by hand to keep one mental model. The result has to remain coherent under one mental model.
 
 <!-- CUSTOM-BEGIN: graft-coherence, reason: picker blind, judge pre-graft, verify tests-only; retirement: delete markers if upstream adds a coherence pass -->
-When at least one graft was folded: run one coherence pass with a fresh readonly subagent (not the Phase D picker, not the Phase C judge) — checks single-mental-model plus the 8 flags in `architect/references/design-red-flags.md`, emits PASS/FLAG plus one line each. One round max; the picker hand-folds FLAG fixes, then Phase F verify. The base stays the base and the graft set stays closed. Skip when no graft was folded.
+When at least one graft was folded: run one coherence pass with a fresh readonly subagent (not the Phase D picker, not the Phase C judge) — checks single-mental-model plus the 8 flags in `architect/references/design-red-flags.md`, emits PASS/FLAG plus one line each. One round max; the picker hand-folds FLAG fixes, then Phase F verify. The base stays the base and the graft set stays closed. Skip when no graft was folded. If `architect/references/design-red-flags.md` is absent (standalone arena without architect installed), skip the flag check and log the skip.
 <!-- CUSTOM-END -->
 
 Record what was grafted, from which candidate, and what was rejected and why.

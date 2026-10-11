@@ -7,7 +7,9 @@ description: Diagnosis loop for hard bugs and performance regressions. Use when 
 
 A discipline for hard bugs. Skip phases only when explicitly justified.
 
+<!-- CUSTOM-BEGIN: glossary-term, reason: fork uses GLOSSARY.md vocabulary; retirement: delete markers if upstream renames CONTEXT.md -->
 When exploring the codebase, read `GLOSSARY.md` (if it exists) to get a clear mental model of the relevant modules, and check ADRs in the area you're touching.
+<!-- CUSTOM-END -->
 
 ## Redact
 
@@ -97,9 +99,11 @@ If you cannot state the prediction, the hypothesis is a vibe: discard or sharpen
 
 **Show the ranked list to the user before testing.** They often have domain knowledge that re-ranks instantly ("we just deployed a change to #3"), or know hypotheses they've already ruled out. Cheap checkpoint, big time saver. Don't block on it; proceed with your ranking if the user is AFK.
 
+<!-- CUSTOM-BEGIN: phase-3b-fanout, reason: parallel hypothesis testing needs a gate; retirement: delete markers if upstream adds fan-out -->
 ## Phase 3b: Fan out (conditional)
 
 If 2 or more hypotheses survive the checkpoint with comparable likelihood AND the Phase 1 loop is fast (seconds) and deterministic, spawn up to 3 parallel subagents (one hypothesis each, same loop command); converge on the survivor. Otherwise test the leader yourself; escalate to 3 only if it dies. If all three die, the ranking was wrong — re-rank and re-run, don't patch.
+<!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: fanout-depth, reason: nested fan-out multiplies agents; retirement: delete markers if upstream adopts a depth rule -->
 When invoked as a fanned child, test the leader hypothesis serially; only the top-level invocation fans. State `depth: top | child` in the brief.

@@ -20,7 +20,7 @@ Open a todolist with one entry per phase before starting.
 
 ## Phase A: Ground the problem
 
-Build a real mental model of every system the new code touches. Trace the relevant subsystems from entry points through call chains, types, and data flow until you can describe the full path from input to output without hand-waving any step. If an exploration skill (`how`, `research`) is installed, use it for this; otherwise explore directly with Glob/Grep/Read.
+Build a real mental model of every system the new code touches. Trace the relevant subsystems from entry points through call chains, types, and data flow until you can describe the full path from input to output without hand-waving any step. If the exploration skill (`research`) is installed, use it for this; otherwise explore directly with Glob/Grep/Read.
 
 Naming a file isn't grounding. If the design redefines ownership or layering, also dig up the rationale behind the existing shape (commit history, ADRs, issue threads) so the old reason becomes a constraint, not a guess.
 
@@ -28,7 +28,7 @@ Skip Phase A only when the work is genuinely greenfield with no surrounding syst
 
 ## Phase B: Sketch
 
-Run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`.
+Run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`. Dependency note: `arena`'s Phase E coherence pass reads back `architect/references/design-red-flags.md`, so keep that path stable.
 
 Design it twice. Require at least two structurally distinct candidates before synthesis, even when the first looks sufficient. Whole-shape alternatives, not point fixes inside one shape.
 
@@ -48,7 +48,7 @@ Opt in to a checkpoint when the invoker explicitly asks: "/architect with checkp
 Default-on applies only when a hard-to-reverse tradeoff meets one of: Interrogate findings the picker disputes with reasons, 2 Interrogate rounds exhausted, a cited ADR contradiction (ADR-ID plus one line why it reopens), or a human-value question (naming, permissions, data loss, cost, or shipped UX meaning). Hard-to-reverse alone without one of the four proceeds; Interrogate below remains the backstop.
 <!-- CUSTOM-END -->
 
-The synthesis can ship as its own commit either way (scaffold-first: types and signatures land behind the repo-convention skip flag with ticket link plus TODO, so CI stays green). Planned and scoped breakage during fill-in is replaced by flagged scaffolding; the Phase D implementer brief must list flag removal as an acceptance criterion, and merger plus final review must grep the flag and reject residuals. For adversarial pressure on the design before implementing, run the **interrogate** skill on the synthesized sketch (if installed). Mandatory when `Interrogate: yes` or the synthesis names a hard-to-reverse tradeoff: scope to the sketch package only, Act-On findings re-run Phase B, max 2 rounds before a human checkpoint.
+The synthesis can ship as its own commit either way (scaffold-first: types and signatures land behind the repo-convention skip flag with ticket link plus TODO, so CI stays green). Planned and scoped breakage during fill-in is replaced by flagged scaffolding; the Phase D implementer brief must list flag removal as an acceptance criterion, and merger plus final review must grep the flag and reject residuals. For adversarial pressure on the design before implementing, run the **interrogate** skill on the synthesized sketch (if installed). Mandatory when `Interrogate: yes` or the synthesis names a hard-to-reverse tradeoff: scope to the sketch package only, Act-On findings re-run Phase B, max 2 rounds before a human checkpoint. When the settled sketch still leaves 2+ concrete hard-to-reverse implementation approaches open, name each explicitly in the synthesis decision (approach + what is hard to reverse): this is the signal `to-tickets` §4 reads for the `Both: yes` escape.
 
 If the human pushes back on the shape (in a checkpoint or after the fact), treat that as Phase A evidence. Re-ground and re-run Phase B before writing more code.
 

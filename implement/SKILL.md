@@ -13,7 +13,7 @@ Run typechecking regularly, single test files regularly, and the full test suite
 Once done, use /code-review to review the work.
 
 <!-- CUSTOM-BEGIN: flag-routing, reason: bare implement silently single-shots flagged tickets; retirement: delete markers if upstream routes flags -->
-To override a stale flag, provide override evidence (settled-interface SHA or ADR, approach count, touched LOC and file count). Re-check the flags against `to-tickets` §4 first; when the flag no longer applies, proceed locally and log the correction to `flag-corrections.md`, referenced from the commit message. When the ticket is contested, security-sensitive, hard-to-reverse, marked `Both: yes`, or evidence is absent, stop and hand to `/implement-spec`. Tie goes to handoff. Criteria are canonical in `to-tickets` §4, the map in `ask-matt`.
+To override a stale flag, provide override evidence (settled-interface SHA or ADR, approach count, touched LOC and file count). Re-check the flags against `to-tickets` §4 first; when the flag no longer applies, proceed locally and log the correction to `flag-corrections.md`, referenced from the commit message. When the ticket is contested, security-sensitive, hard-to-reverse, marked `Both: yes`, or evidence is absent, stop and hand to `/implement-spec`. Tie goes to handoff. Criteria and routing map are canonical in `to-tickets` §4 (`ask-matt` cites them only).
 <!-- CUSTOM-END -->
 
 Commit your work to the current branch.
