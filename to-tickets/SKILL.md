@@ -57,7 +57,7 @@ Mark routing candidates yourself and present the markings with the breakdown bel
 
 Both arbitration (canonical — consumers cite, do not restate): filter to frontier-ready first; blocked claimants keep flags untouched and hold no slots (they enter the next scoring pass on unblock, subject to the cap); when none is ready, defer scoring until one unblocks (leave flags, note the deferral). Otherwise score ready tickets by `score = Rmax × f(n_raw)` where `n_raw` is the cited approach count, `f(n_raw)`: 2→1.0, 3→1.2, ≥4→1.3; `Rmax` is the max cited hard-to-reverse weight (b-scale, each band cited to the current-spec synthesis section ID: 1 reversible <1d refactor no migration, 2 costly 1–5d migration or internal break, 3 hard persisted-data/external-contract break or >5d rewrite). Gate: eligible iff `n_raw ≥ 2` AND `Rmax ≥ 2` (cross-spec or missing cites count as uncited). Uncited or single-approach `Both: yes` claims are ineligible, never auto-fill (holds empty; downgrades to `Arena: yes` linked to the sketch in the same pass). Total-order tiebreak: score desc, then Rmax desc, then n_raw desc, then lowest ticket number (no tie band). Rank top ready-eligible to `Both: active <ticket#>`, next to queued, downgrade the rest to `Arena: yes` linked to the settled sketch ID (downgrades route to `Arena: yes` only; re-escalate only on a newly discovered hard axis with sketch amendment). Any `→Arena` downgrade voids that ticket's pre-approval log line; re-escalation needs a fresh §4 checkbox.
 
-Both lifecycle transitions (states `no` | `yes` | `yes (queued, reason: ...)` | `active <n>`; log per §4 schema below):
+Both lifecycle transitions (Both value syntax (canonical): `no` | `yes` | `yes (queued, reason: ...)` | `active <n> [(ex-queued: <reason>)]`; log per §4 schema below):
 
 | Transition | From → To | Trigger | Flag write |
 |---|---|---|---|
@@ -119,7 +119,7 @@ Do NOT close or modify any parent issue.
 Architect: <yes|no>
 Arena: <yes|no>
 Interrogate: <yes|no>
-Both: <no|yes|yes (queued, reason: ...)|active <n> (ex-queued: <reason>)> (per §4 above; do not restate the criteria here).
+Both: <see §4 Both value syntax> (per §4 above; do not restate the criteria here).
 <!-- CUSTOM-END -->
 
 - [ ] Acceptance criterion 1
@@ -156,7 +156,7 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 Architect: <yes|no>
 Arena: <yes|no>
 Interrogate: <yes|no>
-Both: <no|yes|yes (queued, reason: ...)|active <n> (ex-queued: <reason>)> (per §4 above; do not restate the criteria here).
+Both: <see §4 Both value syntax> (per §4 above; do not restate the criteria here).
 <!-- CUSTOM-END -->
 
 </issue-template>

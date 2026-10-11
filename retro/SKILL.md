@@ -29,7 +29,7 @@ Checklist before done (advisory only, no file writes here): each finding names i
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: scratch-gc, reason: .scratch grows O(runs) and stale notes poison spec lookup; retirement: delete markers if upstream adds retention -->
-Stale `.scratch`? Record candidate paths only; leave all writes to GC per `implement-spec` scratch-gc pointer.
+Stale `.scratch`? Record candidate paths only; leave all writes to GC per `setup-matt-pocock-skills/issue-tracker-local.md` §scratch GC convention.
 <!-- CUSTOM-END -->
 
 ## Reference
