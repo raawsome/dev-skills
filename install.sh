@@ -1,6 +1,6 @@
 #!/bin/sh
 # Install these skills into opencode and/or Claude Code.
-# Usage: ./install.sh [--opencode-only] [--claude-only] [--symlink] [--list] [--dry-run] [--diff] [--backup] [--prune]
+# Usage: ./install.sh [--opencode-only] [--claude-only] [--symlink] [--list] [--dry-run] [--diff] [--backup] [--prune] [--help]
 # Default: copy every <skill>/ with a SKILL.md into both locations.
 set -eu
 SRC="$(cd "$(dirname "$0")" && pwd)"
@@ -21,10 +21,17 @@ for a in "$@"; do
     --diff) SHOW_DIFF=1 ;;
     --backup) DO_BACKUP=1 ;;
     --prune) PRUNE=1 ;;
+    --help|-h) echo "Usage: ./install.sh [--opencode-only] [--claude-only] [--symlink] [--list] [--dry-run] [--diff] [--backup] [--prune] [--help]"; echo "  --opencode-only  install to opencode only"; echo "  --claude-only    install to Claude Code only"; echo "  --symlink        symlink instead of copy"; echo "  --list           list installable skills"; echo "  --dry-run        preview without copying"; echo "  --diff           show diffs; implies --dry-run (preview only, no copy)"; echo "  --backup         back up existing dest before overwrite/prune"; echo "  --prune          remove dest skills with no source (backs up first with --backup)"; echo "  --help           show this help"; exit 0 ;;
     --list) ls -1 "$SRC" | while read -r d; do [ -f "$SRC/$d/SKILL.md" ] && echo "$d"; done; exit 0 ;;
     *) echo "unknown flag: $a" >&2; exit 1 ;;
   esac
 done
+if [ "$SHOW_DIFF" = "1" ] && [ "$DRY_RUN" = "0" ]; then
+  DRY_RUN=1
+fi
+if [ "$SHOW_DIFF" = "1" ] && [ "$MODE" = "symlink" ]; then
+  echo "warning: --diff is a no-op in --symlink mode" >&2
+fi
 install_one() {
   dest_root="$1"; name="$2"
   if [ "$SHOW_DIFF" = "1" ] && [ -d "$dest_root/$name" ] && [ "$MODE" = "copy" ]; then
@@ -63,6 +70,9 @@ prune_one() {
     if [ "$DRY_RUN" = "1" ]; then
       echo "dry-run prune -> $dest_root/$tname"
       continue
+    fi
+    if [ "$DO_BACKUP" = "1" ]; then
+      cp -R "$dest_root/$tname" "$dest_root/$tname.bak.$(date +%s)"
     fi
     rm -rf "$dest_root/$tname"
     echo "prune -> $dest_root/$tname"

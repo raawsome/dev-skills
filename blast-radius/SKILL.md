@@ -1,6 +1,6 @@
 ---
 name: blast-radius
-description: Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code instead of writing it up. Use ONLY for blast radius of X, what could this break, or reviewing a small diff the user says they don't trust.
+description: Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code instead of writing it up. Use ONLY for blast radius of X, what could this break, reviewing a small diff the user says they don't trust, shared code / library version / concurrency-lifecycle / wire-format triggers, or when another skill routes here (code-review §5 gate).
 license: MIT
 ---
 
@@ -28,9 +28,9 @@ Step 4 is usually one small script that imports the same library the app ships a
 
 ### Escalation rule
 
-- Attempt level 4 only when all hold: (a) you can execute code here, (b) the risk is non-trivial (shared code, lib version, concurrency/lifecycle, wire format, the code-review §5 triggers), (c) levels 2-3 did not already clear it.
+- Attempt level 4 only when all hold: (a) you can execute code here, (b) the risk is non-trivial (per canonical list below), (c) levels 2-3 did not already clear it (cleared = cited file:line + walked failure path that doesn't reach). Canonical property list (consumption of to-tickets §4 Interrogate/Blast signals): shared code, library version, concurrency/lifecycle, wire format.
 - Attempt level 5 only when level 4 passed but integration doubt remains AND the app is runnable in under about 2 minutes. Otherwise report "Level 4 proven, level 5 not attempted because <reason>".
-- No exec env means stopping at the highest cheap level. Mark `UNPROVEN (highest: level N; cheapest next check: <one command>)`. This is advisory; the merge decision stays with the reviewer, never a merge block.
+- No exec env means stopping at the highest cheap level. Mark `UNPROVEN (highest: level N; cheapest next check: <one command>)`. Advisory otherwise; reviewer must treat UNPROVEN wire-format as merge-blocking.
 
 ## Steps
 
@@ -43,7 +43,7 @@ Step 4 is usually one small script that imports the same library the app ships a
 <!-- CUSTOM-BEGIN: fact-linkage, reason: free exec invites retrofit-proofing; retirement: delete markers if upstream freezes the fact -->
 Freeze one sentence in step 2 as `Fact: "<...>"`. Step 5 cites it verbatim: `Proves Fact: "<...>" → level N→M (N, M in 1..5 per How sure are you) via .scratch/blast/<slug>/...` plus output. A changed fact is restated and re-proved. `UNPROVEN` still names the fact: `Fact: "<...>" — UNPROVEN (highest: level N; cheapest next check: <one command>)`.
 <!-- CUSTOM-END -->
-6. For a big or wide change, run it as an **arena**. Ask more than one candidate the same question and merge the answers. Different attempts catch different real bugs.
+6. For a big or wide change, run it as an **arena** only via Arena: yes routing (Architect: no + 2+ approaches) per `to-tickets` §4. Ask more than one candidate the same question and merge the answers. Different attempts catch different real bugs.
 
 ## What to hand back
 

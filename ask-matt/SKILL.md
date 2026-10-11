@@ -25,10 +25,10 @@ The route most work travels. You have an idea and want it built.
      - **`/implement-spec`** for the whole spec in one run. It reads the tickets as a **task graph**, runs implementer subagents across the ready **frontier** in parallel, and lands everything on one **integration branch**. Reach for it when you'd rather orchestrate the build than drive each ticket yourself.
    - **No** → **`/implement`** right here, in the same context window.
 
-   Either way, the code gets built by driving **`/tdd`** (one red-green slice at a time) and closes out with **`/code-review`**, a three-axis review (Standards + Spec + Ponytail) of the diff. `/implement` runs both per ticket; `/implement-spec`'s implementers each drive `/tdd`, and it runs one `/code-review` over the integration branch. Reach for **`/tdd`** on its own when you just want to build a concrete behaviour test-first without a full spec, and **`/code-review`** on its own whenever you want to review a branch or PR against a fixed point.
+   Either way, the code gets built by driving **`/tdd`** (one red-green slice at a time) and closes out with **`/code-review`**, a three-axis review (Standards + Spec + Ponytail) of the diff. `/implement` runs tdd + code-review per ticket; `/implement-spec`'s implementers each drive `/tdd`, and it runs one `/code-review` over the integration branch. Reach for **`/tdd`** on its own when you just want to build a concrete behaviour test-first without a full spec, and **`/code-review`** on its own whenever you want to review a branch or PR against a fixed point.
 
    <!-- CUSTOM-BEGIN: routing-cites, reason: upstream router has no flag routing; retirement: delete markers if upstream adopts flag routing -->
-`Architect:`/`Arena:`/`Interrogate:`/`Both:` flags ride on tickets (criteria canonical in `to-tickets` §4): `implement-spec` routes `Architect: yes→architect`, `Arena: yes→arena`, `Both: yes→architect then code-arena`; `code-review §5` gates `Interrogate`/`blast-radius` on flags or properties. Flag criteria canonical in `to-tickets` §4; do not restate (cite-only).
+`Architect:`/`Arena:`/`Interrogate:`/`Both:` flags ride on tickets (flag criteria canonical in `to-tickets` §4, routing map canonical in `implement-spec` §4): `code-review §5` gates `Interrogate`/`blast-radius` on flags or properties. Flag criteria canonical in `to-tickets` §4, routing map in `implement-spec` §4; do not restate (cite-only).
 <!-- CUSTOM-END -->
 
    Before stating what a skill does, read its SKILL.md; summaries here are a cache.
@@ -104,7 +104,9 @@ Off the main flow entirely.
 - **`/interrogate` / `/blast-radius`**: adversarial review and breakage analysis. Each also runs inside `code-review §5` gates; invoke directly when the user names them.
 - **`/swarm` / `/ponytail-review`**: parallel coverage and over-engineering review. `swarm` also runs for multi-slice exploration, `ponytail-review` as the Ponytail axis; invoke directly when the user names them.
 <!-- CUSTOM-END -->
-- **Conflict in a merge/rebase** → resolve per `resolving-merge-conflicts` 5 steps (state → intent → hunks → checks → finish), preserving both intents.
+<!-- CUSTOM-BEGIN: conflict-pointer, reason: upstream router has no merge-conflict entry; retirement: delete markers if upstream adds one -->
+- **Conflict in a merge/rebase** → resolve per `resolving-merge-conflicts` 5 steps, preserving both intents.
+<!-- CUSTOM-END -->
 
 ## Precondition
 

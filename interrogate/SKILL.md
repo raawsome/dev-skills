@@ -1,6 +1,6 @@
 ---
 name: interrogate
-description: Use ONLY for interrogate, adversarial review, multi-model review, challenge this, stress test this code, find blind spots, or tear this apart. Multiple independent reviewers challenge the same change, then a lead synthesizes one verdict.
+description: Use ONLY for interrogate, adversarial review, multi-model review, challenge this, stress test this code, find blind spots, or tear this apart, or when another skill routes here (code-review §5 gate, architect Phase C). Multiple independent reviewers challenge the same change, then a lead synthesizes one verdict.
 license: MIT
 ---
 
@@ -33,10 +33,10 @@ Write one clear paragraph. If you're unsure about the intent, ask the user befor
 
 ## Step 3, Spawn reviewers
 
-Launch N (default 2) readonly reviewer subagents in a single message, in the background. If the user explicitly asks for more reviewers, extend the Reviewer A/B labels to fit.
+Launch N (default 2) readonly reviewer subagents in a single message, in the background. When run as code-review §5 gate, run foreground (blocking) under code-review after §4 axes complete; standalone runs background. If the user explicitly asks for more reviewers, extend the Reviewer A/B labels to fit.
 
 <!-- CUSTOM-BEGIN: reviewer-count, reason: free re-rolls launder noise as consensus; retirement: delete markers if upstream pre-registers N -->
-Pre-register the reviewer count N (default 2) before spawning and run exactly N reviewers once; never add reviewers after seeing results for any reason. Consensus is a majority AND at least 2 when N is greater than 2, not a bare 2+. Report N and the per-finding agreement rate (k/N) in the agreement map, plus `reviewers spawned: N, rounds: R` (R counts synthesis passes over the fixed N results, never re-spawns) under Reviewers.
+Pre-register the reviewer count N (default 2) before spawning and run exactly N reviewers once; never add reviewers after seeing results for any reason. Consensus is a majority AND at least 2 when N is greater than 2, not a bare 2+ (N=2→2, N=3→2, N=5→3). Report N and the per-finding agreement rate (k/N) in the agreement map, plus `reviewers spawned: N, rounds: R` (R counts synthesis passes over the fixed N results, never re-spawns) under Reviewers.
 <!-- CUSTOM-END -->
 
 Read `references/reviewer-prompt.md` and fill in the template with:
@@ -53,7 +53,7 @@ The same filled template goes to all reviewers, so every reviewer applies the co
 As results come back, build a unified picture:
 
 1. **Parse all findings** from the reviewers
-2. **Identify consensus**. Per the reviewer-count rule above: consensus is a majority AND at least 2 when N is greater than 2; N=2 requires 2/2. Lone-reviewer findings are lower confidence.
+2. **Identify consensus**. Per the reviewer-count rule above: consensus is a majority AND at least 2 when N is greater than 2; N=2 requires 2/2 (per Step 3 reviewer-count rule). Lone-reviewer findings are lower confidence. Single-reviewer security/correctness findings escalate to Consider minimum, never auto-Dismiss.
 3. **Identify lone-reviewer findings**. Still worth reading, but weight accordingly.
 4. **Deduplicate**. Different reviewers may describe the same issue differently. Merge these and note which reviewers raised it.
 5. **Note disagreements**. If one reviewer flags something and another explicitly says the opposite, that's useful context for the verdict.

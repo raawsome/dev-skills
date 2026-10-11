@@ -39,7 +39,7 @@ Each skill is `<name>/SKILL.md` plus supporting files. `agents/openai.yaml` file
 
 ## Provenance
 
-Upstream: mattpocock-skills 1.3.1 per the upstream changelog (vendored checkout here is 1.2.3, so 1.3.x parity — GLOSSARY rename, graduated `implement-spec`/`retro`, Skill-tool convention, 1.3.1 router fix — is claimed, not verified). Third-party-derived custom: `pr` (from Dex Horthy's `show-me`, Humanlayer — see `pr/CREDITS.md`; not upstream). Retained: `resolving-merge-conflicts` (present in vendored 1.2.3 under `skills/engineering/`; per upstream changelog removed in 1.3.0 — unverifiable from this checkout; kept here as `FULLY-CUSTOM`). Diverged: `diagnosing-bugs` (Phase 3b conditional fan-out), `research` (conditional 1-vs-3 fan-out), `code-review` (third Ponytail axis + Interrogate/Blast-radius gates), ticket-flag routing (`Architect`/`Arena`/`Both`/`Interrogate` canonical in `to-tickets` §4). Custom-only: `architect`, `arena`, `blast-radius`, `interrogate`, `swarm`, `ponytail-review`. Route table canonical in `ask-matt`; `arena`/`swarm`/`implement-spec` cite it.
+Upstream: mattpocock-skills 1.3.1 per the upstream changelog (static grep/diff verification against the `v1.2.3`/`v1.3.1` tags, not a behavioural check; no vendored checkout exists in this repo). Per-item: GLOSSARY rename VERIFIED (`GLOSSARY` in 10 `SKILL.md` files; no `CONTEXT` leftovers; glossary-retirement marker removed; matches upstream `CONTEXT.md => GLOSSARY.md` rename per CHANGELOG `006a52b`); Skill-tool convention VERIFIED (27 `Skill tool` hits, e.g. `implement` calls it with `tdd`/`code-review`, per upstream #878); 1.3.1 router fix VERIFIED (`ask-matt:58` diagnosing-bugs → `/retro` + seam-only `/improve-codebase-architecture` wording is byte-identical to `v1.3.1:skills/engineering/ask-matt/SKILL.md:48`, and `diagnosing-bugs` Phase 6 is Cleanup-only). Graduation structure VERIFIED (`implement-spec`/`pr`/`retro` exist top-level); content intentionally diverged (custom overlays with retirement markers: `implement-spec` fanout-depth/flag-routing/merger-gate/gap-handling, `pr` blast-gate, `retro` checklist + scratch-gc). Third-party-derived custom: `pr` (from Dex Horthy's `show-me`, Humanlayer — see `pr/CREDITS.md`; not upstream). Retained: `resolving-merge-conflicts` retained-from-1.2.3, consistent-with-`v1.2.3`-tag (diff vs `v1.2.3:skills/engineering/resolving-merge-conflicts/SKILL.md` is only the em-dash fix plus the `FULLY-CUSTOM` marker; removed upstream in 1.3.0 per CHANGELOG `daa01d8`, so never-merge). Diverged: `diagnosing-bugs` (Phase 3b conditional fan-out), `research` (conditional 1-vs-3 fan-out), `code-review` (third Ponytail axis + Interrogate/Blast-radius gates), ticket-flag routing (`Architect`/`Arena`/`Both`/`Interrogate` canonical in `to-tickets` §4). Custom-only: `architect`, `arena`, `blast-radius`, `interrogate`, `swarm`, `ponytail-review`. Route table canonical in `ask-matt`; `arena`/`swarm`/`implement-spec` cite it.
 
 ## Upstream watch (flattened fork, cherry-pick only)
 
@@ -50,7 +50,7 @@ git -C ~/dev-skills fetch upstream --tags
 git -C ~/dev-skills diff v1.3.1 main -- <skill>/SKILL.md   # what you own vs them
 # copy the patch-class hunk by hand into ~/dev-skills/<skill>/SKILL.md,
 # keeping CUSTOM-BEGIN/END blocks as the merge boundary
-~/dev-skills/install.sh --diff   # preview harness drift
+~/dev-skills/install.sh --diff --dry-run   # preview harness drift (safe: no copies)
 ~/dev-skills/install.sh          # copy into harness(es), restart harness
 ```
 
@@ -58,7 +58,7 @@ Rules: port patch-class fixes only (naming, invocation, router fixes); keep `cod
 
 Marker audit (`SKILL.md` scope only — README:52 + ask-matt:112 are prose, not markers):
 `grep -rho '<!-- CUSTOM-BEGIN: [^>]*-->' --include=SKILL.md . | wc -l` must equal
-`grep -rho '<!-- CUSTOM-END[^>]*-->' --include=SKILL.md . | wc -l` (43/43 today).
+`grep -rho '<!-- CUSTOM-END[^>]*-->' --include=SKILL.md . | wc -l` (47/47 today).
 Sequence (no nesting, every BEGIN closed in-file):
 `for f in */SKILL.md; do perl -ne 'while(/<!-- CUSTOM-BEGIN: [^>]*-->|<!-- CUSTOM-END[^>]*-->/g){if($&=~/BEGIN/){$d++;print"$ARGV:$.: nested\n"if$d>1}else{if($d<1){print"$ARGV:$.: stray END\n"}$d--}}END{if($d!=0){print"$ARGV: unclosed\n"}}' "$f"; done`
 Bare `grep -c CUSTOM-BEGIN` false-fails (prose line + multi-block lines count as 1).

@@ -1,6 +1,6 @@
 ---
 name: arena
-description: Spawn N parallel candidates at the same task, pick a base, graft the strongest parts of the losers into it. Use ONLY when the user says /arena, arena this, throw it in the arena, or asks for parallel attempts at a non-trivial artifact.
+description: Spawn N parallel candidates at the same task, pick a base, graft the strongest parts of the losers into it. Use ONLY when the user says /arena, arena this, throw it in the arena, asks for parallel attempts at a non-trivial artifact, or when another skill routes here (architect Phase B, implement-spec Both code-arena).
 license: MIT
 ---
 
@@ -20,7 +20,7 @@ Open a todolist with one entry per phase before launching anything.
 
 1. Frame
 2. Fan out
-3. Cross-judge
+3. Cross-judge (parallel with parent reading in Pick)
 4. Pick
 5. Graft
 6. Verify
@@ -44,7 +44,7 @@ If a candidate fails to produce output, proceed with N-1 and note the dropout in
 
 ## Phase C: Cross-judge
 
-After all Phase B candidates complete, spawn one readonly judge subagent. It sees the rubric and the candidates by path label, scores each criterion in a table, and recommends a base with rationale. It runs after candidates finish, in parallel with the parent's own reading in Phase D. Don't spawn the judge while candidates are still writing. Quorum is 3 valid for N=3 and 3-4 valid for N=5; below quorum, reframe rather than picking from too few.
+After all Phase B candidates complete, spawn one readonly judge subagent. It sees the rubric and the candidates by path label, scores each criterion in a table, and recommends a base with rationale. It runs after candidates finish, in parallel with the parent's own reading in Phase D. Don't spawn the judge while candidates are still writing. Quorum is 2 valid for N=3 (proceed, note dropout in report) and 3-4 valid for N=5; below quorum, reframe rather than picking from too few.
 
 ## Phase D: Pick a base
 
@@ -63,7 +63,7 @@ Walk each losing candidate once more and identify what is worth porting into the
 Fold each graft in by hand to keep one mental model. The result has to remain coherent under one mental model.
 
 <!-- CUSTOM-BEGIN: graft-coherence, reason: picker blind, judge pre-graft, verify tests-only; retirement: delete markers if upstream adds a coherence pass -->
-When at least one graft was folded: run one coherence pass with a fresh readonly subagent (not the Phase D picker, not the Phase C judge) — checks single-mental-model plus the 8 flags in `architect/references/design-red-flags.md`, emits PASS/FLAG plus one line each. One round max; the picker hand-folds FLAG fixes, then Phase F verify. The base stays the base and the graft set stays closed. Skip when no graft was folded. If `architect/references/design-red-flags.md` is absent (standalone arena without architect installed), skip the flag check and log the skip.
+When at least one graft was folded: run one coherence pass with a fresh readonly subagent (not the Phase D picker, not the Phase C judge) — checks single-mental-model plus the 8 flags in `architect/references/design-red-flags.md`, emits PASS/FLAG plus one line each. One round max; the picker hand-folds FLAG fixes, then Phase F verify. The base stays the base and the graft set stays closed. Skip when no graft was folded. If `architect/references/design-red-flags.md` is absent (standalone arena without architect installed), skip the flag check, emit `COHERENCE-WITHOUT-FLAGS` explicitly, and log the skip; treat COHERENCE-WITHOUT-FLAGS as PASS on mental-model for Phase F entry.
 <!-- CUSTOM-END -->
 
 Record what was grafted, from which candidate, and what was rejected and why.

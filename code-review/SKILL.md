@@ -28,7 +28,7 @@ Triage pre-pass (stat only, no diff load): run `git diff --stat <fixed-point>...
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: large-diff, reason: silent cap leaves hunks unreviewed yet looking reviewed; retirement: delete markers if upstream defines sharding -->
-Above 300 LOC, warn and shard (at most 300 LOC per shard, max 4 shards per axis report, 250 words per shard). Beyond 4 shards, review entry points, shared code, and wire boundaries first and list unreviewed paths explicitly. Never silently cap.
+Above 300 LOC, warn and shard for axis review (at most 300 LOC per shard, max 4 shards per axis report, 250 words per shard). Beyond 4 shards, review entry points, shared code, and wire boundaries first and list unreviewed paths explicitly. Never silently cap. Evaluate the 800-LOC/10-file prompt on TOTAL triage pre-pass size, not per-shard.
 <!-- CUSTOM-END -->
 
 ### 2. Identify the spec source
@@ -70,13 +70,13 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 - The full diff command and commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
-- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. <!-- CUSTOM-BEGIN: standards-scope, reason: Generality/YAGNI ownership split between axes; retirement: delete markers if upstream scopes the briefs -->Report documented-standard violations and non-generality smells only; leave generality/YAGNI structure to the Ponytail axis.<!-- CUSTOM-END --> Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 250 words. Priority inside the cap: documented-standard hard violations first, then smells; drop the lowest priority first and state the count dropped."
+- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. <!-- CUSTOM-BEGIN: standards-scope, reason: Generality/YAGNI ownership split between axes; retirement: delete markers if upstream scopes the briefs -->Report documented-standard violations and non-generality smells only; leave generality/YAGNI structure to the Ponytail axis.<!-- CUSTOM-END --> Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 250 words. Priority inside the cap: documented-standard hard violations first, then smells; drop the lowest priority first and state the count dropped and list dropped finding titles."
 
 **Spec sub-agent prompt** should include:
 
 - The diff command and commit list.
 - The path or fetched contents of the spec.
-- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. <!-- CUSTOM-BEGIN: spec-scope, reason: Spec findings kept even under Ponytail overlap; retirement: delete markers if upstream scopes the briefs -->Quote the spec line for each finding, even if Ponytail may also flag the structure.<!-- CUSTOM-END --> Under 250 words. Priority: missing or partial requirements first, then scope creep, then wrong implementation; state the count dropped."
+- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. <!-- CUSTOM-BEGIN: spec-scope, reason: Spec findings kept even under Ponytail overlap; retirement: delete markers if upstream scopes the briefs -->Quote the spec line for each finding, even if Ponytail may also flag the structure.<!-- CUSTOM-END --> Under 250 words. Priority: missing or partial requirements first, then scope creep, then wrong implementation; state the count dropped and list dropped finding titles."
 
 If the spec is missing, skip the Spec sub-agent and note this in the final report.
 
@@ -84,18 +84,18 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 **Ponytail sub-agent prompt** should include:
 
 - The diff command and commit list.
-- The brief: "Call the Skill tool with `ponytail-review` and review this diff for over-engineering only. One line per finding (`<file>:L<line>: <tag> <what>. <replacement>.`), tags `delete` / `stdlib` / `native` / `yagni` / `shrink`. Correctness bugs, security holes, and performance are out of scope — leave those to the other axes. End with the ponytail-review Scoring line (`net: -N / touched M (+/-), -P%`, or `Lean already. Ship.`). Under 250 words. Priority: delete and yagni first, then stdlib and native, then shrink; state the count dropped."
+- The brief: "Call the Skill tool with `ponytail-review` and review this diff for over-engineering only. One line per finding (`<file>:L<line>: <tag> <what>. <replacement>.`), tags `delete` / `stdlib` / `native` / `yagni` / `shrink`. Correctness bugs, security holes, and performance are out of scope — leave those to the other axes. End with the ponytail-review Scoring line (`net: -N / touched M (+/-), -P%`, or `Lean already. Ship.`). Under 250 words. Priority: delete and yagni first, then stdlib and native, then shrink; state the count dropped and list dropped finding titles."
 
-Skip Ponytail on docs-only micro-diffs: added lines under 20 AND changed files matching only `\.(md|mdx|txt|rst)$`. Note "Ponytail skipped (docs-only, under 20 lines)" in the report. Review code-adjacent docs (OpenAPI yaml, schemas).
+Skip Ponytail on docs-only micro-diffs: added lines per `git diff --numstat` under 20 AND changed files matching only `\.(md|mdx|txt|rst)$`. Note "Ponytail skipped (docs-only, under 20 lines)" in the report. Review code-adjacent docs (e.g. `**/openapi.* **/schema/**`).
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: opt-in-gates, reason: contested designs need adversarial review and breakage proof; retirement: delete markers if upstream adds review gates -->
 ### 5. Opt-in gates (Interrogate / Blast-radius)
 
-These run only when triggered. Use the Step 1 triage pre-pass to decide without loading the diff into reviewers. Report each under its own heading; do not merge or rerank with the three axes. Flag definitions canonical in `to-tickets` §4 (cite-only; do not redefine). Firing conditions below are consumption, not criteria. Do not fire Interrogate on size alone (`>300 LOC` is not a trigger); fire on signal.
+These run only when triggered. Use the Step 1 triage pre-pass to decide without loading the diff into reviewers. Report each under its own heading; do not merge or rerank with the three axes. Flag definitions canonical in `to-tickets` §4 (cite-only; do not redefine). The size prompt is not a firing; default no. Size alone (>300 LOC) never fires; 800 LOC / 10 files with Divergent Change or Shotgun Surgery earns one prompt to consider, default no (size prompt is local consumption, not a canonical flag).
 
-- **Interrogate**: when the branch contains tickets marked `Interrogate: yes`, the user says "interrogate this", or the design is contested / security-sensitive / hard-to-reverse with a single approach. Call the Skill tool with `interrogate` on the diff command from step 1 and report its verdict verbatim under `## Interrogate`. In interactive runs, a diff above 800 LOC or above 10 files showing Divergent Change or Shotgun Surgery earns one prompt: ask the user whether to interrogate, default no, with a one-line reason. In autonomous runs (`implement-spec` step 7), log the suggested interrogation with its reason and continue; never block.
-- **Blast-radius**: when the diff touches shared code, a library version, concurrency/lifecycle semantics, or a wire format another system reads — or the user asks "what could this break". Call the Skill tool with `blast-radius` on the change and report its writeup verbatim under `## Blast-radius`, keeping the proven-or-unproven safety fact.
+- **Interrogate** (flags per `to-tickets` §4): Call the Skill tool with `interrogate` on the diff command from step 1 and report its verdict verbatim under `## Interrogate`. In interactive runs, a diff above 800 LOC or above 10 files showing Divergent Change or Shotgun Surgery earns one prompt: ask the user whether to interrogate, default no, with a one-line reason. In autonomous runs (`implement-spec` step 7), log the suggested interrogation with its reason and continue; never block.
+- **Blast-radius** (flags per `to-tickets` §4; properties as consumed in blast-radius Escalation rule): Call the Skill tool with `blast-radius` on the change and report its writeup verbatim under `## Blast-radius`, keeping the proven-or-unproven safety fact.
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: aggregate-fallback, reason: overlap links and fallback keep smells reported; retirement: delete markers if upstream changes aggregation -->

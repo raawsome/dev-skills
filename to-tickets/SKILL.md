@@ -53,7 +53,7 @@ Mark routing candidates yourself and present the markings with the breakdown bel
 - `Architect: yes` when the interface, usage, or module shape must still be settled before implementation, `no` otherwise.
 - `Arena: yes` only when `Architect: no` AND the implementation approach itself is high-uncertainty or hard to reverse, with 2+ concrete approaches under a settled interface (a shared seam, 2+ data-flow or state-ownership shapes). `No` on everything else — including every `Architect: yes` ticket, since architect already runs an internal arena over sketches in its Phase B.
 - `Interrogate: yes` if contested, security-sensitive, or hard-to-reverse with a single approach (where `Arena: no`), `no` on the rest.
-- `Both: yes` only as a narrow escape: when the architect Phase C synthesis decision still names 2+ concrete hard-to-reverse implementation approaches after the sketch settles. Requires lead/user approval. Both cap: 1 active + max 1 queued per spec, marked `Both: yes (queued, reason: <2+ approaches + what is hard-to-reverse>)`. Re-score once when the frontier first contains the queued ticket or the active Both resolves; otherwise leave flags untouched. On promotion the `(queued, reason:)` marker strips to plain `Both: yes`; a close is a land or a gap-out. Default is exclusive flags above.
+- `Both: yes` only as a narrow escape: when the architect Phase C synthesis decision still names 2+ concrete hard-to-reverse implementation approaches after the sketch settles. Requires lead/user approval. Both cap: 1 active + max 1 queued per spec, marked `Both: yes (queued, reason: <2+ approaches + what is hard-to-reverse>)`. Re-score at most once per trigger — when the frontier first contains the queued ticket or the active Both resolves — in a single pass when both triggers coincide; otherwise leave flags untouched. On promotion the `(queued, reason:)` marker strips to plain `Both: yes`; a close is a land or a gap-out. Default is exclusive flags above.
 
 Both arbitration (canonical — consumers cite, do not restate): filter to frontier-ready first; when none is ready, defer scoring until one unblocks (leave flags, note the deferral). Otherwise score ready tickets by max(a×b) where (a) is the count of concrete approaches named and (b) is the hard-to-reverse weight (b-scale: 1 reversible, 2 costly to reverse, 3 hard-to-reverse); tie goes to higher b, then lowest ticket number. Downgrade the rest to `Architect: yes`, except one runner-up within the tie band may stay `Both: yes (queued, reason: …)` to run after the active Both lands.
 
@@ -83,7 +83,7 @@ Present flags as a table (`| ticket | Architect | Arena | Interrogate | Both |`)
 Publish the approved tickets. **How** depends on the tracker `/setup-matt-pocock-skills` configured; the tickets are the same either way, only the shape of the blocking edges changes:
 
 - **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's "Blocked by" lists the numbers/titles it depends on. Use the per-ticket file template below: one ticket per file, never a single combined file.
-- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the platform's native blocking / sub-issue relationship where it has one; otherwise set each ticket's "Blocked by" to the blocking issues. Apply the `ready-for-agent` triage label unless instructed otherwise; the tickets are agent-grabbable by construction.
+- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the platform's native blocking relationship where it has one; otherwise set each ticket's "Blocked by" to the blocking issues. If the source was an existing issue, make each ticket its sub-issue (tracker doc's operation). Apply the `ready-for-agent` triage label unless instructed otherwise; the tickets are agent-grabbable by construction.
 
 Work the **frontier**: any ticket whose blockers are all done. For a purely linear chain that means top to bottom.
 
@@ -125,7 +125,7 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 
 ## Blocked by
 
-- A reference to each blocking ticket, or "None (can start immediately)".
+- A reference to each blocking ticket, or "None (can start immediately)". Omit this section when blockers were set as native edges.
 
 ## Imports
 

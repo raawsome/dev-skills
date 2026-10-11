@@ -4,6 +4,9 @@ description: Architecture review surfacing deepening opportunities as a visual H
 disable-model-invocation: true
 ---
 
+<!-- CUSTOM-BEGIN: frontmatter-trim, reason: description trimmed to human one-liner per SKILL-MECHANICS.md; upstream tail "then grill through whichever one you pick" cut as covered by §3 grilling loop; retirement: delete markers if upstream restores tail -->
+<!-- CUSTOM-END -->
+
 # Improve Codebase Architecture
 
 Surface architectural friction and propose **deepening opportunities**: refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
@@ -68,4 +71,6 @@ Side effects happen inline as decisions crystallize; call the Skill tool with "d
 - **Naming a deepened module after a concept not in `GLOSSARY.md`?** Add the term to `GLOSSARY.md`. Create the file lazily if it doesn't exist.
 - **Sharpening a fuzzy term during the conversation?** Update `GLOSSARY.md` right there.
 - **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing; skip ephemeral reasons ("not worth it right now") and self-evident ones.
+<!-- CUSTOM-BEGIN: arena-routing, reason: upstream has no arena cap/routing; retirement: delete markers if upstream adds arena routing -->
 - **Want to explore alternative interfaces?** Offer `arena` only if shared or 2+ shapes — else single proposal. Cap 1/pick, N=3 only (never N=5 via this route). When it fires, call Skill `arena` full A–F with codebase-design vocab + GLOSSARY terms as the frame. If the pick needs its types and module shape settled before anyone codes it, route through `architect` first, then a single implementer fills in the sketch.
+<!-- CUSTOM-END -->
