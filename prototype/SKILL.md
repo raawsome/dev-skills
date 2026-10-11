@@ -12,7 +12,7 @@ A prototype is **throwaway code that answers a question**. The question decides 
 Identify which question is being answered, using the user's prompt, the surrounding code, or by asking if the user is around:
 
 - **"Does this logic / state model feel right?"** → [LOGIC.md](LOGIC.md). Build a single shareable HTML file (free-play buttons plus tabbed guided walkthroughs) that pushes the state machine through cases that are hard to reason about on paper, and that a non-developer can drive.
-- **"What should this look like?"** → [UI.md](UI.md). <!-- CUSTOM-BEGIN: ui-count, reason: deterministic output over open-ended several; retirement: delete markers if upstream pins a count -->Always generate 3 radically different UI variations<!-- CUSTOM-END --> on a single route, switchable via a URL search param and a floating bottom bar.
+- **"What should this look like?"** → [UI.md](UI.md). <!-- CUSTOM-BEGIN: ui-count, reason: deterministic output over open-ended several; retirement: delete markers if upstream pins a count -->Always generate 3 radically different UI variations. 1 only when the question is a single binary choice with no visual styling at stake — quote the question text and keep 3 the default otherwise.<!-- CUSTOM-END --> on a single route, switchable via a URL search param and a floating bottom bar.
 
 The two branches produce very different artifacts, so getting this wrong wastes the whole prototype. If the question is genuinely ambiguous and the user isn't reachable, default to whichever branch better matches the surrounding code (a backend module → logic; a page or component → UI) and state the assumption at the top of the prototype.
 

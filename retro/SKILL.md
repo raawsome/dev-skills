@@ -24,7 +24,9 @@ The user has asked for a **retrospective**. You are suggesting improvements to t
 
 4. Present these candidates to the user, in order of severity.
 
+<!-- CUSTOM-BEGIN: checklist-gate, reason: advisory bar before done, no writes here; retirement: delete markers if upstream adds a done checklist -->
 Checklist before done (advisory only, no file writes here): each finding names its category plus cheapest enforcement, findings are ordered by severity, no code changes were made, and vague writeups were cut.
+<!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: scratch-gc, reason: .scratch grows O(runs); retirement: delete markers if upstream adds retention -->
 GC owns no writes here (checklist above stays authoritative): when a retro surfaces stale `.scratch`, point at `implement-spec` scratch-gc as the single source of truth for the unreferenced-delete plus grep-before-rm plus per-type retention rules; record the candidate paths only.

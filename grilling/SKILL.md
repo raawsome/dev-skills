@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan, decision, or idea. Invoked via Skill tool from grill-me/grill-with-docs/triage/wayfinder/improve-codebase-architecture; trigger phrases route to the wrappers.
+description: Grill the user relentlessly about a plan, decision, or idea.
 ---
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
@@ -25,7 +25,9 @@ Format a round like so:
 ➡️ <your recommended answer>
 ```
 
+<!-- CUSTOM-BEGIN: yes-framing, reason: yes-means-recommended keeps rounds decisive; retirement: delete markers if upstream pins question framing -->
 Word each question so "yes" accepts your recommended answer.
+<!-- CUSTOM-END -->
 
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
 

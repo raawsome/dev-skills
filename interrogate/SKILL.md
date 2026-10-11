@@ -1,6 +1,6 @@
 ---
 name: interrogate
-description: Use ONLY for interrogate, adversarial review, multi-model review, challenge this, stress test this code, find blind spots, or tear this apart, or when another skill routes here (code-review §5 gate, architect Phase C). Multiple independent reviewers challenge the same change, then a lead synthesizes one verdict.
+description: Use ONLY for adversarial review (challenge/stress-test/tear-apart synonyms point here, not separate) or when routed here (code-review §5, architect Phase C). Multiple independent reviewers challenge the same change, then a lead synthesizes one verdict.
 license: MIT
 ---
 

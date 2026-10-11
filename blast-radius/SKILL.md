@@ -1,12 +1,12 @@
 ---
 name: blast-radius
-description: Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code instead of writing it up. Use ONLY for blast radius of X, what could this break, reviewing a small diff the user says they don't trust, shared code / library version / concurrency-lifecycle / wire-format triggers, or when another skill routes here (code-review §5 gate).
+description: blast-radius — what a change could break beyond the diff, proven by running code. Use ONLY for blast-radius asks, a small diff the user doesn't trust, shared code / library version / concurrency-lifecycle / wire-format triggers, or when another skill routes here (code-review §5 gate).
 license: MIT
 ---
 
 # Blast radius
 
-Find what a change breaks somewhere else, before it ships. Use for "blast radius of X", "what could this break", or reviewing a small diff the user says they don't trust.
+Find what a change breaks somewhere else, before it ships.
 
 Listing the callers is not the job. The callers can be grepped in a second. The job is the breakage grep won't show you.
 
@@ -28,9 +28,9 @@ Step 4 is usually one small script that imports the same library the app ships a
 
 ### Escalation rule
 
-- Attempt level 4 only when all hold: (a) you can execute code here, (b) the risk is non-trivial (per canonical list below), (c) levels 2-3 did not already clear it (cleared = cited file:line + walked failure path that doesn't reach). Canonical property list: shared code, library version, concurrency/lifecycle, wire format.
-- Attempt level 5 only when level 4 passed but integration doubt remains AND the app is runnable in under about 2 minutes. Otherwise report "Level 4 proven, level 5 not attempted because <reason>".
-- No exec env means stopping at the highest cheap level. Mark `UNPROVEN (highest: level N; cheapest next check: <one command>)`. Advisory otherwise; reviewer must treat UNPROVEN wire-format as merge-blocking.
+- Attempt level 4 only when all hold: (a) you can execute code here (probe with an exec command with a timeout; if no probe command fits in the timeout, treat as no exec env), (b) the risk is non-trivial — non-trivial means it touches any of: shared code, library version, concurrency/lifecycle, wire format — (c) levels 2-3 did not already clear it (cleared = cited file:line + walked failure path that doesn't reach).
+- Attempt level 5 only when level 4 passed but integration doubt remains — doubt means naming the specific untested hop (e.g. downstream consumer, wire peer, lifecycle host) — AND the app is runnable in under 2 minutes (probe with a start/build/test command with a timeout; if no probe command fits in the timeout, automatically report "Level 4 proven, level 5 not attempted because <reason>").
+- No exec env means stopping at the highest cheap level. Mark `UNPROVEN (highest: level N; cheapest next check: <one command>)`. Non-wire-format UNPROVEN stays advisory; UNPROVEN wire-format is merge-blocking.
 
 ## Steps
 
