@@ -1,6 +1,6 @@
 ---
 name: swarm
-description: Fan out N parallel workers, drain them, and return one report. Use ONLY for /swarm, swarm this, or parallel coverage, races, gauntlets, and exploration.
+description: Fan out N parallel workers, drain them, and return one report. Use ONLY for /swarm, swarm this, or parallel coverage, races, gauntlets, or multi-slice exploration.
 license: MIT
 ---
 

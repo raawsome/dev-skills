@@ -32,7 +32,7 @@ Use this template for writing the PR body:
 <optional: potential ramifications of merge>
 
 <!-- CUSTOM-BEGIN: blast-gate, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->
-**Blast-radius:** [ ] skipped (<reason>) / [ ] ran (<link>). Fire when it touches shared code, a lib version, concurrency/lifecycle, or a wire format; small diffs run single, big or wide diffs run as an arena (see blast-radius step 6). Small is about 300 or fewer LOC touched, or an isolated surface per blast-radius "small diff you don't trust". Causal analysis lives in the blast-radius writeup; this template stays comms-only.
+**Blast-radius:** [ ] skipped (<reason>) / [ ] ran (<link>). Fire when it touches shared code, a lib version, concurrency/lifecycle, or a wire format; small diffs run single, big or wide diffs run as an arena (see blast-radius step 6). Small is about 300 or fewer LOC touched, or an isolated surface per blast-radius "small diff the user says they don't trust". Causal analysis lives in the blast-radius writeup; this template stays comms-only.
 <!-- CUSTOM-END -->
 ```
 

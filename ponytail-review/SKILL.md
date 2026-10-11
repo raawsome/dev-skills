@@ -4,9 +4,9 @@ description: >
   Code review focused exclusively on over-engineering. Finds what to delete:
   reinvented standard library, unneeded dependencies, speculative abstractions,
   dead flexibility. One line per finding: location, what to cut, what replaces
-  it. Use when the user says "review for over-engineering", "what can we
-  delete", "is this over-engineered", "simplify review", or invokes
-  /ponytail-review. Complements correctness-focused review, this one only
+   it. Use ONLY when the user says "review for over-engineering", "what can we
+   delete", "is this over-engineered", "simplify review", or invokes
+   /ponytail-review, or when another skill routes a diff here. Complements correctness-focused review, this one only
   hunts complexity.
 ---
 

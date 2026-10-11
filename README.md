@@ -55,3 +55,10 @@ git -C ~/dev-skills diff v1.3.1 main -- <skill>/SKILL.md   # what you own vs the
 ```
 
 Rules: port patch-class fixes only (naming, invocation, router fixes); keep `code-review` 3-axis and `ask-matt` router as owned files; when upstream adopts a custom block, delete its markers and rebase onto vendor wording in the same commit. `resolving-merge-conflicts` is never-merge.
+
+Marker audit (`SKILL.md` scope only — README:52 + ask-matt:112 are prose, not markers):
+`grep -rho '<!-- CUSTOM-BEGIN: [^>]*-->' --include=SKILL.md . | wc -l` must equal
+`grep -rho '<!-- CUSTOM-END[^>]*-->' --include=SKILL.md . | wc -l` (43/43 today).
+Sequence (no nesting, every BEGIN closed in-file):
+`for f in */SKILL.md; do perl -ne 'while(/<!-- CUSTOM-BEGIN: [^>]*-->|<!-- CUSTOM-END[^>]*-->/g){if($&=~/BEGIN/){$d++;print"$ARGV:$.: nested\n"if$d>1}else{if($d<1){print"$ARGV:$.: stray END\n"}$d--}}END{if($d!=0){print"$ARGV: unclosed\n"}}' "$f"; done`
+Bare `grep -c CUSTOM-BEGIN` false-fails (prose line + multi-block lines count as 1).

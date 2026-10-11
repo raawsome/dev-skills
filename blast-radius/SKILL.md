@@ -1,12 +1,12 @@
 ---
 name: blast-radius
-description: Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code instead of writing it up. Use ONLY for blast radius of X, what could this break, or reviewing a small diff you don't trust.
+description: Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code instead of writing it up. Use ONLY for blast radius of X, what could this break, or reviewing a small diff the user says they don't trust.
 license: MIT
 ---
 
 # Blast radius
 
-Find what a change breaks somewhere else, before it ships. Use for "blast radius of X", "what could this break", or reviewing a small diff you don't trust yet.
+Find what a change breaks somewhere else, before it ships. Use for "blast radius of X", "what could this break", or reviewing a small diff the user says they don't trust.
 
 Listing the callers is not the job. The callers can be grepped in a second. The job is the breakage grep won't show you.
 

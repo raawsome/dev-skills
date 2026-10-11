@@ -1,6 +1,7 @@
 ---
 name: implement-spec
-description: "Implement the result of /to-spec and /to-tickets in code. Reads tickets as a task graph, runs implementer subagents across the ready frontier in parallel, lands everything on one integration branch. Use when the user wants to build a whole spec at once rather than ticket by ticket."
+description: "Builds a whole spec at once from tickets on one integration branch."
+disable-model-invocation: true
 ---
 
 You have been provided a spec. This spec should have tickets associated with it, describing how to implement the spec.
