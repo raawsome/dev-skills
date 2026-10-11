@@ -92,10 +92,10 @@ Skip Ponytail on docs-only micro-diffs: added lines per `git diff --numstat` und
 <!-- CUSTOM-BEGIN: opt-in-gates, reason: contested designs need adversarial review and breakage proof; retirement: delete markers if upstream adds review gates -->
 ### 5. Opt-in gates (Interrogate / Blast-radius)
 
-These run only when triggered. Use the Step 1 triage pre-pass to decide without loading the diff into reviewers. Report each under its own heading; do not merge or rerank with the three axes. Flag definitions canonical in `to-tickets` §4 (cite-only; do not redefine). The size prompt is not a firing; default no (local consumption, not a canonical flag).
+These run only when triggered. Use the Step 1 triage pre-pass to decide without loading the diff into reviewers. Report each under its own heading; do not merge or rerank with the three axes. Flag definitions canonical in `to-tickets` §4 (cite-only; do not redefine). The size prompt is not a firing; default no.
 
 - **Interrogate** (flags per `to-tickets` §4): Call the Skill tool with `interrogate` on the diff command from step 1 and report its verdict verbatim under `## Interrogate`. In interactive runs, a diff above 800 LOC or above 10 files showing Divergent Change or Shotgun Surgery earns one prompt: ask the user whether to interrogate, default no, with a one-line reason. In autonomous runs (`implement-spec` step 7), log the suggested interrogation with its reason and continue; never block.
-- **Blast-radius** (flags per `to-tickets` §4; properties canonical in blast-radius Escalation rule, cite-only): Call the Skill tool with `blast-radius` on the change and report its writeup verbatim under `## Blast-radius`, keeping the proven-or-unproven safety fact.
+- **Blast-radius** (flags per `to-tickets` §4; properties per blast-radius Escalation rule): Call the Skill tool with `blast-radius` on the change and report its writeup verbatim under `## Blast-radius`, keeping the proven-or-unproven safety fact.
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: aggregate-fallback, reason: overlap links and fallback keep smells reported; retirement: delete markers if upstream changes aggregation -->

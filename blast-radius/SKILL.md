@@ -28,7 +28,7 @@ Step 4 is usually one small script that imports the same library the app ships a
 
 ### Escalation rule
 
-- Attempt level 4 only when all hold: (a) you can execute code here, (b) the risk is non-trivial (per canonical list below), (c) levels 2-3 did not already clear it (cleared = cited file:line + walked failure path that doesn't reach). Canonical property list (canonical; to-tickets §4 and code-review §5 cite-only): shared code, library version, concurrency/lifecycle, wire format.
+- Attempt level 4 only when all hold: (a) you can execute code here, (b) the risk is non-trivial (per canonical list below), (c) levels 2-3 did not already clear it (cleared = cited file:line + walked failure path that doesn't reach). Canonical property list: shared code, library version, concurrency/lifecycle, wire format.
 - Attempt level 5 only when level 4 passed but integration doubt remains AND the app is runnable in under about 2 minutes. Otherwise report "Level 4 proven, level 5 not attempted because <reason>".
 - No exec env means stopping at the highest cheap level. Mark `UNPROVEN (highest: level N; cheapest next check: <one command>)`. Advisory otherwise; reviewer must treat UNPROVEN wire-format as merge-blocking.
 

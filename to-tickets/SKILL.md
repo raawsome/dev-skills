@@ -59,7 +59,7 @@ Both arbitration (canonical — consumers cite, do not restate): filter to front
 
 Flag criteria are canonical here. Consumers (`implement`, `implement-spec`, `code-review`) cite the flags; they don't redefine them. Before routing, check all four lines (0-cost): `for f in .scratch/<slug>/issues/*.md; do grep -q 'Arena:' "$f" && grep -q 'Architect:' "$f" && grep -q 'Interrogate:' "$f" && grep -q 'Both:' "$f" || echo "missing flags: $f"; done` must print nothing.
 
-No `Blast:`/`Swarm:` flags by design: wide refactors sequence via §3 expand–contract (:40); blast analysis fires via `code-review` §5 property triggers; multi-slice exploration fans out via `implement-spec` step 2. These route on properties, not flags.
+No `Blast:`/`Swarm:` flags by design: wide refactors sequence via §3 expand–contract (:40); blast analysis fires via `code-review` §5 property triggers; multi-slice exploration fans out via `implement-spec` step 2. These route on properties, not flags (properties per blast-radius Escalation rule).
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: flag-contradiction, reason: silent downgrade hides contested signal; retirement: delete markers if upstream adopts a contradiction rule -->
