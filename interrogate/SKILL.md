@@ -53,7 +53,7 @@ The same filled template goes to all reviewers, so every reviewer applies the co
 As results come back, build a unified picture:
 
 1. **Parse all findings** from the reviewers
-2. **Identify consensus**. Per the reviewer-count rule above: consensus is a majority AND at least 2 when N is greater than 2; N=2 requires 2/2 (per Step 3 reviewer-count rule). Lone-reviewer findings are lower confidence. Single-reviewer security/correctness findings escalate to Consider minimum, never auto-Dismiss.
+2. **Identify consensus** (per Step 3 reviewer-count rule). Lone-reviewer findings are lower confidence. Single-reviewer security/correctness findings escalate to Consider minimum, never auto-Dismiss.
 3. **Identify lone-reviewer findings**. Still worth reading, but weight accordingly.
 4. **Deduplicate**. Different reviewers may describe the same issue differently. Merge these and note which reviewers raised it.
 5. **Note disagreements**. If one reviewer flags something and another explicitly says the opposite, that's useful context for the verdict.

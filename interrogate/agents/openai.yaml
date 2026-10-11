@@ -1,3 +1,5 @@
 interface:
   display_name: "Interrogate"
   short_description: "Adversarial review with a synthesized verdict"
+policy:
+  allow_implicit_invocation: false

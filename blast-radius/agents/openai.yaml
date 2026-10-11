@@ -1,3 +1,5 @@
 interface:
   display_name: "Blast Radius"
   short_description: "Find outside-diff breakage, prove the safety fact"
+policy:
+  allow_implicit_invocation: false

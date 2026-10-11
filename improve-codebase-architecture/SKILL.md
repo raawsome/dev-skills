@@ -4,9 +4,6 @@ description: Architecture review surfacing deepening opportunities as a visual H
 disable-model-invocation: true
 ---
 
-<!-- CUSTOM-BEGIN: frontmatter-trim, reason: description trimmed to human one-liner per SKILL-MECHANICS.md; upstream tail "then grill through whichever one you pick" cut as covered by §3 grilling loop; retirement: delete markers if upstream restores tail -->
-<!-- CUSTOM-END -->
-
 # Improve Codebase Architecture
 
 Surface architectural friction and propose **deepening opportunities**: refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
