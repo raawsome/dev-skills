@@ -39,4 +39,19 @@ Each skill is `<name>/SKILL.md` plus supporting files. `agents/openai.yaml` file
 
 ## Provenance
 
-Upstream: mattpocock-skills 1.2.3. Diverged: `diagnosing-bugs` (GLOSSARY rename + Phase 3b conditional fan-out), `research` (conditional 1-vs-3 fan-out). Route table canonical in `ask-matt`; `arena`/`swarm`/`implement-spec` cite it.
+Upstream: mattpocock-skills 1.3.1 (parity — GLOSSARY rename, graduated `implement-spec`/`pr`/`retro`, Skill-tool convention, 1.3.1 router fix all ported). Retained: `resolving-merge-conflicts` (deleted upstream in 1.3.0, kept here as `FULLY-CUSTOM`). Diverged: `diagnosing-bugs` (Phase 3b conditional fan-out), `research` (conditional 1-vs-3 fan-out), `code-review` (third Ponytail axis + Interrogate/Blast-radius gates), ticket-flag routing (`Architect`/`Arena`/`Both`/`Interrogate` canonical in `to-tickets` §4). Custom-only: `architect`, `arena`, `blast-radius`, `interrogate`, `swarm`, `ponytail-review`. Route table canonical in `ask-matt`; `arena`/`swarm`/`implement-spec` cite it.
+
+## Upstream watch (flattened fork, cherry-pick only)
+
+This repo is a flattened fork: no shared history with upstream, so never blanket-merge or rebase onto it. To port an upstream fix:
+
+```sh
+git -C ~/dev-skills fetch upstream --tags
+git -C ~/dev-skills diff v1.3.1 main -- <skill>/SKILL.md   # what you own vs them
+# copy the patch-class hunk by hand into ~/dev-skills/<skill>/SKILL.md,
+# keeping CUSTOM-BEGIN/END blocks as the merge boundary
+~/dev-skills/install.sh --diff   # preview harness drift
+~/dev-skills/install.sh          # copy into harness(es), restart harness
+```
+
+Rules: port patch-class fixes only (naming, invocation, router fixes); keep `code-review` 3-axis and `ask-matt` router as owned files; when upstream adopts a custom block, delete its markers and rebase onto vendor wording in the same commit. `resolving-merge-conflicts` is never-merge.
