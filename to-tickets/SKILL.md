@@ -57,7 +57,7 @@ Mark routing candidates yourself and present the markings with the breakdown bel
 
 Both arbitration (canonical — consumers cite, do not restate): filter to frontier-ready first; blocked claimants keep flags untouched and hold no slots (they enter the next scoring pass on unblock, subject to the cap); when none is ready, defer scoring until one unblocks (leave flags, note the deferral). Otherwise score ready tickets by `score = Rmax × f(n_raw)` where `n_raw` is the cited approach count, `f(n_raw)`: 2→1.0, 3→1.2, ≥4→1.3; `Rmax` is the max cited hard-to-reverse weight (b-scale, each band cited to the current-spec synthesis section ID: 1 reversible <1d refactor no migration, 2 costly 1–5d migration or internal break, 3 hard persisted-data/external-contract break or >5d rewrite). Gate: eligible iff `n_raw ≥ 2` AND `Rmax ≥ 2` (cross-spec or missing cites count as uncited). Uncited or single-approach `Both: yes` claims are ineligible, never auto-fill (holds empty; downgrades to `Arena: yes` linked to the sketch in the same pass). Total-order tiebreak: score desc, then Rmax desc, then n_raw desc, then lowest ticket number (no tie band). Rank top ready-eligible to `Both: active <ticket#>`, next to queued, downgrade the rest to `Arena: yes` linked to the settled sketch ID (downgrades route to `Arena: yes` only; re-escalate only on a newly discovered hard axis with sketch amendment). Any `→Arena` downgrade voids that ticket's pre-approval log line; re-escalation needs a fresh §4 checkbox.
 
-Both lifecycle transitions (states `no` | `yes` | `yes (queued, reason: ...)` | `active <n>`; log every decision as `ticket#, a=n_raw, Rmax, score, N, Active|Queued|→Arena, one-line reason` where N = code-arena size, 3 default; 5 only with arena Phase A criteria cite; N optional, defaults to 3 for 6-tuple readers):
+Both lifecycle transitions (states `no` | `yes` | `yes (queued, reason: ...)` | `active <n>`; log per §4 schema below):
 
 | Transition | From → To | Trigger | Flag write |
 |---|---|---|---|
@@ -73,7 +73,7 @@ Flag criteria are canonical here. Consumers (`implement`, `implement-spec`, `cod
 No `Blast:`/`Swarm:` flags by design: wide refactors sequence via §3 expand–contract (:40); blast analysis fires via `code-review` §5 property triggers; multi-slice exploration fans out via `implement-spec` step 2. These route on properties, not flags (properties per blast-radius Escalation rule).
 <!-- CUSTOM-END -->
 
-<!-- CUSTOM-BEGIN: flag-routing, reason: silent downgrade hides contested signal; retirement: delete markers if upstream adopts a contradiction rule -->
+<!-- CUSTOM-BEGIN: flag-routing-contradictions, reason: silent downgrade hides contested signal; retirement: delete markers if upstream adopts a contradiction rule -->
 For tickets marked `Architect: yes`/`Arena: yes`/`Both: yes`, or where flags contradict each other, re-check against §4 in one cheap pass.
 - In this file (interactive): collect all contradictions into the §4 quiz as one table (ticket / flags / §4-correct value / accept?) — single user pass; malformed values get one quiz-table row each.
 - In `implement-spec` (autonomous): (1) well-formed §4 contradictions resolve by priority Both > Architect > Arena (Interrogate orthogonal; ticket flag wins unless it contradicts §4; e.g. `Arena: yes` with `Architect: yes` forces `Arena: no`), log-not-silent — append each to `## corrections` like (3); (2) normalizable values per the canonical map (case, surrounding whitespace, strip trailing `./,` punctuation, then `y`/`yes` only) normalize and proceed, else gap; well-formed Both: values (per §4 above, cited not restated) proceed without normalize; (3) missing or unnormalizable lines apply per-line relevance: a routine ticket missing only an irrelevant line proceeds (missing line defaults to `no`, logged); a malformed `Both:` claim gaps; other missing/unnormalizable lines mark that ticket `blocked-by-gap`, continue the rest of the frontier, and request a fix. Well-formed cap excess → downgrade per §4 arbitration above, never gap. Append each correction to `## corrections` in `flag-corrections.md` and cite its path + count in the integration report; the PR body carries a one-line count + link. Corrections occurred iff `## corrections` is non-empty. Escalate mid-run only contradictions outside §4 pairs.
@@ -88,7 +88,7 @@ Ask the user:
 
 Iterate until the user approves the breakdown.
 
-<!-- CUSTOM-BEGIN: flag-routing, reason: batch veto stays legible; retirement: delete markers if upstream adopts a flag presentation -->
+<!-- CUSTOM-BEGIN: flag-routing-presentation, reason: batch veto stays legible; retirement: delete markers if upstream adopts a flag presentation -->
 Present flags as a table (`| ticket | Architect | Arena | Interrogate | Both |`), veto by row, approve once; isolate the `Both:` row with its approval checkbox.
 <!-- CUSTOM-END -->
 

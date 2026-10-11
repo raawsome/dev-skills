@@ -61,10 +61,10 @@ Record the pick and the reason in a short synthesis note alongside the base arti
 
 Walk each losing candidate once more and identify what is worth porting into the base. The signal is usually one or two things per candidate, not most of it. Cap grafts at 2-3 total, not per loser.
 
-Fold each graft in by hand to keep one mental model. The result has to remain coherent under one mental model.
+Fold each graft in by hand to keep one mental model.
 
 <!-- CUSTOM-BEGIN: graft-coherence, reason: picker blind, judge pre-graft, verify tests-only; retirement: delete markers if upstream adds a coherence pass -->
-When at least one graft was folded: run one coherence pass with a fresh readonly subagent (not the Phase D picker, not the Phase C judge) — checks single-mental-model plus the 8 flags in `architect/references/design-red-flags.md`, emits PASS/FLAG plus one line each. One round max; the picker hand-folds FLAG fixes, then Phase F verify. The base stays the base and the graft set stays closed. Skip when no graft was folded. If `architect/references/design-red-flags.md` is absent (standalone arena without architect installed), skip the flag check, emit `COHERENCE-WITHOUT-FLAGS` explicitly, and log the skip; treat COHERENCE-WITHOUT-FLAGS as SKIP on mental-model — it blocks Phase F entry.
+When at least one graft was folded: run one advisory coherence pass with a fresh readonly subagent — checks single-mental-model plus the 8 flags in `architect/references/design-red-flags.md`, emits PASS/FLAG plus one line each. One round max; keep the base and graft set fixed; hand-fold FLAG fixes, then continue to Phase F. Skip when no graft was folded. If the flags file is absent, log WARN and continue with mental-model check only.
 <!-- CUSTOM-END -->
 
 Record what was grafted, from which candidate, and what was rejected and why.

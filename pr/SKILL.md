@@ -32,7 +32,7 @@ Use this template for writing the PR body:
 
 <optional: potential ramifications of merge>
 
-<!-- CUSTOM-BEGIN: blast-gate, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->
+<!-- CUSTOM-BEGIN: blast-gate-template, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->
 **Blast-radius:** [ ] skipped (<reason>) / [ ] ran (<link>). Fire when it touches shared code, a lib version, concurrency/lifecycle, or a wire format; small diffs run single, big or wide diffs run as an arena (see blast-radius step 6). Small means ≤300 LOC touched or an isolated surface. Causal analysis lives in the blast-radius writeup; this template stays comms-only.
 <!-- CUSTOM-END -->
 ```
@@ -172,4 +172,4 @@ Execution-based evidence is A-tier. Test results, console output. Show the exact
 
 Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
 
-Scope is one sentence on the potential impact of this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc. <!-- CUSTOM-BEGIN: blast-gate, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->For causal breakage analysis beyond this sentence, call the blast-radius skill; this template stays comms only. The 300-LOC heuristic is local to this template; blast-radius Escalation owns the big/wide→arena routing. Record the blast-radius line every time so skipping stays a conscious act.<!-- CUSTOM-END -->
+Scope is one sentence on the potential impact of this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc. <!-- CUSTOM-BEGIN: blast-gate-pointer, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->For causal breakage analysis beyond this sentence, call the blast-radius skill; this template stays comms only. The 300-LOC heuristic is local to this template; blast-radius Escalation owns the big/wide→arena routing. Record the blast-radius line every time so skipping stays a conscious act.<!-- CUSTOM-END -->

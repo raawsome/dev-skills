@@ -103,11 +103,11 @@ These run only when triggered. Use the Step 1 triage pre-pass to decide without 
 
 Present the three reports under `## Standards`, `## Spec`, and `## Ponytail` headings, verbatim or lightly cleaned, plus `## Interrogate` / `## Blast-radius` when those gates ran. Do **not** merge or rerank findings, because the axes are deliberately separate (see _Why three axes_). Keep both findings when Spec scope-creep and Ponytail overlap on one hunk; append `Overlaps Ponytail <loc>` / `Overlaps Spec <item>` rather than deleting either.
 
-If Ponytail failed (tool error/timeout), run fallback; otherwise continue without fallback. Ownership per §4 Ponytail brief above.
+Run the fallback only when status is `failed (<reason>)`; otherwise continue without fallback. Ownership per §4 Ponytail brief above.
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: ponytail-status, reason: fallback trigger was untestable; retirement: delete markers if upstream enumerates skip reasons -->
-Always log one status line verbatim as one of: `Ponytail ran` / `Ponytail skipped (docs-only, under 20 lines)` / `Ponytail skipped (tool-missing: <tool>)` / `Ponytail failed (<reason>)`. Any other `skipped (<reason>)` is WARN (log and continue, no fallback). When the status line is missing, log WARN and retry once; fail only on second miss as `Ponytail failed (no status after retry)`. Run the fallback only when status is `failed (tool error/timeout)`.
+Always log one status line verbatim as one of: `Ponytail ran` / `Ponytail skipped (docs-only, under 20 lines)` / `Ponytail failed (<reason>)`.
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: why-three-axes, reason: separation rationale covers three axes plus gates; retirement: delete markers if upstream changes the axis model -->

@@ -34,7 +34,7 @@ The route most work travels. You have an idea and want it built.
    Before stating what a skill does, read its SKILL.md; summaries here are a cache.
 
    <!-- CUSTOM-BEGIN: parallel-routing, reason: upstream has no arena/swarm disambiguation; retirement: delete markers if upstream adds it -->
-Route parallel work by need: one artifact needing synthesis goes to arena (best-of plus graft); speed-only race with no synthesis goes to swarm (race shape: declare `first pass` / `rank all` / `best-of` per swarm Phase A); coverage, tables, or reports go to swarm.
+Route parallel work by need: one artifact needing synthesis → arena (best-of plus graft); no-synthesis race or coverage/tables/reports → swarm (race shape per swarm Phase A).
 <!-- CUSTOM-END -->
 
    When the work goes up as a pull request, **`/pr`** shapes the body: the smallest visual that shows the change, before/after evidence that it works, and a one-way or two-way door call. It's model-invoked, so the agent reaches for it whenever it writes a PR.
@@ -105,7 +105,7 @@ Off the main flow entirely.
 - **`/swarm` / `/ponytail-review`**: parallel coverage and over-engineering review. `swarm` also runs for multi-slice exploration, `ponytail-review` as the Ponytail axis; invoke directly when the user names them.
 <!-- CUSTOM-END -->
 <!-- CUSTOM-BEGIN: conflict-pointer, reason: upstream router has no merge-conflict entry; retirement: delete markers if upstream adds one -->
-- **Conflict in a merge/rebase** → resolve per `resolving-merge-conflicts` 5 steps, preserving both intents.
+- **Conflict in a merge/rebase** → resolve per `resolving-merge-conflicts` 5 steps.
 <!-- CUSTOM-END -->
 
 ## Precondition
