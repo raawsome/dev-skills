@@ -52,12 +52,14 @@ Mark routing candidates yourself and present the markings with the breakdown bel
 - `Architect: yes` when the interface, usage, or module shape must still be settled before implementation, `no` otherwise.
 - `Arena: yes` only when `Architect: no` AND the implementation approach itself is high-uncertainty or hard to reverse, with 2+ concrete approaches under a settled interface (a shared seam, 2+ data-flow or state-ownership shapes). `No` on everything else — including every `Architect: yes` ticket, since architect already runs an internal arena over sketches in its Phase B.
 - `Interrogate: yes` if contested, security-sensitive, or hard-to-reverse with a single approach (where `Arena: no`), `no` on the rest.
-- `Both: yes` only as a narrow escape: when architect Phase C synthesis still names 2+ concrete hard-to-reverse implementation approaches after the sketch settles. Requires lead/user approval. Cap 1 per spec (10% max). Default is exclusive flags above.
+- `Both: yes` only as a narrow escape: when architect Phase C synthesis still names 2+ concrete hard-to-reverse implementation approaches after the sketch settles. Requires lead/user approval. Both cap: 1 active + max 1 queued per spec, marked `Both: yes (queued, reason: <2+ approaches + what is hard-to-reverse>)`. Re-score once when the frontier first contains the queued ticket or the active Both resolves; otherwise leave flags untouched. Default is exclusive flags above.
+
+Both arbitration (canonical — consumers cite, do not restate): filter to frontier-ready first; when none is ready, defer scoring until one unblocks (leave flags, note the deferral). Otherwise score ready tickets by max(a×b) where (a) is the count of concrete approaches named and (b) is the hard-to-reverse weight (b-scale: 1 reversible, 2 costly to reverse, 3 hard-to-reverse); tie goes to higher b, then lowest ticket number. Downgrade the rest to `Architect: yes`, except one runner-up within the tie band may stay `Both: yes (queued, reason: …)` to run after the active Both lands.
 
 Flag criteria are canonical here. Consumers (`implement-spec`, `code-review`) cite the flags; they don't redefine them. Before routing, check all four lines (0-cost): `for f in .scratch/<slug>/issues/*.md; do grep -q 'Arena:' "$f" && grep -q 'Architect:' "$f" && grep -q 'Interrogate:' "$f" && grep -q 'Both:' "$f" || echo "missing flags: $f"; done` must print nothing.
 
 <!-- CUSTOM-BEGIN: flag-contradiction, reason: silent downgrade hides contested signal; retirement: delete markers if upstream adopts a contradiction rule -->
-For tickets marked `Architect: yes`/`Arena: yes`/`Both: yes`, or where flags contradict each other, re-check against §4 in one cheap pass. In this file (interactive): collect all contradictions into the §4 quiz as one table (ticket / flags / §4-correct value / accept?) — single user pass. In `implement-spec` (autonomous): keep the silent default (ticket flag wins unless it contradicts §4; e.g. `Arena: yes` with `Architect: yes` forces `Arena: no`) but append each correction to `flag-corrections.md` and surface it with the integration report; escalate mid-run only contradictions outside §4 pairs (missing flag lines, malformed values, Both-cap ties needing approval).
+For tickets marked `Architect: yes`/`Arena: yes`/`Both: yes`, or where flags contradict each other, re-check against §4 in one cheap pass. In this file (interactive): collect all contradictions into the §4 quiz as one table (ticket / flags / §4-correct value / accept?) — single user pass; malformed values get one quiz-table row each. In `implement-spec` (autonomous): (1) well-formed §4 contradictions use the silent default (ticket flag wins unless it contradicts §4; e.g. `Arena: yes` with `Architect: yes` forces `Arena: no`); (2) normalizable values per the canonical map (case, surrounding whitespace, `y`/`yes` only) normalize and proceed; (3) missing lines, unnormalizable values, or Both-cap overflow mark that ticket `blocked-by-gap`, continue the rest of the frontier, and request a fix. Append each correction to `flag-corrections.md` and cite its path + count in the integration report; the PR body carries a one-line count + link. Corrections occurred iff `flag-corrections.md` is non-empty. Escalate mid-run only contradictions outside §4 pairs.
 <!-- CUSTOM-END -->
 
 Ask the user:
@@ -91,6 +93,8 @@ Do NOT close or modify any parent issue.
 
 **Blocked by:** the numbers/titles of the tickets that gate this one, or "None (can start immediately)".
 
+**Imports:** optional — only if this ticket produces shared outputs another ticket reads; else omit.
+
 **Status:** ready-for-agent
 
 Architect / Arena / Interrogate / Both: per §4 above (do not restate the criteria here).
@@ -118,6 +122,10 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 ## Blocked by
 
 - A reference to each blocking ticket, or "None (can start immediately)".
+
+## Imports
+
+- Optional: shared outputs this ticket produces that another ticket reads; else omit.
 
 ## Routing flags
 

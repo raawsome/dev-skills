@@ -68,7 +68,7 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 - The full diff command and commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
-- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Do NOT report Speculative Generality here — that belongs to the Ponytail axis; if you spot it, leave it for them. Under 250 words. Priority inside the cap: documented-standard hard violations first, then smells; drop the lowest priority first and state the count dropped."
+- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Report documented-standard violations and non-generality smells only; leave generality/YAGNI structure to the Ponytail axis. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 250 words. Priority inside the cap: documented-standard hard violations first, then smells; drop the lowest priority first and state the count dropped."
 
 **Spec sub-agent prompt** should include:
 
@@ -87,19 +87,19 @@ Skip Ponytail on docs-only micro-diffs: added lines under 20 AND changed files m
 
 ### 5. Opt-in gates (Interrogate / Blast-radius)
 
-These run only when triggered. Use the Step 1 triage pre-pass to decide without loading the diff into reviewers. Report each under its own heading; do not merge or rerank with the three axes. Flag criteria are canonical in `to-tickets` §4. Do not fire Interrogate on size alone (`>300 LOC` is not a trigger); fire on signal.
+These run only when triggered. Use the Step 1 triage pre-pass to decide without loading the diff into reviewers. Report each under its own heading; do not merge or rerank with the three axes. Flag criteria canonical in `to-tickets` §4; do not restate (cite-only). Do not fire Interrogate on size alone (`>300 LOC` is not a trigger); fire on signal.
 
-- **Interrogate**: when the branch contains tickets marked `Interrogate: yes`, the user says "interrogate this", or the design is contested / security-sensitive / hard-to-reverse with a single approach. Call the Skill tool with `interrogate` on the diff command from step 1 and report its verdict verbatim under `## Interrogate`.
+- **Interrogate**: when the branch contains tickets marked `Interrogate: yes`, the user says "interrogate this", or the design is contested / security-sensitive / hard-to-reverse with a single approach. Call the Skill tool with `interrogate` on the diff command from step 1 and report its verdict verbatim under `## Interrogate`. In interactive runs, a diff above 800 LOC or above 10 files showing Divergent Change or Shotgun Surgery earns one prompt: ask the user whether to interrogate, default no, with a one-line reason. In autonomous runs (`implement-spec` step 7), log the suggested interrogation with its reason and continue; never block.
 - **Blast-radius**: when the diff touches shared code, a library version, concurrency/lifecycle semantics, or a wire format another system reads — or the user asks "what could this break". Call the Skill tool with `blast-radius` on the change and report its writeup verbatim under `## Blast-radius`, keeping the proven-or-unproven safety fact.
 
 ### 6. Aggregate
 
 Present the three reports under `## Standards`, `## Spec`, and `## Ponytail` headings, verbatim or lightly cleaned, plus `## Interrogate` / `## Blast-radius` when those gates ran. Do **not** merge or rerank findings, because the axes are deliberately separate (see _Why three axes_). Keep both findings when Spec scope-creep and Ponytail overlap on one hunk; append `Overlaps Ponytail <loc>` / `Overlaps Spec <item>` rather than deleting either.
 
-If Ponytail was skipped for non-docs reasons or failed, run one follow-up pass under `## Standards (fallback)`: "Report Speculative Generality only on the same diff, under 150 words", labelled as fallback. Skip the fallback when the skip reason was docs-only micro-diff. Otherwise the smell goes unreported anywhere.
+If Ponytail was skipped for non-docs reasons or failed, run a second sequential Standards invocation as follow-up under `## Standards (fallback)`: "Report generality/YAGNI structure only on the same diff, under 150 words", labelled as fallback. Skip the fallback when the skip reason was docs-only micro-diff. Otherwise the smell goes unreported anywhere.
 
 <!-- CUSTOM-BEGIN: ponytail-status, reason: fallback trigger was untestable; retirement: delete markers if upstream enumerates skip reasons -->
-Always log one of: `Ponytail ran` / `Ponytail skipped (docs-only, under 20 lines)` / `Ponytail skipped (<reason>)` / `Ponytail failed (<reason>)`. Run the fallback on every status except `ran` and `skipped docs-only`. Standards never reports Speculative Generality outside this fallback.
+Always log one of: `Ponytail ran` / `Ponytail skipped (docs-only, under 20 lines)` / `Ponytail skipped (<reason>)` / `Ponytail failed (<reason>)`. Require this status line before the fallback spawns; when the status line is missing, log `Ponytail failed (no status)` and run the fallback. Run the fallback on every status except `ran` and `skipped docs-only`. Ownership per §4 brief above.
 <!-- CUSTOM-END -->
 
 End with a one-line summary: total findings per axis (and per gate that ran), and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.

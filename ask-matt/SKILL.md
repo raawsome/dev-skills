@@ -27,7 +27,9 @@ The route most work travels. You have an idea and want it built.
 
    Either way, the code gets built by driving **`/tdd`** (one red-green slice at a time) and closes out with **`/code-review`**, a three-axis review (Standards + Spec + Ponytail) of the diff. `/implement` runs both per ticket; `/implement-spec`'s implementers each drive `/tdd`, and it runs one `/code-review` over the integration branch. Reach for **`/tdd`** on its own when you just want to build a concrete behaviour test-first without a full spec, and **`/code-review`** on its own whenever you want to review a branch or PR against a fixed point.
 
-   `Architect:`/`Arena:`/`Interrogate:`/`Both:` flags ride on tickets (criteria canonical in `to-tickets` §4): `implement-spec` routes `Architect: yes→architect`, `Arena: yes→arena`, `Both: yes→architect then code-arena`; `code-review §5` gates `Interrogate`/`blast-radius` on flags or properties.
+   `Architect:`/`Arena:`/`Interrogate:`/`Both:` flags ride on tickets (criteria canonical in `to-tickets` §4): `implement-spec` routes `Architect: yes→architect`, `Arena: yes→arena`, `Both: yes→architect then code-arena`; `code-review §5` gates `Interrogate`/`blast-radius` on flags or properties. Flag criteria canonical in `to-tickets` §4; do not restate (cite-only).
+
+   Before stating what a skill does, read its SKILL.md; summaries here are a cache.
 
    Route parallel work by need: one artifact needing synthesis goes to arena (best-of plus graft); speed-only race with no synthesis goes to swarm-race; coverage, tables, or reports go to swarm.
 
