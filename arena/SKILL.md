@@ -4,6 +4,7 @@ description: Spawn N parallel candidates at the same task, pick a base, graft th
 license: MIT
 ---
 
+<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
 # Arena
 
 Fan out N parallel attempts at the same task. Read every candidate end to end. Pick the strongest as the base. Graft the best ideas from the others into it. Verify the synthesized result.
@@ -54,7 +55,7 @@ Score each candidate against the rubric criterion by criterion, not on holistic 
 
 Pick the base on which a future maintainer can extend most easily without breaking invariants. Prefer the cleaner boundary or smaller API when two feel tied.
 
-Record the pick and the reason in a short synthesis note alongside the base artifact, including the cross-judge's verdict.
+Record the pick and the reason in a short synthesis note alongside the base artifact, including the cross-judge's verdict plus one line `N: <n> (criterion cite or default); outcome: <base+graft summary>`.
 
 ## Phase E: Graft
 
@@ -78,4 +79,4 @@ If verification surfaces a problem the arena did not catch, either Phase A was w
 
 ## Outputs
 
-One synthesized artifact. One short synthesis note alongside, naming the base, the grafts (with source candidate), the rejections, the dropouts if any, and the verification result.
+One synthesized artifact. One short synthesis note alongside, naming the base, the grafts (with source candidate), the rejections, the dropouts if any, the verification result, plus `N: <n> (criterion cite or default); outcome: <base+graft summary>`.

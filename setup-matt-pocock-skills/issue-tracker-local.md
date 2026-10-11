@@ -28,3 +28,16 @@ Used by `/wayfinder`. The **map** is a file with one **child** file per ticket.
 - **Frontier**: scan `.scratch/<effort>/issues/` for files that are open, unblocked, and unclaimed; first by number wins.
 - **Claim**: set `Status: claimed` and save before any work.
 - **Resolve**: append the answer under an `## Answer` heading, set `Status: resolved`, then append a context pointer (gist + link) to the map's Decisions-so-far in `map.md`.
+
+## scratch GC convention (canonical listing)
+
+On spec close, GC unreferenced `.scratch/<spec>/`; archive `issues/` + `spec.md` under `.scratch/<spec>/archive/`.
+
+Listing (`nullglob` + `grep -rl` unreferenced, rm-only-listed):
+
+```sh
+shopt -s nullglob; for f in ".scratch/<spec>/gaps/"* ".scratch/<spec>/blast/"*; do [ -e "$f" ] || continue; grep -rl --exclude-dir=archive "$(basename "$f")" ".scratch/<spec>/issues" ".scratch/<spec>/spec.md" .scratch/<spec>/map* 2>/dev/null | grep -q . || echo "unreferenced: $f"; done
+# rm only paths listed as unreferenced above; log the paths.
+```
+
+Retention: `issues/` + `spec.md` → archive; map files persist while referenced by any open ticket, else archive; `gaps/` persist while named in any open `Blocked by`; `blast/` persist while linked from an open PR; `flag-corrections.md` archives on spec close, never delete while linked from the report or PR.

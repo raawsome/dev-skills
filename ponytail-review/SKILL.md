@@ -10,6 +10,7 @@ description: >
   hunts complexity.
 ---
 
+<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
 Review diffs for unnecessary complexity. One line per finding: location, what
 to cut, what replaces it. The diff's best outcome is getting shorter.
 

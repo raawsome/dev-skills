@@ -4,6 +4,7 @@ description: Fan out N parallel workers, drain them, and return one report. Use 
 license: MIT
 ---
 
+<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
 # Swarm
 
 Fan out N parallel workers. They may cover separate slices, race the same brief, or mix both. The parent waits, aggregates, and returns one report.

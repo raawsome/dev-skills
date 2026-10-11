@@ -47,7 +47,8 @@ This repo is a flattened fork: no shared history with upstream, so never blanket
 
 ```sh
 git -C ~/dev-skills fetch upstream --tags
-git -C ~/dev-skills diff v1.3.1 main -- <skill>/SKILL.md   # what you own vs them
+git -C ~/dev-skills show v1.3.1:skills/<group>/<skill>/SKILL.md | diff - ~/dev-skills/<skill>/SKILL.md   # what you own vs them
+# group per skill: engineering|productivity|misc|in-progress — list with: git -C ~/dev-skills ls-tree -d --name-only v1.3.1 skills/
 # copy the patch-class hunk by hand into ~/dev-skills/<skill>/SKILL.md,
 # keeping CUSTOM-BEGIN/END blocks as the merge boundary
 ~/dev-skills/install.sh --diff --dry-run   # preview harness drift (safe: no copies)
@@ -56,7 +57,7 @@ git -C ~/dev-skills diff v1.3.1 main -- <skill>/SKILL.md   # what you own vs the
 
 Rules: port patch-class fixes only (naming, invocation, router fixes); keep `code-review` 3-axis and `ask-matt` router as owned files; when upstream adopts a custom block, delete its markers and rebase onto vendor wording in the same commit. `resolving-merge-conflicts` is never-merge.
 
-Marker audit (`SKILL.md` scope only — README:52 + ask-matt:112 are prose, not markers):
+Marker audit (`SKILL.md` scope only — this marker-audit block + ask-matt marker-convention paragraph are prose, not markers):
 `grep -rho '<!-- CUSTOM-BEGIN: [^>]*-->' --include=SKILL.md . | wc -l` must equal
 `grep -rho '<!-- CUSTOM-END[^>]*-->' --include=SKILL.md . | wc -l`.
 Sequence (no nesting, every BEGIN closed in-file):

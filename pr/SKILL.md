@@ -20,7 +20,7 @@ Use this template for writing the PR body:
 
 - **Before:** <screenshot/output/failing test run>
   **After:** <screenshot/output/passing test run>
-- Corrections: <n> (<link to log, or `none` if zero>)
+<!-- CUSTOM-BEGIN: corrections-line, reason: upstream template has no corrections line; retirement: delete markers if upstream adds it -->- Corrections: <n> (<link to log, or `none` if zero>)<!-- CUSTOM-END -->
 
 ## Merge Danger
 
@@ -28,7 +28,7 @@ Use this template for writing the PR body:
 
 <optional: description>
 
-**Scope:** <one sentence on what could feel this merge>
+<!-- CUSTOM-BEGIN: scope-line, reason: scope line renames upstream wording; retirement: delete markers if upstream adopts this wording -->**Scope:** <one sentence on what could feel this merge><!-- CUSTOM-END -->
 
 <optional: potential ramifications of merge>
 
@@ -172,4 +172,4 @@ Execution-based evidence is A-tier. Test results, console output. Show the exact
 
 Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
 
-Scope is one sentence on the potential impact of this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc. For causal breakage analysis beyond this sentence, call the blast-radius skill; this template stays comms only. The 300-LOC heuristic is local to this template; blast-radius Escalation owns the big/wide→arena routing. Record the blast-radius line every time so skipping stays a conscious act.
+Scope is one sentence on the potential impact of this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc. <!-- CUSTOM-BEGIN: blast-gate, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->For causal breakage analysis beyond this sentence, call the blast-radius skill; this template stays comms only. The 300-LOC heuristic is local to this template; blast-radius Escalation owns the big/wide→arena routing. Record the blast-radius line every time so skipping stays a conscious act.<!-- CUSTOM-END -->

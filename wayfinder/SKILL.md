@@ -114,7 +114,7 @@ User invokes with a loose idea.
 4. **Create the tickets you can specify now** as child issues of the map, then wire blocking edges in a **second pass** (issues need ids before they can reference each other). <!-- CUSTOM-BEGIN: xref-precision, reason: placeholder ids auto-link to unrelated issues; retirement: delete markers if upstream warns on placeholder ids -->Write cross-references in that pass too, with real ids: a placeholder `#<n>` auto-links to an unrelated issue.<!-- CUSTOM-END --> Wiring sorts them into the frontier and the blocked; everything you can't yet specify stays in the fog: the **Not yet specified** section.
 5. **Fire the research subagents.** For each `research` ticket you just created, spin up a subagent that calls the Skill tool with "research" to resolve it in parallel, capturing its findings on a throwaway `research/<name>` branch with a context pointer from the ticket. <!-- CUSTOM-BEGIN: never-merge-branch, reason: research branches are context pointers, never merged; retirement: delete markers if upstream pins branch handling -->Push the branch but open no PR: it is never merged.<!-- CUSTOM-END -->
 
-<!-- CUSTOM-BEGIN: fanout-depth, reason: ticket-times-angle explodes; retirement: delete markers if upstream adopts a depth rule -->
+<!-- CUSTOM-BEGIN: fanout-depth, reason: nested fan-out multiplies agents; see research §fanout-depth; retirement: delete markers if upstream adopts a depth rule -->
 See research §fanout-depth (single-angle serially in-ticket; depth: top|child).
 <!-- CUSTOM-END -->
 6. Stop: charting is one session's work; it hand-resolves nothing.

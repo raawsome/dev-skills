@@ -4,6 +4,7 @@ description: blast-radius — what a change could break beyond the diff, proven 
 license: MIT
 ---
 
+<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
 # Blast radius
 
 Find what a change breaks somewhere else, before it ships.

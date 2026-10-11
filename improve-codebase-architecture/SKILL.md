@@ -1,6 +1,6 @@
 ---
 name: improve-codebase-architecture
-description: Architecture review surfacing deepening opportunities as a visual HTML report.
+description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
 disable-model-invocation: true
 ---
 

@@ -4,6 +4,7 @@ description: Use ONLY for adversarial review (challenge/stress-test/tear-apart s
 license: MIT
 ---
 
+<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
 # Interrogate
 
 Spawn independent reviewers to adversarially review code changes. Each reviewer gets the same prompt and rubric. The adversarial signal comes from reviewer independence, not assigned personas: independent readers differ in blind spots, priors, and reasoning patterns. Agreement across reviewers is high-confidence signal; lone-reviewer findings are worth reading but lower confidence.
