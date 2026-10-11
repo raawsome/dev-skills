@@ -23,7 +23,7 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 2. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets - relevant codebase files or external documentation. Ensure the exploration subagent can save files - it should save its markdown notes in a directory outside the repo, accessible by all future subagents. For multi-slice exploration (several subsystems, coverage matrices), run the exploration as a **swarm** instead of a single subagent. Single by default; swarm for multi-slice with a declared shape plus N plus a one-line reason in the exploration notes. Briefs stay pointer-based (spec path, ticket IDs, SHAs, grounding dir); cite by path.
 
 <!-- CUSTOM-BEGIN: fanout-depth, reason: ticket-times-angle-times-hypothesis explodes; retirement: delete markers if upstream adopts a depth rule -->
-If invoked as a fanned child, run serially; only the top-level invocation fans. Briefs state `depth: top | child`.
+Protocol per research §fanout-depth; payload: run implementer serially in-ticket. Briefs state 'depth: top|child'.
 <!-- CUSTOM-END -->
 
 3. Create the integration branch named `integration/<spec-slug>` (`$INTEGRATION`). Pass `$INTEGRATION` in every implementer and merger brief. Prune `$INTEGRATION` (local plus remote) when the spec resolves. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one), marked as closing the spec and tickets.

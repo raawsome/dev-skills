@@ -56,7 +56,7 @@ If the human pushes back on the shape (in a checkpoint or after the fact), treat
 ## Phase D: Implement against the sketch
 
 <!-- CUSTOM-BEGIN: reground, reason: sketch grounds at T0, frontier moves the tip; retirement: delete markers if upstream adds drift handling -->
-Before fill-in: run the implementer drift check defined in `implement-spec` Step 4 (`git rev-list --left-right --count $INTEGRATION...HEAD` for magnitude plus `git merge-tree $(git merge-base HEAD $INTEGRATION) HEAD $INTEGRATION` for conflict prediction), then diff `old-tip..new-tip --name-only` and intersect with the sketch touch set (Phase A files plus module map plus GLOSSARY/ADR deps). Disjoint work proceeds with the tip SHA noted under Rationale/Problem. Intersecting work re-grounds the delta and re-screens the 8 flags in `references/design-red-flags.md`; full Phase B re-arena only when the delta hits split-ownership, a seam, or a wire-type boundary (cite the flag plus file:line).
+Before fill-in: run the implementer drift check defined in `implement-spec` Step 4 (see implement-spec Step 4 for exact commands), then diff `old-tip..new-tip --name-only` and intersect with the sketch touch set (Phase A files plus module map plus GLOSSARY/ADR deps). Disjoint work proceeds with the tip SHA noted under Rationale/Problem. Intersecting work re-grounds the delta and re-screens the 8 flags in `references/design-red-flags.md`; full Phase B re-arena only when the delta hits split-ownership, a seam, or a wire-type boundary (cite the flag plus file:line).
 <!-- CUSTOM-END -->
 
 Replace `not implemented` bodies with code, pseudocode with logic. The synthesized sketch is the contract.

@@ -115,7 +115,7 @@ User invokes with a loose idea.
 5. **Fire the research subagents.** For each `research` ticket you just created, spin up a subagent that calls the Skill tool with "research" to resolve it in parallel, capturing its findings on a throwaway `research/<name>` branch with a context pointer from the ticket. <!-- CUSTOM-BEGIN: never-merge-branch, reason: research branches are context pointers, never merged; retirement: delete markers if upstream pins branch handling -->Push the branch but open no PR: it is never merged.<!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: fanout-depth, reason: ticket-times-angle explodes; retirement: delete markers if upstream adopts a depth rule -->
-Wayfinder-spawned research runs single-angle serially in-ticket; only the top-level invocation fans. State `depth: top | child` in the brief.
+See research §fanout-depth (single-angle serially in-ticket; depth: top|child).
 <!-- CUSTOM-END -->
 6. Stop: charting is one session's work; it hand-resolves nothing.
 

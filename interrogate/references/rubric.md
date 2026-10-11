@@ -65,7 +65,7 @@ Is the complexity justified by what the code accomplishes?
 - Obsolete compatibility paths kept alive for transitional stability that's no longer needed. If the migration is done, delete the scaffolding
 - Does the user experience justify the complexity? Every feature, control, and option should earn its place. Half-finished features are worse than missing ones.
 
-Simpler is better unless simpler is wrong. Three lines of duplication beat a premature abstraction.
+Simpler is better unless simpler is wrong. Three lines of duplication beat a premature abstraction. For pure yagni/delete/shrink mechanics see ponytail-review tags; this lens keeps compat-scaffolding and UX-justification.
 
 ## Security
 

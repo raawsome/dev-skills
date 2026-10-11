@@ -104,7 +104,7 @@ If 2 or more hypotheses survive the checkpoint with comparable likelihood AND th
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: fanout-depth, reason: nested fan-out multiplies agents; retirement: delete markers if upstream adopts a depth rule -->
-When invoked as a fanned child, test the leader hypothesis serially; only the top-level invocation fans. State `depth: top | child` in the brief.
+Protocol per research §fanout-depth (fanned child serial, top-level fans, depth: top|child); payload: test the leader hypothesis serially.
 <!-- CUSTOM-END -->
 
 ## Phase 4: Instrument
