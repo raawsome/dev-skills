@@ -1,6 +1,6 @@
 ---
 name: blast-radius
-description: blast-radius — what a change could break beyond the diff, proven by running code. Use ONLY for blast-radius asks, a small diff the user doesn't trust, shared code / library version / concurrency-lifecycle / wire-format triggers, or when another skill routes here (code-review §5 gate).
+description: blast-radius — what a change breaks beyond the diff, proven by running code. ONLY blast-radius asks, untrusted small diff, shared code, library version, concurrency-lifecycle, wire-format, code-review §5.
 license: MIT
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: "Review the changes since a fixed point (commit, branch, tag, or merge-base) along three axes: Standards (does the code follow this repo's documented coding standards?), Spec (does the code match what the originating issue/spec asked for?), and Ponytail (what over-engineering can be deleted?). Runs all three reviews in parallel sub-agents and reports them side by side, with opt-in Interrogate and Blast-radius gates. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\"."
+description: "Review diff since commit/branch/tag/merge-base on Standards, Spec, Ponytail via parallel sub-agents, Interrogate/Blast-radius gates. Triggers: review branch, PR, WIP, review since X."
 ---
 
 Three-axis review of the diff between `HEAD` and a fixed point the user supplies:

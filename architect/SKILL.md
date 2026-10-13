@@ -1,6 +1,6 @@
 ---
 name: architect
-description: Sketch types, signatures, and module structure before code, then stay in the loop while implementation fills in. Use ONLY when the user says /architect, architect this, design this, or when routed via implement-spec flag (Architect: yes / Both: yes), or for non-trivial work where jumping to code would lock in the wrong shape.
+description: Sketch types, signatures, module structure before code, then stay in the loop while implementation fills in. ONLY /architect, architect this, design this, implement-spec Architect/Both flags, non-trivial work where jumping to code locks in wrong shape.
 license: MIT
 ---
 

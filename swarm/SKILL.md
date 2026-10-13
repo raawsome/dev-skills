@@ -1,6 +1,6 @@
 ---
 name: swarm
-description: Fan out N parallel workers, drain them, and return one report. Use ONLY for parallel races/coverage (declare shape per Phase A) or when routed here (implement-spec step 2).
+description: Fan out N parallel workers, drain them, and return one report. ONLY parallel races/coverage (declare shape per Phase A), implement-spec step 2.
 license: MIT
 ---
 

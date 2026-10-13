@@ -1,6 +1,6 @@
 ---
 name: arena
-description: Spawn N parallel candidates at the same task, pick a base, graft the strongest parts of the losers into it. Use ONLY when the user says /arena, arena this, throw it in the arena, asks for parallel attempts at a non-trivial artifact, or when another skill routes here (architect Phase B, implement-spec Both code-arena).
+description: Spawn N parallel candidates at the same task, pick a base, graft the strongest parts of the losers into it. ONLY /arena, arena this, throw it in the arena, parallel attempts at a non-trivial artifact, architect Phase B, implement-spec Both code-arena.
 license: MIT
 ---
 

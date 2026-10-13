@@ -16,8 +16,8 @@ Run typechecking regularly, single test files regularly, and the full test suite
 
 Once done, call the Skill tool with "code-review" to review the work.
 
-<!-- CUSTOM-BEGIN: flag-routing, reason: bare implement silently single-shots flagged tickets; retirement: delete markers if upstream routes flags -->
-Re-check flags against `to-tickets` §4 (cite, do not redefine); `Architect:/Arena:/Both:/Interrogate: yes`, missing/malformed/contradicting lines, or any doubt routes via the Skill tool "implement-spec".
+<!-- CUSTOM-BEGIN: flag-routing, reason: bare implement silently single-shots flagged tickets + user-invoked skills cannot Skill-invoke user-invoked skills per writing-for-agents SKILL-MECHANICS:10,22, so flagged work goes to a Task subagent following SKILL.md as reference (intentional waiver of router-hint-only rule); retirement: delete markers if upstream routes flags -->
+Re-check flags against `to-tickets` §4 (cite, do not redefine); `Architect:/Arena:/Both:/Interrogate: yes`, missing/malformed/contradicting lines, or any doubt routes to a Task subagent following `implement-spec/SKILL.md` as reference (never via the Skill tool).
 Trivial 1-line fix proceeds only per §4(2)–(3) (normalizable or routine-missing-irrelevant-line), appended to `## corrections` in `.scratch/<spec>/flag-corrections.md` and cited in the commit message.
 <!-- CUSTOM-END -->
 
