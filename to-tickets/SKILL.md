@@ -10,7 +10,7 @@ metadata:
 
 Break a plan, spec, or conversation into a set of **tickets**: tracer-bullet vertical slices, each declaring the tickets that **block** it.
 
-The issue tracker and triage label vocabulary should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
+The issue tracker and triage label vocabulary should have been provided to you. If not, tell the user to invoke the `setup-matt-pocock-skills` skill.
 
 ## Process
 
@@ -78,7 +78,7 @@ Append each correction to `## corrections` in `.scratch/<spec>/flag-corrections.
 
 ### 5. Publish the tickets to the configured tracker
 
-Publish the tickets. **How** depends on the tracker `/setup-matt-pocock-skills` configured; the tickets are the same either way, only the shape of the blocking edges changes:
+Publish the tickets. **How** depends on the tracker the `setup-matt-pocock-skills` skill configured; the tickets are the same either way, only the shape of the blocking edges changes:
 
 - **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's `Blocked by:` line lists the file numbers it depends on (`Blocked by: 01, 03`). Use the per-ticket file template below: one ticket per file, never a single combined file.
 - **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. <!-- CUSTOM-BEGIN: blocking-via-tracker-doc, reason: native edges need tracker-specific calls (GitHub numeric db id, GitLab Premium) that §5 never named, so agents skipped or botched them; retirement: delete markers if upstream points §5 at the tracker doc -->Set blocking edges per the tracker doc's Wayfinding operations "Blocking" entry (with its fallback); with no such entry, use the platform's native blocking relationship where it has one, else set each ticket's "Blocked by" to the blocking issues.<!-- CUSTOM-END --> If the source was an existing issue, make each ticket its sub-issue (tracker doc's operation). Apply the `ready-for-agent` triage label; the tickets are agent-grabbable by construction. <!-- CUSTOM-BEGIN: create-labels, reason: setup writes no labels without triage, and a create with a missing label fails; retirement: delete markers if setup creates labels -->On GitHub/GitLab, create the label first if it's missing (`gh label create <name>` / `glab label create --name <name>`).<!-- CUSTOM-END --> <!-- CUSTOM-BEGIN: second-pass-ids, reason: Both: active <n> and cross-references need ids that exist only after creation; retirement: delete markers if upstream wires ids in a second pass -->Write each `Both: active <n>` marker and every cross-reference after all tickets exist, in a second pass, with real ids: a placeholder `#<n>` auto-links to an unrelated issue.<!-- CUSTOM-END -->

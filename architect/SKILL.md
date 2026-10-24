@@ -46,7 +46,7 @@ Arena returns one synthesized design package. The synthesis decision populates t
 
 Default: proceed directly to implementation with the synthesized design, with no human checkpoint, unless the invoker asks for one or the trigger below fires.
 
-Opt in to a checkpoint when the invoker explicitly asks: "/architect with checkpoint," "stop and show me before implementing," or similar. Then surface the synthesized design and pause for sign-off.
+Opt in to a checkpoint when the invoker explicitly asks: "architect this with a checkpoint," "stop and show me before implementing," or similar. Then surface the synthesized design and pause for sign-off.
 
 <!-- CUSTOM-BEGIN: architect-checkpoint, reason: broad triggers pause every run; retirement: delete markers if upstream narrows the trigger -->
 The checkpoint also fires, unasked, only when a hard-to-reverse tradeoff meets one of: Interrogate findings the picker disputes with reasons, 2 Interrogate rounds exhausted, a cited ADR contradiction (ADR-ID plus one line why it reopens), or a human-value question (naming, permissions, data loss, cost, or shipped UX meaning). Hard-to-reverse alone without one of the four proceeds; Interrogate below remains the backstop. This asymmetry is intentional: interrogate fires on bare hard-to-reverse as backstop; checkpoint requires hard-to-reverse plus one of four.

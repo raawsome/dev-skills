@@ -44,7 +44,7 @@ Lead each section with the recommended answer so the user can accept it in a wor
 Default posture: these skills were designed for GitHub. If a `git remote` points at GitHub, propose that. If a `git remote` points at GitLab (`gitlab.com` or a self-hosted host), propose GitLab. Otherwise (or if the user prefers), offer:
 
 - **GitHub**: issues live in the repo's GitHub Issues (uses the `gh` CLI)
-- **GitLab**: issues live in the repo's GitLab Issues (uses the [`glab`](https://gitlab.com/gitlab-org/cli) CLI)
+- **GitLab**: issues live in the repo's GitLab Issues (uses the [`glab`](https://gitlab.com/gitlab-org/cli) CLI; verify with `glab --version` and install it first if missing)
 - **Local markdown**: issues live as files under `.scratch/<feature>/` in this repo (good for solo projects or repos without a remote)
 - **Other** (Jira, Linear, etc.): ask the user to describe the workflow in one paragraph; the skill will record it as freeform prose
 
@@ -75,13 +75,13 @@ Let them edit before writing.
 
 **Pick the file to edit:**
 
-- If `CLAUDE.md` exists, edit it.
-- Else if `AGENTS.md` exists, edit it.
+- If `AGENTS.md` exists, edit it. If `CLAUDE.md` also exists, make the same edit there too: OpenCode uses only `AGENTS.md` when both exist, so a block written only to `CLAUDE.md` is silently ignored.
+- Else if `CLAUDE.md` exists, edit it (OpenCode falls back to `CLAUDE.md` when `AGENTS.md` is absent).
 - If neither exists, ask the user which one to create; don't pick for them.
 
-Never create `AGENTS.md` when `CLAUDE.md` already exists (or vice versa); always edit the one that's already there.
+Never create the other file just to mirror the block.
 
-If an `## Agent skills` block already exists in the chosen file, update its contents in-place rather than appending a duplicate. Don't overwrite user edits to the surrounding sections.
+If an `## Agent skills` block already exists in the file(s) being edited, update its contents in-place rather than appending a duplicate. Don't overwrite user edits to the surrounding sections.
 
 The block:
 

@@ -116,7 +116,7 @@ For a file-layout change:
 ```diff
  src/
  ├── commands/
-+│   └── show-me.ts       # expands the slash command
++│   └── show-me.ts       # expands the show-me command
  ├── sessions/
 -└── transport.ts
 +└── transport/

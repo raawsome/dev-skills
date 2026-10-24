@@ -8,7 +8,7 @@ metadata:
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
 <!-- CUSTOM-BEGIN: invocation-scope, reason: bare "grill" phrases would bypass the grill-me vs grill-with-docs working-directory decision; retirement: delete markers if upstream scopes the trigger -->
-When a user asks to be grilled (`grill me`, `grill this`), the working directory decides: in a working directory, also call the Skill tool with `domain-modeling`, which is what `/grill-with-docs` does; otherwise run this primitive alone, as `/grill-me` does. You can't start those two slash commands yourself; they are user-invoked.
+When a user asks to be grilled (`grill me`, `grill this`), the working directory decides: in a working directory, also call the Skill tool with `domain-modeling`, which is what the `grill-with-docs` skill does; otherwise run this primitive alone, as the `grill-me` skill does. Don't invoke those two skills yourself; they are user-invoked.
 <!-- CUSTOM-END -->
 
 Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
