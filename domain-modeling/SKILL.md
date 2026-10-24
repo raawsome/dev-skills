@@ -1,6 +1,8 @@
 ---
 name: domain-modeling
 description: "Build/sharpen domain model. Triggers: codebase terminology, GLOSSARY.md, ADR."
+metadata:
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/domain-modeling (compared 2026-10-14; fork point unknown)"
 ---
 
 # Domain Modeling

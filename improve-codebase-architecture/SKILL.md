@@ -2,6 +2,8 @@
 name: improve-codebase-architecture
 description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
 disable-model-invocation: true
+metadata:
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/improve-codebase-architecture (compared 2026-10-14; fork point unknown)"
 ---
 
 # Improve Codebase Architecture
@@ -69,5 +71,5 @@ Side effects happen inline as decisions crystallize; call the Skill tool with "d
 - **Sharpening a fuzzy term during the conversation?** Update `GLOSSARY.md` right there.
 - **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing; skip ephemeral reasons ("not worth it right now") and self-evident ones.
 <!-- CUSTOM-BEGIN: arena-routing, reason: upstream has no arena cap/routing; retirement: delete markers if upstream adds arena routing -->
-- **Want to explore alternative interfaces?** Offer `arena` only if shared or 2+ shapes — else single proposal. Cap 1/pick, N=3 only (never N=5 via this route). When it fires, call Skill `arena` full A–F with codebase-design vocab + GLOSSARY terms as the frame. If the pick needs its types and module shape settled before anyone codes it, route through `architect` first, then a single implementer fills in the sketch.
+- **Want to explore alternative interfaces?** Offer `arena` only if shared or 2+ shapes — else single proposal. Cap 1/pick, N=3 only (never N=5 via this route). When it fires, read `arena/SKILL.md` and follow it as reference (never via the Skill tool) for full A–F with codebase-design vocab + GLOSSARY terms as the frame. If the pick needs its types and module shape settled before anyone codes it, route through `architect` first (read `architect/SKILL.md` and follow it as reference), then a single implementer fills in the sketch.
 <!-- CUSTOM-END -->

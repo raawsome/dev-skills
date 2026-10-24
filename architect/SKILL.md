@@ -1,10 +1,13 @@
 ---
 name: architect
-description: Sketch types, signatures, module structure before code, then stay in the loop while implementation fills in. ONLY /architect, architect this, design this, implement-spec Architect/Both flags, non-trivial work where jumping to code locks in wrong shape.
+description: Sketch types, signatures, module structure before code, then stay in the loop while implementation fills in. ONLY /architect, architect this, design this (new code, before implementation), implement-spec Architect/Both flags, non-trivial work where jumping to code locks in wrong shape.
+disable-model-invocation: true
 license: MIT
+metadata:
+  upstream: "cursor/plugins@1e5c90a4b6f249917bd21fe361b3a2a7deb741b8 pstack/skills/architect (compared 2026-10-14; fork point unknown)"
 ---
 
-<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
+<!-- FULLY-CUSTOM: no upstream in mattpocock/skills v1.3.1, never merge from it; pstack fork, see metadata.upstream; retirement: delete this file if upstream re-adds the skill -->
 # Architect
 
 Design before implementing. Sketch types, function signatures, class shapes, and module boundaries with `not implemented` bodies and pseudocode. Synthesize across multiple candidate perspectives, then fill in code against the chosen sketch. If implementation proves the sketch wrong, throw it out and redesign.
@@ -29,7 +32,7 @@ Skip Phase A only when the work is genuinely greenfield with no surrounding syst
 
 ## Phase B: Sketch
 
-Run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`. Dependency note: `arena`'s Phase E coherence pass reads back `architect/references/design-red-flags.md`, so keep that path stable.
+Read `arena/SKILL.md` and follow it as reference (never via the Skill tool; it is user-invoked only) with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`. Dependency note: `arena`'s Phase E coherence pass reads back `architect/references/design-red-flags.md`, so keep that path stable.
 
 Design it twice. Require at least two structurally distinct candidates before synthesis, even when the first looks sufficient. Whole-shape alternatives, not point fixes inside one shape.
 
@@ -39,17 +42,17 @@ Compare viable candidates on interface depth. Prefer the design that hides more 
 
 Arena returns one synthesized design package. The synthesis decision populates the rationale's "Synthesis decision" section. The synthesis note must include a single red-flag table for the base plus grafts (8 flags from `design-red-flags.md` by PASS/FLAG plus one line each, about 150 tokens). Screening stays internal per candidate; only the synthesized table is emitted.
 
-## Phase C: Agree (opt-in)
+## Phase C: Agree (checkpoint when asked or triggered)
 
-Default: proceed directly to implementation with the synthesized design. No human checkpoint.
+Default: proceed directly to implementation with the synthesized design, with no human checkpoint, unless the invoker asks for one or the trigger below fires.
 
 Opt in to a checkpoint when the invoker explicitly asks: "/architect with checkpoint," "stop and show me before implementing," or similar. Then surface the synthesized design and pause for sign-off.
 
 <!-- CUSTOM-BEGIN: architect-checkpoint, reason: broad triggers pause every run; retirement: delete markers if upstream narrows the trigger -->
-Default-on applies only when a hard-to-reverse tradeoff meets one of: Interrogate findings the picker disputes with reasons, 2 Interrogate rounds exhausted, a cited ADR contradiction (ADR-ID plus one line why it reopens), or a human-value question (naming, permissions, data loss, cost, or shipped UX meaning). Hard-to-reverse alone without one of the four proceeds; Interrogate below remains the backstop. This asymmetry is intentional: interrogate fires on bare hard-to-reverse as backstop; checkpoint requires hard-to-reverse plus one of four.
+The checkpoint also fires, unasked, only when a hard-to-reverse tradeoff meets one of: Interrogate findings the picker disputes with reasons, 2 Interrogate rounds exhausted, a cited ADR contradiction (ADR-ID plus one line why it reopens), or a human-value question (naming, permissions, data loss, cost, or shipped UX meaning). Hard-to-reverse alone without one of the four proceeds; Interrogate below remains the backstop. This asymmetry is intentional: interrogate fires on bare hard-to-reverse as backstop; checkpoint requires hard-to-reverse plus one of four.
 <!-- CUSTOM-END -->
 
-The synthesis can ship as its own commit either way (scaffold-first: types and signatures land behind the repo-convention skip flag with ticket link plus TODO, so CI stays green). Planned and scoped breakage during fill-in is replaced by flagged scaffolding; the Phase D implementer brief must list flag removal as an acceptance criterion, and merger plus final review must grep the flag and reject residuals. For adversarial pressure on the design before implementing, run the **interrogate** skill on the synthesized sketch (if installed). Mandatory when `Interrogate: yes` or the synthesis names a hard-to-reverse tradeoff: scope to the sketch package only, Act-On findings re-run Phase B, max 2 rounds before a human checkpoint. When the settled sketch still leaves 2+ concrete hard-to-reverse implementation approaches open, emit a Both-signal in the synthesis decision per `to-tickets` §4 (section+axis+reason+band per cited approach): this is the signal `to-tickets` §4 reads for the `Both: yes` escape.
+The synthesis can ship as its own commit on the ticket's branch either way (scaffold-first: types and signatures land behind the repo-convention skip flag with ticket link plus TODO, so CI stays green), never merged alone: the merger gate denies skip markers, so only the flag-free fill-in lands. Planned and scoped breakage during fill-in is replaced by flagged scaffolding; the Phase D implementer brief must list flag removal as an acceptance criterion, and merger plus final review must grep the flag and reject residuals. For adversarial pressure on the design before implementing, run the **interrogate** skill on the synthesized sketch (if installed). Mandatory when the synthesis names a hard-to-reverse tradeoff: scope to the sketch package only, Act-On findings re-run Phase B, max 2 rounds before a human checkpoint. When the settled sketch still leaves 2+ concrete hard-to-reverse implementation approaches open, emit a Both-signal in the synthesis decision per `to-tickets` §4 (section+axis+reason+band per cited approach): the run lead (`implement-spec` step 4) turns this signal into a `Both: yes` claim per `to-tickets` §4.
 <!-- CUSTOM-BEGIN: both-cap-pointer, reason: cap lives in one place; retirement: keep while Both escape exists -->Both cap is canonical in `to-tickets` §4; architect emits the signal only, never the cap.<!-- CUSTOM-END -->
 
 If the human pushes back on the shape (in a checkpoint or after the fact), treat that as Phase A evidence. Re-ground and re-run Phase B before writing more code.
@@ -88,7 +91,7 @@ When you scrap:
 1. Re-trace what has actually been built (Phase A over the new reality).
 2. Redesign as if the new constraints had been day-one assumptions.
 3. Subtract before adding. The new sketch should be smaller than the old one before it grows.
-4. Return to Phase B and re-run arena.
+4. Return to Phase B and re-run arena (read `arena/SKILL.md` and follow it).
 
 ## Outputs
 

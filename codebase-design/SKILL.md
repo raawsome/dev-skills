@@ -1,6 +1,10 @@
 ---
 name: codebase-design
-description: "Shared vocabulary for designing deep modules. Triggers: design/improve module interface, deepening opportunities, seam placement, testable/AI-navigable, or when another skill needs the deep-module vocabulary."
+# CUSTOM-BEGIN: description-vocab, reason: disambiguate from architect "design this"; retirement: delete markers if upstream reword
+description: "Deep-module design vocabulary only (architect sketches new code). Triggers: design/improve a module interface, deepening opportunities, seam placement, testable/AI-navigable code, or another skill needs the vocabulary."
+# CUSTOM-END
+metadata:
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/codebase-design (compared 2026-10-14; fork point unknown)"
 ---
 
 # Codebase Design

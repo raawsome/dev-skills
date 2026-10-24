@@ -2,6 +2,8 @@
 name: to-spec
 description: "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed."
 disable-model-invocation: true
+metadata:
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/to-spec (compared 2026-10-14; fork point unknown)"
 ---
 
 This skill takes the current conversation context and codebase understanding and produces a spec. Do NOT interview the user; just synthesize what you already know.
@@ -11,12 +13,15 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 ## Process
 
 1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
+<!-- CUSTOM-BEGIN: read-wayfinder-map, reason: to-spec only read the conversation, but a wayfinder map's decisions are the discussion; retirement: delete markers if upstream adds map ingestion -->
+Given a wayfinder map, read its Destination, Decisions so far, and each closed ticket's resolution comment: those decisions are the discussion to synthesize.
+<!-- CUSTOM-END -->
 
 2. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
 
 Check with the user that these seams match their expectations.
 
-3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage. <!-- CUSTOM-BEGIN: create-labels, reason: setup writes no labels without triage, and a create with a missing label fails; retirement: delete markers if setup creates labels -->On GitHub/GitLab, create the label first if it's missing (`gh label create <name>` / `glab label create --name <name>`).<!-- CUSTOM-END -->
 
 <spec-template>
 

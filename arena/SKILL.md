@@ -1,19 +1,22 @@
 ---
 name: arena
-description: Spawn N parallel candidates at the same task, pick a base, graft the strongest parts of the losers into it. ONLY /arena, arena this, throw it in the arena, parallel attempts at a non-trivial artifact, architect Phase B, implement-spec Both code-arena.
+description: "Spawn N parallel candidates at one task, pick a base, graft the best parts of the losers into it. ONLY /arena, arena this, throw it in the arena, parallel attempts at a non-trivial artifact, architect Phase B, implement-spec Both code-arena."
+disable-model-invocation: true
 license: MIT
+metadata:
+  upstream: "cursor/plugins@1e5c90a4b6f249917bd21fe361b3a2a7deb741b8 pstack/skills/arena (compared 2026-10-14; fork point unknown)"
 ---
 
-<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
+<!-- FULLY-CUSTOM: no upstream in mattpocock/skills v1.3.1, never merge from it; pstack fork, see metadata.upstream; retirement: delete this file if upstream re-adds the skill -->
 # Arena
 
 Fan out N parallel attempts at the same task. Read every candidate end to end. Pick the strongest as the base. Graft the best ideas from the others into it. Verify the synthesized result.
 
 Do not use for routine tracer-bullet tickets. This is expensive by design. One attempt is the default; arena is the opt-in for high-uncertainty, hard-to-reverse shapes.
 
-Route: see ask-matt routing. Rule here is best-of plus graft. Briefs stay pointer-based (task path, SHAs, grounding dir).
+Route: reached via `to-tickets` §4 flags (`implement-spec` step 4), or when the user names it. Rule here is best-of plus graft. Briefs stay pointer-based (task path, SHAs, grounding dir).
 
-`code-arena` (the term `implement-spec` step 4 and `ask-matt` cite for the `to-tickets` §4 `Both: yes` escape) means an arena run over code bodies against a settled architect sketch/scaffold: candidates implement the bodies, then pick, graft, and verify per phases A–F.
+`code-arena` (the term `implement-spec` step 4 cites for the `to-tickets` §4 `Both: yes` escape) means an arena run over code bodies against a settled architect sketch/scaffold: candidates implement the bodies, then pick, graft, and verify per phases A–F. Each candidate is briefed as an implementer (`implement-spec` step 4: drift check as report-only with no rebase (drift is handled when the branch lands), `tdd` against the spec's Testing Decisions, the leaf depth line; not the `$INTEGRATION` merge), and Phase F runs the ticket-scoped tests plus typecheck.
 
 ## Start
 
@@ -33,7 +36,7 @@ The N candidates will receive the same prompt, so the prompt is the contract.
 1. State the artifact each candidate is producing.
 2. Derive the rubric. State what success looks like for *this* task, then turn it into 3-6 concrete gradeable criteria. The rubric is the picker's tool in Phase D. Candidates only see the task.
 3. Pick the runners. N is 3 by default. Use N=5 only when hard-to-reverse plus (wide space or rework cost far above 1.6x) plus parent-readable size. Same approach 3 times when the work is generation-bound rather than judgment-sensitive.
-4. Assign output paths. Each candidate writes to its own location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`). Separate before serializing shared state: no candidate edits the shared branch directly.
+4. Assign output paths. Each candidate writes to its own location (a git worktree on its own branch, forked from the SHA the brief names or else current HEAD, where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`). Separate before serializing shared state: no candidate edits the shared branch directly.
 
 ## Phase B: Fan out
 
@@ -73,10 +76,10 @@ When N candidates converge on the same shape, that is a strong agreement signal.
 
 ## Phase F: Verify
 
-The synthesized artifact has to hold up under the same scrutiny as any other output: run typechecking, run the relevant tests, and (for implement-spec integration) run the full suite once at the end.
+The synthesized artifact has to hold up under the same scrutiny as any other output: run typechecking, run the relevant tests, and (for implement-spec integration) run the full suite once at the end (under implement-spec the merge step's full suite covers this).
 
 If verification surfaces a problem the arena did not catch, either Phase A was wrong (re-frame and re-run) or one candidate caught it and you missed the graft (go back to Phase E). Fix the frame or graft instead of covering it.
 
 ## Outputs
 
-One synthesized artifact. One short synthesis note alongside, naming the base, the grafts (with source candidate), the rejections, the dropouts if any, the verification result, plus `N: <n> (criterion cite or default); outcome: <base+graft summary>`.
+One synthesized artifact; once it is committed outside the candidate worktrees (the ticket branch for implement-spec) and the note written, the parent force-removes the candidate worktrees (deliberately discarded), prunes them, and deletes their branches with `git branch -D`. One short synthesis note alongside, naming the base, the grafts (with source candidate), the rejections, the dropouts if any, the verification result, plus `N: <n> (criterion cite or default); outcome: <base+graft summary>`.

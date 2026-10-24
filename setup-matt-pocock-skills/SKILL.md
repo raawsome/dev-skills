@@ -2,6 +2,8 @@
 name: setup-matt-pocock-skills
 description: "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills."
 disable-model-invocation: true
+metadata:
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/setup-matt-pocock-skills (compared 2026-10-14; partially synced 2026-10-14)"
 ---
 
 # Setup Matt Pocock's Skills
@@ -100,6 +102,8 @@ The block:
 ```
 
 Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.md`, only when `triage` is installed and Section B ran. When it isn't, both are omitted.
+
+When Section B ran on GitHub or GitLab, create each configured label the tracker lacks (`gh label create` / `glab label create`).
 
 Then write the docs files using the seed templates in this skill folder as a starting point:
 

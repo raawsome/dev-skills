@@ -1,6 +1,8 @@
 ---
 name: tdd
 description: "Test-driven red-green-refactor. Triggers: test-first features/fixes, integration tests."
+metadata:
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/tdd (compared 2026-10-14; fork point unknown)"
 ---
 
 # Test-Driven Development
@@ -19,7 +21,7 @@ See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking g
 
 A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
 
-**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
+**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. <!-- CUSTOM-BEGIN: preapproved-seams, reason: subagent runs cannot ask the user, and a spec the user approved already lists the seams; retirement: delete markers if upstream accepts pre-approved seams -->Seams the user already approved, such as an approved spec's Testing Decisions handed to you in a brief, count as confirmed. Ask only about a seam outside them; in a subagent with no user, return the question to your caller instead.<!-- CUSTOM-END --> You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
 
 Ask: "What's the public interface, and which seams should we test?" <!-- CUSTOM-BEGIN: seam-notes, reason: one-line catch/miss notes focus seam choice; retirement: delete markers if upstream requires seam notes -->Give each proposed seam a one-line note on what it catches and what it misses.<!-- CUSTOM-END -->
 
@@ -35,4 +37,4 @@ When the shape of that interface is itself in question (how deep the module is, 
 
 - **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
 - **One slice at a time.** One seam, one test, one minimal implementation per cycle.
-- **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.
+- **Refactoring is not part of the loop.** It belongs to the review stage (see the `dev-code-review` skill), not the red → green implementation cycle.

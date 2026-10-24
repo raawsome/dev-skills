@@ -1,15 +1,18 @@
 ---
 name: swarm
 description: Fan out N parallel workers, drain them, and return one report. ONLY parallel races/coverage (declare shape per Phase A), implement-spec step 2.
+disable-model-invocation: true
 license: MIT
+metadata:
+  upstream: "cursor/plugins@1e5c90a4b6f249917bd21fe361b3a2a7deb741b8 pstack/skills/swarm (compared 2026-10-14; fork point unknown)"
 ---
 
-<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
+<!-- FULLY-CUSTOM: no upstream in mattpocock/skills v1.3.1, never merge from it; pstack fork, see metadata.upstream; retirement: delete this file if upstream re-adds the skill -->
 # Swarm
 
 Fan out N parallel workers. They may cover separate slices, race the same brief, or mix both. The parent waits, aggregates, and returns one report.
 
-Route: see ask-matt routing. Briefs stay pointer-based (SHAs, paths, method). Subagents do not further fan out.
+Route: `implement-spec` step 2 multi-slice exploration, or when the user names it. Briefs stay pointer-based (SHAs, paths, method). Subagents do not further fan out.
 
 ## Start
 
@@ -45,4 +48,4 @@ Keep a compact result table, one-line evidenced issues, and explicit gaps or dro
 
 Return one consolidated in-chat report with the table, issue one-liners, gaps or dropouts, and the race rule when used.
 
-For race or mixed winners only, verify with typecheck plus the brief's tests and add a ponytail bloat pass as pre-review hygiene; code-review axis authoritative. For coverage or table shapes there is no winner review. Ponytail never substitutes for correctness review or downstream code-review.
+For race or mixed winners only, verify with typecheck plus the brief's tests and add a ponytail bloat pass as pre-review hygiene; dev-code-review axis authoritative. For coverage or table shapes there is no winner review. Ponytail never substitutes for correctness review or downstream dev-code-review.

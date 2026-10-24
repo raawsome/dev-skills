@@ -1,6 +1,8 @@
 ---
 name: diagnosing-bugs
 description: "Diagnose hard bugs, performance regressions. Triggers: diagnose/debug this, broken/throwing/failing/slow."
+metadata:
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/diagnosing-bugs (compared 2026-10-14; fork point unknown)"
 ---
 
 # Diagnosing Bugs

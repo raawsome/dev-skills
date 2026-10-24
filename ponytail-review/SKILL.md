@@ -1,13 +1,8 @@
 ---
 name: ponytail-review
-description: >
-  Use ONLY when the user says "review for over-engineering", "what can we
-  delete", "is this over-engineered", "simplify review", or invokes
-  /ponytail-review, or when another skill routes a diff here (code-review §4, swarm Phase D). Code review focused exclusively on over-engineering. Finds what to delete:
-  reinvented standard library, unneeded dependencies, speculative abstractions,
-  dead flexibility. One line per finding: location, what to cut, what replaces
-   it. Complements correctness-focused review, this one only
-  hunts complexity.
+description: "Use ONLY for over-engineering review: \"review for over-engineering\", \"is this over-engineered\", \"what can we delete\", \"report-only simplify review\", /ponytail-review, or when routed here (dev-code-review §4, swarm Phase D). Lists cuts (unneeded deps, speculative abstractions, dead flexibility), one line each; ignores correctness."
+metadata:
+  upstream: "none (local-only)"
 ---
 
 <!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
@@ -45,7 +40,7 @@ considered whether all these validation rules are needed at this stage?"
 ## Scoring
 
 <!-- CUSTOM-BEGIN: ponytail-metric, reason: absolute N rewards golf; retirement: delete markers if upstream adds a denominator -->
-End with `net: -<N> / touched <M> (+/-), -<P>%` where P is round(100×N/M) and M is added+modified+deleted diff lines under the same `-w` and comment-only exclusions as N. Measure with `git diff --numstat -w <base>...HEAD`, then subtract comment-only lines from the counts. M=0 → P=—. Each `shrink:` shows the shorter form; each `delete:` / `yagni:` names the absent caller or need. `Lean already. Ship.` is a passing result but must still be accompanied by a `Ponytail ran` status line and the `net:` line.
+End with `net: -<N> / touched <M> (+/-), -<P>%` where N is the net lines your findings would remove, P is round(100×N/M), and M is added+modified+deleted diff lines under the same `-w` and comment-only exclusions as N. Measure with `git diff --numstat -w <base>...HEAD`, then subtract comment-only lines from the counts. M=0 → P=—. Each `shrink:` shows the shorter form; each `delete:` / `yagni:` names the absent caller or need. `Lean already. Ship.` is a passing result but must still be accompanied by a `Ponytail ran` status line and the `net:` line.
 <!-- CUSTOM-END -->
 
 If there is nothing to cut, say `Ponytail ran. Lean already. Ship.` with the `net:` line and stop.

@@ -1,10 +1,12 @@
 ---
 name: blast-radius
-description: blast-radius — what a change breaks beyond the diff, proven by running code. ONLY blast-radius asks, untrusted small diff, shared code, library version, concurrency-lifecycle, wire-format, code-review §5.
+description: "What a change breaks beyond the diff, proven by running code. ONLY blast-radius asks, untrusted small diff, shared code, library version, concurrency-lifecycle, wire-format, dev-code-review §5."
 license: MIT
+metadata:
+  upstream: "cursor/plugins@1e5c90a4b6f249917bd21fe361b3a2a7deb741b8 pstack/skills/blast-radius (compared 2026-10-14; fork point unknown)"
 ---
 
-<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
+<!-- FULLY-CUSTOM: no upstream in mattpocock/skills v1.3.1, never merge from it; pstack fork, see metadata.upstream; retirement: delete this file if upstream re-adds the skill -->
 # Blast radius
 
 Find what a change breaks somewhere else, before it ships.
@@ -39,12 +41,12 @@ Step 4 is usually one small script that imports the same library the app ships a
 2. Find the one fact it's safe because of. Most changes that look risky are safe because of a single fact, like "this call only drops already-dead cache entries and does nothing else". Find that fact. If it holds, most risky cases are cleared at once. Spend your time here, not on a long list of maybes.
 3. Look where grep stops. Read the source of the library you call, and check its pinned version and any local patch. Work out when things run: microtasks, unmount and teardown, framework lifecycle semantics. Follow what a symbol search misses: the JSON an API returns, a DB column, a wire format, another language reading the same bytes, a feature flag, code three hops downstream.
 4. Be honest about each risk. Give it a real chance of happening and a real cost if it does. Keep the risks you confirmed. List the ones you checked and cleared separately. Cite a real `file:line`; a search that finds nothing is still an answer, and never make up a caller or an API.
-5. Prove the one fact when the escalation rule fires. Write the script or test under `.scratch/blast/<slug>/` so it is rerunnable, run it against the real code, and paste what happened. Otherwise skip and say why (no exec env, or levels 2-3 already cleared it).
+5. Prove the one fact when the escalation rule fires. Write the script or test under `.scratch/<slug>/blast/` (`<slug>`: the spec's slug when there is one; in a worktree, use the main checkout's absolute path from your brief) so it is rerunnable, run it against the real code, and paste what happened. Otherwise skip and say why (no exec env, or levels 2-3 already cleared it).
 
 <!-- CUSTOM-BEGIN: fact-linkage, reason: free exec invites retrofit-proofing; retirement: delete markers if upstream freezes the fact -->
-Freeze one sentence in step 2 as `Fact: "<...>"`. Step 5 cites it verbatim: `Proves Fact: "<...>" → level N→M (N, M in 1..5 per How sure are you) via .scratch/blast/<slug>/...` plus output. A changed fact is restated and re-proved. `UNPROVEN` still names the fact: `Fact: "<...>" — UNPROVEN (highest: level N; cheapest next check: <one command>)`.
+Freeze one sentence in step 2 as `Fact: "<...>"`. Step 5 cites it verbatim: `Proves Fact: "<...>" → level N→M (N, M in 1..5 per How sure are you) via .scratch/<slug>/blast/...` plus output. A changed fact is restated and re-proved. `UNPROVEN` still names the fact: `Fact: "<...>" — UNPROVEN [wire-format|other] (highest: level N; cheapest next check: <one command>)`.
 <!-- CUSTOM-END -->
-6. For a big or wide change, run it as an **arena** only via Arena: yes routing (Architect: no + 2+ approaches) per `to-tickets` §4. Ask more than one candidate the same question and merge the answers. Different attempts catch different real bugs.
+6. For a big or wide change, run it as an **arena** (read `arena/SKILL.md` and follow it; never via the Skill tool) only via Arena: yes routing (Architect: no + 2+ approaches) per `to-tickets` §4. Ask more than one candidate the same question and merge the answers. Different attempts catch different real bugs.
 
 ## What to hand back
 

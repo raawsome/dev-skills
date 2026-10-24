@@ -1,10 +1,12 @@
 ---
 name: interrogate
-description: Use ONLY for adversarial review (challenge/stress-test/tear-apart synonyms point here, not separate) or when routed here (code-review §5, architect Phase C). Multiple independent reviewers challenge the same change, then a lead synthesizes one verdict.
+description: "Use ONLY for adversarial multi-reviewer review of a code change (challenge/stress-test/tear-apart a diff; plans and ideas go to grilling), or when routed here (dev-code-review §5, architect Phase C)."
 license: MIT
+metadata:
+  upstream: "cursor/plugins@1e5c90a4b6f249917bd21fe361b3a2a7deb741b8 pstack/skills/interrogate (compared 2026-10-14; fork point unknown)"
 ---
 
-<!-- FULLY-CUSTOM: no upstream in v1.3.1, never merge; retirement: delete this file if upstream re-adds the skill -->
+<!-- FULLY-CUSTOM: no upstream in mattpocock/skills v1.3.1, never merge from it; pstack fork, see metadata.upstream; retirement: delete this file if upstream re-adds the skill -->
 # Interrogate
 
 Spawn independent reviewers to adversarially review code changes. Each reviewer gets the same prompt and rubric. The adversarial signal comes from reviewer independence, not assigned personas: independent readers differ in blind spots, priors, and reasoning patterns. Agreement across reviewers is high-confidence signal; lone-reviewer findings are worth reading but lower confidence.
@@ -34,7 +36,7 @@ Write one clear paragraph. If you're unsure about the intent, ask the user befor
 
 ## Step 3, Spawn reviewers
 
-Launch N (default 2) readonly reviewer subagents in a single message, in the background. When run as code-review §5 gate, run foreground (blocking) under code-review after §4 axes complete; standalone runs background. If the user explicitly asks for more reviewers, extend the Reviewer A/B labels to fit.
+Launch N (default 2) readonly reviewer subagents in a single message, in the background. When run as dev-code-review §5 gate, run foreground (blocking) under dev-code-review after §4 axes complete; standalone runs background. If the user explicitly asks for more reviewers, extend the Reviewer A/B labels to fit.
 
 <!-- CUSTOM-BEGIN: reviewer-count, reason: free re-rolls launder noise as consensus; retirement: delete markers if upstream pre-registers N -->
 Pre-register the reviewer count N (default 2) before spawning and run exactly N reviewers once; never add reviewers after seeing results for any reason. Consensus is a majority AND at least 2 when N is greater than 2, not a bare 2+ (N=2→2, N=3→2, N=5→3). Report N and the per-finding agreement rate (k/N) in the agreement map, plus `reviewers spawned: N, rounds: R` (R counts synthesis passes over the fixed N results, never re-spawns) under Reviewers.

@@ -1,6 +1,8 @@
 ---
 name: research
 description: "Research question against primary sources into repo Markdown. Triggers: researched topic, docs/API facts, delegated reading legwork."
+metadata:
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/research (compared 2026-10-14; fork point unknown)"
 ---
 
 <!-- CUSTOM-BEGIN: conditional-fanout, reason: unconditional background agent wastes context when source known; retirement: delete markers if upstream conditions fan-out -->
@@ -14,5 +16,7 @@ Then synthesise: merge the reports into a single Markdown file, citing each clai
 <!-- CUSTOM-END -->
 
 <!-- CUSTOM-BEGIN: fanout-depth, reason: nested fan-out multiplies agents; see research §fanout-depth; retirement: delete markers if upstream adopts a depth rule -->
+### fanout-depth
+
 When invoked as a fanned child, run single-angle serially in-ticket; only the top-level invocation fans. State `depth: top | child` in the brief.
 <!-- CUSTOM-END -->

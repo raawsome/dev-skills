@@ -1,15 +1,18 @@
 ---
 name: pr
-description: "Write PR body."
+description: "Write a PR body from a fast-to-review template. Triggers: write/draft the PR description, mark a draft PR ready."
 metadata:
   credits:
     skill: show-me
     author: Dex Horthy
     organisation: Humanlayer
     url: "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md"
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/pr (compared 2026-10-14; fork point unknown)"
 ---
 
-Use this template for writing the PR body:
+<!-- CUSTOM-BEGIN: keep-closes, reason: reshaping a body must not drop closing keywords (standalone implement-spec overwrites); retirement: delete markers if upstream handles existing bodies -->Closing keywords (`Closes #N`, `Fixes #N`), from the PR's existing body or supplied by the caller, go on their own lines after the template; add or remove only when asked (implement-spec step 3 landed-closes governs inside that skill).<!-- CUSTOM-END -->
+
+Use this template for writing the PR body<!-- CUSTOM-BEGIN: strip-markers, reason: CUSTOM marker comments inside the template would be copied into PR bodies; retirement: delete markers if upstream template has no local fences --> (omit the CUSTOM marker comments)<!-- CUSTOM-END -->:
 
 ```markdown
 ## Summary
@@ -33,7 +36,7 @@ Use this template for writing the PR body:
 <optional: potential ramifications of merge>
 
 <!-- CUSTOM-BEGIN: blast-gate-template, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->
-**Blast-radius:** [ ] skipped (<reason>) / [ ] ran (<link>). Fire per blast-radius Escalation rule; big/wide→arena per blast-radius step 6 via to-tickets §4. This template records the outcome only; details live in the blast-radius writeup.
+**Blast-radius:** [ ] skipped (<reason>) / [ ] ran (<one-line summary: Fact + verdict; never a local .scratch path>)
 <!-- CUSTOM-END -->
 ```
 
@@ -172,4 +175,4 @@ Execution-based evidence is A-tier. Test results, console output. Show the exact
 
 Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
 
-Scope is one sentence on the potential impact of this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc. <!-- CUSTOM-BEGIN: blast-gate-pointer, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->For causal breakage analysis beyond this sentence (shared code / library version / concurrency-lifecycle / wire format), call the blast-radius skill; always record the Blast-radius line so skipping stays a conscious act.<!-- CUSTOM-END -->
+Scope is one sentence on the potential impact of this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc. <!-- CUSTOM-BEGIN: blast-gate-pointer, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->For causal breakage analysis beyond this sentence (shared code / library version / concurrency-lifecycle / wire format), call the blast-radius skill when its Escalation rule fires (a big or wide change goes to an arena only as its step 6 routes it); always record the Blast-radius line so skipping stays a conscious act. That line records the outcome only; details live in the blast-radius writeup.<!-- CUSTOM-END -->

@@ -1,6 +1,8 @@
 ---
 name: wizard
-description: "Generate an interactive bash wizard that walks a human through steps only they can perform. Triggers: provisioning infrastructure, credentials/CI secrets, third-party dashboard, migration/cutover. Don't invoke this for steps the agent can perform itself."
+description: "Generate an interactive bash wizard for steps only a human can perform. Triggers: provisioning infrastructure, credentials/CI secrets, third-party dashboard, migration/cutover. Not for steps the agent can do itself."
+metadata:
+  upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/wizard (compared 2026-10-14; template.sh synced 2026-10-14)"
 ---
 
 # Wizard
