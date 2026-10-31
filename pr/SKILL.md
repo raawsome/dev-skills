@@ -36,7 +36,7 @@ Use this template for writing the PR body<!-- CUSTOM-BEGIN: strip-markers, reaso
 <optional: potential ramifications of merge>
 
 <!-- CUSTOM-BEGIN: blast-gate-template, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->
-**Blast-radius:** [ ] skipped (<reason>) / [ ] ran (<one-line summary: Fact + verdict; never a local .scratch path>)
+**Blast-radius:** [ ] skipped (<reason>) / [ ] ran (Fact: "<verbatim from writeup>" — proven|UNPROVEN)
 <!-- CUSTOM-END -->
 ```
 
@@ -175,4 +175,4 @@ Execution-based evidence is A-tier. Test results, console output. Show the exact
 
 Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
 
-Scope is one sentence on the potential impact of this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc. <!-- CUSTOM-BEGIN: blast-gate-pointer, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->For causal breakage analysis beyond this sentence (shared code / library version / concurrency-lifecycle / wire format), call the blast-radius skill when its Escalation rule fires (a big or wide change goes to an arena only as its step 6 routes it); always record the Blast-radius line so skipping stays a conscious act. That line records the outcome only; details live in the blast-radius writeup.<!-- CUSTOM-END -->
+Scope is one sentence on the potential impact of this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc. <!-- CUSTOM-BEGIN: blast-gate-pointer, reason: HTML-comment gate never renders so never fires; retirement: delete markers if upstream makes the gate visible -->For causal breakage analysis beyond this sentence (shared code / library version / concurrency-lifecycle / wire format), call the blast-radius skill when its Escalation rule fires (a big or wide change goes to an arena only as its step 6 routes it); always record the Blast-radius line so skipping stays a conscious act. That line quotes the frozen Fact from the writeup; details stay in the writeup.<!-- CUSTOM-END -->
