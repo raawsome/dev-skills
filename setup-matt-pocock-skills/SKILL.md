@@ -1,7 +1,6 @@
 ---
 name: setup-matt-pocock-skills
 description: "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills."
-disable-model-invocation: true
 metadata:
   upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/setup-matt-pocock-skills (compared 2026-10-14; partially synced 2026-10-14)"
 ---
@@ -81,7 +80,7 @@ Let them edit before writing.
 
 Never create the other file just to mirror the block.
 
-If an `## Agent skills` block already exists in the file(s) being edited, update its contents in-place rather than appending a duplicate. Don't overwrite user edits to the surrounding sections.
+If an `## Agent skills` block already exists in the file(s) being edited, update its contents in-place rather than appending a duplicate. Don't overwrite user edits to the surrounding sections, and don't delete extra subsections already inside the block (for example Tool economy).
 
 The block:
 
@@ -105,7 +104,9 @@ Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.
 
 When Section B ran on GitHub or GitLab, create each configured label the tracker lacks (`gh label create` / `glab label create`).
 
-Then write the docs files using the seed templates in this skill folder as a starting point:
+Write only files that are missing under `docs/agents/`. If `issue-tracker.md`, `domain.md`, or `triage-labels.md` already exists, leave it — do not replace its contents with a seed template. When invoked as an AFK repair (ship-it Route step 1): if an existing tracker doc is missing a required operation from that step's list, append that operation only; never rewrite the rest of the file. Interactive re-run to switch trackers or restart from scratch is the only path that may replace existing docs, and only after the user asks.
+
+Then, for files that are missing, write them using the seed templates in this skill folder as a starting point:
 
 - [issue-tracker-github.md](./issue-tracker-github.md): GitHub issue tracker
 - [issue-tracker-gitlab.md](./issue-tracker-gitlab.md): GitLab issue tracker
@@ -113,8 +114,8 @@ Then write the docs files using the seed templates in this skill folder as a sta
 - [triage-labels.md](./triage-labels.md): label mapping (only if `triage` is installed)
 - [domain.md](./domain.md): domain doc consumer rules + layout
 
-For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
+For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description only when that file is missing.
 
 ### 5. Done
 
-Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later; re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.
+Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later. Re-running this skill does not overwrite existing `docs/agents/*` files; it only fills missing ones, unless the user asked to switch issue trackers or restart from scratch.

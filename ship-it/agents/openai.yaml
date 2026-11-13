@@ -1,5 +1,3 @@
 interface:
   display_name: "Ship It"
   short_description: "Fog-to-done router-orchestrator"
-policy:
-  allow_implicit_invocation: false

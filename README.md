@@ -12,9 +12,10 @@ git clone https://github.com/raawsome/dev-skills.git ~/dev-skills
 ~/dev-skills/install.sh --list             # list skills
 ```
 
-Targets (overridable via `OPENCODE_SKILLS_DIR` / `CLAUDE_SKILLS_DIR`):
+Targets (overridable via `OPENCODE_SKILLS_DIR` / `CLAUDE_SKILLS_DIR` / `OPENCODE_REFERENCES_DIR`):
 
 - opencode → `~/.config/opencode/skills/<name>/`
+- opencode shared refs → `~/.config/opencode/references/` (`flag-routing.md`)
 - Claude Code → `~/.claude/skills/<name>/` (symlinks supported)
 
 Restart the harness after installing so new skills register. Re-run after `git pull` to pick up updates.

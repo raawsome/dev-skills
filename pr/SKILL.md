@@ -1,6 +1,6 @@
 ---
 name: pr
-description: "Write a PR body from a fast-to-review template. Triggers: write/draft the PR description, mark a draft PR ready."
+description: "Write a PR body from a fast-to-review template. Triggers: write/draft the PR description."
 metadata:
   credits:
     skill: show-me

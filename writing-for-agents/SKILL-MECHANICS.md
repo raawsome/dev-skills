@@ -1,22 +1,32 @@
 # Skill mechanics
 
-The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when the document is a skill (frontmatter, the invocation choice, and router skills). Everything else about writing it is the universal reference in `SKILL.md`.
+The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when the document is a skill (frontmatter, invocation, nested reach, and shared reference). Everything else about writing it is the universal reference in `SKILL.md`.
 
-## Invocation
+## Invocation (this harness)
 
-Two choices, trading the two loads:
+OpenCode does not read `disable-model-invocation`. A skill with a `description` is reachable by the model, by nested agents, and by the Skill tool. Do not set that flag. Do not claim a skill is human-only.
 
-- A **model-invoked** skill keeps a `description`, so the agent can fire it autonomously, and other skills can reach it. You can still type its name: model-invocation always _includes_ user reach; a description only ever adds agent discovery, never removes the human's. The description is the skill's top-level context pointer, forced to stay loaded at all times: permanent context load in exchange for discoverability. A model-invoked skill whose content is all reference is also one home for shared reference: another skill can invoke it, so reference needed by several skills lives in one place. Mechanics: omit `disable-model-invocation`, and write a model-facing description carrying the trigger branches (the pointer-writing rules in `SKILL.md` apply in full).
-- A **user-invoked** skill strips the description from the agent's reach: only the human typing its name can invoke it, and no other skill can. Zero context load, but it spends cognitive load: you are the index that must remember it exists. Mechanics: set `disable-model-invocation: true`; the `description` becomes human-facing: a one-line summary, trigger lists stripped.
+Write every description as model-facing: front-load the leading word, one trigger per branch (pointer rules in `SKILL.md`). Nested agents are first-class callers, so a missing trigger is a miss for them too.
 
-Pick model-invocation only when the agent must reach the skill on its own, or another skill must. If it only ever fires by hand, make it user-invoked and pay no context load.
+Codex `agents/openai.yaml` `policy.allow_implicit_invocation` is not used here. Do not set it false to fake a user-only skill.
 
-Shared reference that two user-invoked skills both need can live in neither: with no descriptions, neither can fire the other. Push it to a plain file outside the skill system: external reference any skill can point at.
+## Nested reach
 
-## Splitting by invocation
+An orchestrator may reach another skill in either way:
 
-The invocation cut of splitting (the sequence cut lives in `SKILL.md`): split off a model-invoked skill when you have a distinct leading word that should trigger it on its own (a trigger word you actually use in your prompts), or another skill must reach it. You pay context load for the new always-loaded description, so that independent reach has to be worth it.
+- **Skill tool** — load the callee as its own session.
+- **Read-as-reference** — follow that skill's `SKILL.md` (and the files it points at) inside a subagent brief.
+
+Both are legal. Prefer the Skill tool when the callee is a whole session. Prefer read-as-reference when the orchestrator is already running the callee's steps as a named phase (ship-it phase leads, implement-spec flagged tickets).
+
+## Shared reference
+
+A table several skills need (flag routing, fan-out depth, tracker GC) lives in a **plain file**, not inside one skill. Cite the file; do not restate. Flag routing lives at `~/.config/opencode/references/flag-routing.md`. Scratch GC listing lives in `setup-matt-pocock-skills/issue-tracker-local.md` (applies on every tracker).
+
+## Splitting
+
+Split off a skill when a distinct leading word should trigger it on its own, or another skill must reach that procedure as a unit. You pay context load for the always-loaded description, so that independent reach has to be worth it.
 
 ## Router skills
 
-When user-invoked skills multiply past what you can remember, that piled-up cognitive load is cured by a **router skill**: one user-invoked skill that names the others and when to reach for each, so the human has one skill to remember instead of many. It can only hint, never fire them: user-invoked skills have no description, so nothing but the human can reach them.
+A router (ship-it) names the other skills and runs them as nested phase leads. It may Skill-invoke or follow `SKILL.md` as reference. It is not hint-only.

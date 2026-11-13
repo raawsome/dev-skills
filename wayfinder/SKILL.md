@@ -1,7 +1,6 @@
 ---
 name: wayfinder
 description: Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.
-disable-model-invocation: true
 metadata:
   upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/wayfinder (compared 2026-10-14; fork point unknown)"
 ---

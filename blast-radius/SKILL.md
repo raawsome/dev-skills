@@ -49,7 +49,7 @@ Step 4 is usually one small script that imports the same library the app ships a
 <!-- CUSTOM-BEGIN: fact-linkage, reason: free exec invites retrofit-proofing; retirement: delete markers if upstream freezes the fact -->
 Freeze one sentence in step 2 as `Fact: "<...>"`. Step 5 cites it verbatim: `Proves Fact: "<...>" → level N→M (N, M in 1..5 per How sure are you) via .scratch/<slug>/blast/...` plus output. A changed fact is restated and re-proved. `UNPROVEN` still names the fact: `Fact: "<...>" — UNPROVEN [wire-format|other] (highest: level N; cheapest next check: <one command>)`.
 <!-- CUSTOM-END -->
-6. For a big or wide change, run it as an **arena** (read `arena/SKILL.md` and follow it; never via the Skill tool) only via Arena: yes routing (Architect: no + 2+ approaches) per `to-tickets` §4. Ask more than one candidate the same question and merge the answers. Different attempts catch different real bugs.
+6. For a big or wide change, run it as an **arena** (read `arena/SKILL.md` and follow it; never via the Skill tool) only via Arena: yes routing (Architect: no + 2+ approaches) per `flag-routing.md`. Ask more than one candidate the same question and merge the answers. Different attempts catch different real bugs.
 
 ## What to hand back
 

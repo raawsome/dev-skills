@@ -1,5 +1,5 @@
 # Design it twice → use architect/arena
-<!-- CUSTOM-BEGIN: user-invoked-pointer, reason: architect/arena/swarm restored to disable-model-invocation, so callers read the file; retirement: delete markers if upstream drops the flag -->
-For parallel design sketches, read `architect/SKILL.md` Phase B and `arena/SKILL.md` and follow them as reference, never via the Skill tool (arena A-F, rubric+judge+graft-cap+coherence+red-flags).
+<!-- CUSTOM-BEGIN: nested-reach, reason: parallel sketches run architect Phase B then arena; retirement: delete markers if upstream adds a pointer -->
+For parallel design sketches, follow `architect/SKILL.md` Phase B and `arena/SKILL.md` as reference (or Skill-tool them): arena A-F, rubric+judge+graft-cap+coherence+red-flags.
 <!-- CUSTOM-END -->
 This file retained as pointer only.

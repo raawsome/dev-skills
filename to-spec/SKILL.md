@@ -1,7 +1,6 @@
 ---
 name: to-spec
 description: "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed."
-disable-model-invocation: true
 metadata:
   upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/to-spec (compared 2026-10-14; fork point unknown)"
 ---

@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: "Test-driven red-green-refactor. Triggers: test-first features/fixes, integration tests."
+description: "Test-driven red-green loop. Triggers: test-first features/fixes, integration tests."
 metadata:
   upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/tdd (compared 2026-10-14; fork point unknown)"
 ---

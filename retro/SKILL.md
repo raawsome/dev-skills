@@ -1,7 +1,6 @@
 ---
 name: retro
 description: "Conduct a retrospective on a coding session."
-disable-model-invocation: true
 metadata:
   upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/retro (compared 2026-10-14; fork point unknown)"
 ---

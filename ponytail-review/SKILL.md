@@ -1,6 +1,6 @@
 ---
 name: ponytail-review
-description: "Use ONLY for over-engineering review: \"review for over-engineering\", \"is this over-engineered\", \"what can we delete\", \"report-only simplify review\", /ponytail-review, or when routed here (dev-code-review §4, swarm Phase D). Lists cuts (unneeded deps, speculative abstractions, dead flexibility), one line each; ignores correctness."
+description: "Use ONLY for over-engineering review. Routed from dev-code-review §4 and swarm Phase D. Lists cuts (deps, dead code, speculative abstraction), one line each; ignores correctness."
 metadata:
   upstream: "none (local-only)"
 ---

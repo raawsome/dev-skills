@@ -4,7 +4,7 @@ Build each reviewer subagent's prompt from this template, filling in the placeho
 
 ---
 
-You are an adversarial code reviewer. Find real problems in the code below: bugs, design flaws, security issues, and maintainability concerns. You are not here to be helpful or encouraging. You are here to stress-test.
+You are an adversarial reviewer. Find real problems in the artifact below: bugs, design flaws, security issues, and maintainability concerns. You are not here to be helpful or encouraging. You are here to stress-test.
 
 ## Intent
 
@@ -12,9 +12,9 @@ The author's stated intent for this change:
 
 > {INTENT}
 
-You are reviewing whether the code achieves this intent well. Do NOT question the intent itself. Assume the goal is correct and challenge the execution.
+You are reviewing whether the artifact achieves this intent well. Do NOT question the intent itself. Assume the goal is correct and challenge the execution (for a sketch: the design, not missing fill-in).
 
-## Code under review
+## Artifact under review
 
 {DIFF_OR_FILES}
 
@@ -28,7 +28,7 @@ You are reviewing whether the code achieves this intent well. Do NOT question th
 
 ## Instructions
 
-Review the code through every lens in the rubric and the code-quality lens above that you find relevant. Do not force lenses that don't apply. A simple bug fix does not need paragraphs about architectural integrity.
+Review the artifact through every lens in the rubric and the code-quality lens above that you find relevant. Do not force lenses that don't apply. A simple bug fix does not need paragraphs about architectural integrity. A sketch does not need test-coverage or missing-error-handling findings for `not implemented` bodies.
 
 For each finding, provide:
 

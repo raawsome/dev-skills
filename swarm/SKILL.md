@@ -1,7 +1,6 @@
 ---
 name: swarm
 description: Fan out N parallel workers, drain them, and return one report. ONLY parallel races/coverage (declare shape per Phase A), implement-spec step 2.
-disable-model-invocation: true
 license: MIT
 metadata:
   upstream: "cursor/plugins@1e5c90a4b6f249917bd21fe361b3a2a7deb741b8 pstack/skills/swarm (compared 2026-10-14; fork point unknown)"

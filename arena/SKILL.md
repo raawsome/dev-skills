@@ -1,7 +1,6 @@
 ---
 name: arena
 description: "Spawn N parallel candidates at one task, pick a base, graft the best parts of the losers into it. ONLY /arena, arena this, throw it in the arena, parallel attempts at a non-trivial artifact, architect Phase B, implement-spec Both code-arena."
-disable-model-invocation: true
 license: MIT
 metadata:
   upstream: "cursor/plugins@1e5c90a4b6f249917bd21fe361b3a2a7deb741b8 pstack/skills/arena (compared 2026-10-14; fork point unknown)"
@@ -14,9 +13,9 @@ Fan out N parallel attempts at the same task. Read every candidate end to end. P
 
 Do not use for routine tracer-bullet tickets. This is expensive by design. One attempt is the default; arena is the opt-in for high-uncertainty, hard-to-reverse shapes.
 
-Route: reached via `to-tickets` §4 flags (`implement-spec` step 4), or when the user names it. Rule here is best-of plus graft. Briefs stay pointer-based (task path, SHAs, grounding dir).
+Route: reached via `flag-routing.md` flags (`implement-spec` step 4), or when the user names it. Rule here is best-of plus graft. Briefs stay pointer-based (task path, SHAs, grounding dir).
 
-`code-arena` (the term `implement-spec` step 4 cites for the `to-tickets` §4 `Both: yes` escape) means an arena run over code bodies against a settled architect sketch/scaffold: candidates implement the bodies, then pick, graft, and verify per phases A–F. Each candidate is briefed as an implementer (`implement-spec` step 4: drift check as report-only with no rebase (drift is handled when the branch lands), `tdd` against the spec's Testing Decisions, the leaf depth line; not the `$INTEGRATION` merge), and Phase F runs the ticket-scoped tests plus typecheck.
+`code-arena` (the term `implement-spec` step 4 cites for the `flag-routing.md` `Both: yes` escape) means an arena run over code bodies against a settled architect sketch/scaffold: candidates implement the bodies, then pick, graft, and verify per phases A–F. Each candidate is briefed as an implementer (`implement-spec` step 4: drift check as report-only with no rebase (drift is handled when the branch lands), `tdd` against the spec's Testing Decisions, the leaf depth line; not the `$INTEGRATION` merge), and Phase F runs the ticket-scoped tests plus typecheck.
 
 ## Start
 

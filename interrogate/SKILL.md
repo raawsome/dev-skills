@@ -1,6 +1,6 @@
 ---
 name: interrogate
-description: "Use ONLY for adversarial multi-reviewer review of a code change (challenge/stress-test/tear-apart a diff; plans and ideas go to grilling), or when routed here (dev-code-review §5, architect Phase C)."
+description: "Use ONLY for adversarial review of a diff or an architect Phase C synthesized sketch; other plans and ideas go to grilling. Routed from dev-code-review §5 and architect Phase C."
 license: MIT
 metadata:
   upstream: "cursor/plugins@1e5c90a4b6f249917bd21fe361b3a2a7deb741b8 pstack/skills/interrogate (compared 2026-10-14; fork point unknown)"
@@ -17,11 +17,12 @@ The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 
 Identify what to review from context:
 
+- If the caller routes from architect Phase C, use the synthesized sketch package it names; do not run `git diff`
 - If the user points at specific files or a diff, use that
 - If on a feature branch, run `git diff main...HEAD` (or the appropriate base branch) for the full changeset
 - If the user's message references recent work, gather the relevant files
 
-Package the diff (or file contents) plus any surrounding context files the reviewers need to understand the code.
+Package the artifact (diff, file contents, or sketch package) plus any surrounding context files the reviewers need to judge it.
 
 ## Step 2, State the intent
 
@@ -31,6 +32,7 @@ Before spawning reviewers, state the intent explicitly. Derive this from:
 - Commit messages
 - PR description if one exists
 - The code itself
+- For an architect Phase C sketch, the sketch rationale
 
 Write one clear paragraph. If you're unsure about the intent, ask the user before proceeding.
 
@@ -45,7 +47,7 @@ Pre-register the reviewer count N (default 2) before spawning and run exactly N 
 Read `references/reviewer-prompt.md` and fill in the template with:
 
 1. The stated intent
-2. The diff or file contents
+2. The artifact (diff, file contents, or sketch package)
 3. The review rubric from `references/rubric.md`
 4. The code-quality lens from `references/code-quality-review.md`
 

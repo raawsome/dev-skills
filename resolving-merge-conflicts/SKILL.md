@@ -10,7 +10,7 @@ metadata:
 
 2. **Find the primary sources** for each conflict. Understand deeply why each change was made, and what the original intent was. Read the commit messages, check the PRs, check original issues/tickets.
 
-3. **Resolve each hunk.** Preserve both intents where possible. Where incompatible, pick the one matching the merge's stated goal and note the trade-off. Do **not** invent new behaviour. <!-- CUSTOM-BEGIN: needs-user-carveout, reason: ship-it merger worktrees need a NEEDS-USER carve-out from never-abort; retirement: delete markers if upstream re-adds the skill -->Resolve every hunk you can. If one needs the user, stop and ask the user (as a subagent: return `NEEDS-USER: <question>`) leaving the tree as it is; never `--abort` yourself (a ship-it lead resets; standalone, the user decides).<!-- CUSTOM-END -->
+3. **Resolve each hunk.** Preserve both intents where possible. Where incompatible, pick the one matching the merge's stated goal and note the trade-off. Do **not** invent new behaviour. Resolve every hunk you can. Never `--abort` yourself (a ship-it lead resets; standalone, the user decides). If one hunk needs a human: standalone, stop and ask leaving the tree as it is; as a ship-it leaf, take the recommended resolution (preserve both intents, else the merge's stated goal), log `ASSUMED`, never return `NEEDS-USER`.
 
 4. Discover the project's **automated checks** and run them, typically typecheck, then tests, then format. Fix anything the merge broke.
 

@@ -1,7 +1,6 @@
 ---
 name: improve-codebase-architecture
 description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-disable-model-invocation: true
 metadata:
   upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/improve-codebase-architecture (compared 2026-10-14; fork point unknown)"
 ---
