@@ -12,10 +12,9 @@ git clone https://github.com/raawsome/dev-skills.git ~/dev-skills
 ~/dev-skills/install.sh --list             # list skills
 ```
 
-Targets (overridable via `OPENCODE_SKILLS_DIR` / `CLAUDE_SKILLS_DIR` / `OPENCODE_REFERENCES_DIR`):
+Targets (overridable via `OPENCODE_SKILLS_DIR` / `CLAUDE_SKILLS_DIR`):
 
 - opencode → `~/.config/opencode/skills/<name>/`
-- opencode shared refs → `~/.config/opencode/references/` (`flag-routing.md`)
 - Claude Code → `~/.claude/skills/<name>/` (symlinks supported)
 
 Restart the harness after installing so new skills register. Re-run after `git pull` to pick up updates.
@@ -32,9 +31,9 @@ Router: `ask-matt`. Main path: `grill-with-docs` (or `grill-me` with no repo) �
 - `ponytail-review` — over-engineering only ("what can we delete"). Wired into `dev-code-review` as the third axis alongside Standards and Spec.
 - `dev-code-review` — three parallel axes by default, reported separately, no reranking. Opt-in `Interrogate` and `Blast-radius` gates report under their own headings when triggered.
 
-## Skills (30)
+## Skills (29)
 
-architect, arena, blast-radius, codebase-design, dev-code-review, diagnosing-bugs, domain-modeling, grill-me, grill-with-docs, grilling, implement, implement-spec, improve-codebase-architecture, interrogate, ponytail-review, pr, prototype, research, resolving-merge-conflicts, retro, setup-matt-pocock-skills, ship-it, swarm, tdd, to-questionnaire, to-spec, to-tickets, wayfinder, wizard, writing-for-agents
+architect, arena, blast-radius, codebase-design, dev-code-review, diagnosing-bugs, domain-modeling, grill-me, grill-with-docs, grilling, implement, implement-spec, improve-codebase-architecture, interrogate, ponytail-review, pr, prototype, research, resolving-merge-conflicts, retro, setup-matt-pocock-skills, ship-it, swarm, tdd, to-spec, to-tickets, wayfinder, wizard, writing-for-agents
 
 Each skill is `<name>/SKILL.md` plus supporting files. `agents/openai.yaml` files are metadata; Claude Code ignores them.
 

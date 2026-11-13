@@ -5,7 +5,6 @@
 set -eu
 SRC="$(cd "$(dirname "$0")" && pwd)"
 OPENCODE_DIR="${OPENCODE_SKILLS_DIR:-$HOME/.config/opencode/skills}"
-OPENCODE_REF_DIR="${OPENCODE_REFERENCES_DIR:-$HOME/.config/opencode/references}"
 CLAUDE_DIR="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 MODE="copy"
 TARGETS="both"
@@ -54,38 +53,12 @@ install_one() {
   fi
   echo "$MODE -> $dest_root/$name"
 }
-install_references() {
-  src="$SRC/references"
-  dest="$OPENCODE_REF_DIR"
-  [ -d "$src" ] || return 0
-  if [ "$SHOW_DIFF" = "1" ] && [ -d "$dest" ] && [ "$MODE" = "copy" ]; then
-    diff -rq "$dest" "$src" || true
-  fi
-  if [ "$DRY_RUN" = "1" ]; then
-    echo "dry-run $MODE -> $dest"
-    return
-  fi
-  mkdir -p "$(dirname "$dest")"
-  if [ "$MODE" = "symlink" ]; then
-    ln -sfn "$src" "$dest"
-  else
-    if [ "$DO_BACKUP" = "1" ] && [ -d "$dest" ]; then
-      cp -R "$dest" "$dest.bak.$(date +%s)"
-    fi
-    rm -rf "$dest"
-    cp -R "$src" "$dest"
-  fi
-  echo "$MODE -> $dest"
-}
 for d in "$SRC"/*/; do
   name="$(basename "$d")"
   [ -f "$SRC/$name/SKILL.md" ] || continue
   [ "$TARGETS" = "both" ] || [ "$TARGETS" = "opencode" ] && install_one "$OPENCODE_DIR" "$name"
   [ "$TARGETS" = "both" ] || [ "$TARGETS" = "claude" ] && install_one "$CLAUDE_DIR" "$name"
 done
-if [ "$TARGETS" = "both" ] || [ "$TARGETS" = "opencode" ]; then
-  install_references
-fi
 prune_one() {
   dest_root="$1"
   [ -d "$dest_root" ] || return 0
