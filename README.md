@@ -31,9 +31,9 @@ Router: `ask-matt`. Main path: `grill-with-docs` (or `grill-me` with no repo) �
 - `ponytail-review` — over-engineering only ("what can we delete"). Wired into `dev-code-review` as the third axis alongside Standards and Spec.
 - `dev-code-review` — three parallel axes by default, reported separately, no reranking. Opt-in `Interrogate` and `Blast-radius` gates report under their own headings when triggered.
 
-## Skills (29)
+## Skills (31)
 
-architect, arena, blast-radius, codebase-design, dev-code-review, diagnosing-bugs, domain-modeling, grill-me, grill-with-docs, grilling, implement, implement-spec, improve-codebase-architecture, interrogate, ponytail-review, pr, prototype, research, resolving-merge-conflicts, retro, setup-matt-pocock-skills, ship-it, swarm, tdd, to-spec, to-tickets, wayfinder, wizard, writing-for-agents
+architect, arena, blast-radius, codebase-design, dev-code-review, diagnosing-bugs, domain-modeling, grill-me, grill-with-docs, grilling, implement, implement-spec, improve-codebase-architecture, interrogate, pm, ponytail-review, pr, prototype, research, resolving-merge-conflicts, retro, setup-matt-pocock-skills, ship-it, swarm, tdd, to-spec, to-tickets, triage, wayfinder, wizard, writing-for-agents
 
 Each skill is `<name>/SKILL.md` plus supporting files. `agents/openai.yaml` files are metadata; Claude Code ignores them.
 

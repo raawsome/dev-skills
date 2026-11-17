@@ -1,6 +1,6 @@
 ---
 name: retro
-description: "Conduct a retrospective on a coding session."
+description: "Conduct a retrospective on a coding session or ship-it run relay logs."
 metadata:
   upstream: "mattpocock/skills@49dd158d1076134a641b33efb035946536778336 skills/engineering/retro (compared 2026-10-14; fork point unknown)"
 ---
@@ -12,6 +12,12 @@ The user has asked for a **retrospective**. You are suggesting improvements to t
 1. Call the Skill tool with `writing-for-agents` for the writing style guide.
 
 2. Read the primary sources for the session the user specifies. This may mean searching through session logs on this machine. If the user doesn't specify a session, default to the current one.
+
+<!-- CUSTOM-BEGIN: ship-it-relay-logs, reason: ship-it retros read relay logs not the grouped report copy; retirement: delete markers if upstream adds run-log sources -->
+- If the user points at a ship-it run (a `.scratch/<slug>/` directory containing `relay-*.md`), those `relay-<phase>[-<ticket-id>].md` logs are the primary sources. `report.md` is an index only: gaps, review leftovers, the grouped `ASSUMED` copy. Do not treat the grouped copy as the session trace.
+- Otherwise keep the session path above: session logs, defaulting to the current session.
+- A finding whose cheapest enforcement is an edit to a global skill under `~/.config/opencode/skills`, or to `GLOSSARY.md` / an ADR, is reported as repo-scoped: the global or glossary/ADR edit waits until the same finding appears in another run's relay logs. Do not perform the edit; do not add a writer step.
+<!-- CUSTOM-END -->
 
 3. Look for candidates for improvement in these categories.
 

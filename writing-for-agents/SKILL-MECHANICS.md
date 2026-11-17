@@ -8,8 +8,6 @@ OpenCode does not read `disable-model-invocation`. A skill with a `description` 
 
 Write every description as model-facing: front-load the leading word, one trigger per branch (pointer rules in `SKILL.md`). Nested agents are first-class callers, so a missing trigger is a miss for them too.
 
-Codex `agents/openai.yaml` `policy.allow_implicit_invocation` is not used here. Do not set it false to fake a user-only skill.
-
 ## Nested reach
 
 An orchestrator may reach another skill in either way:
